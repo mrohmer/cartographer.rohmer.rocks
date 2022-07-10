@@ -6,6 +6,7 @@
   import {onMount} from 'svelte';
   import type {GameMap} from '../lib/models/GameMap';
   import Button from "../lib/components/Button.svelte";
+  import Loading from "../lib/components/Loading.svelte";
 
   let selection: Terrain = undefined;
   let map: GameMap;
@@ -25,6 +26,7 @@
     localStorage.removeItem('map');
     map = undefined;
   }
+  let loading = true;
 
   onMount(() => (mounted = true));
 
@@ -38,13 +40,17 @@
           map = JSON.parse(tempMap);
         }
       }
+
+      loading = false;
     }
     if (mounted && map) {
     }
   }
 </script>
 
-{#if map}
+{#if loading}
+    <Loading />
+{:else if map}
     <div class="max-w-[500px] mx-auto p-2">
         <TerrainSelection bind:selection={selection}/>
         <GameField {map} canSelect={!!selection} on:clickCell={handleCellClick}/>
