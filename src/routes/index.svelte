@@ -1,3 +1,6 @@
+<script context="module" lang="ts">
+    export const prerender = true;
+</script>
 <script lang="ts">
   import GameField from "$lib/components/GameField.svelte";
   import TerrainSelection from "../lib/components/TerrainSelection.svelte";
