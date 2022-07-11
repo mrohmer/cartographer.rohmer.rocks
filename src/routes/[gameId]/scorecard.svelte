@@ -16,6 +16,8 @@
   import {goto} from '$app/navigation';
   import type {GameMap} from '../../lib/models/game-map';
   import Coins from "../../lib/components/coins/Coins.svelte";
+  import type {GameRoundResult} from '../../lib/models/game-round-result';
+  import Scores from "../../lib/components/scoring/Scores.svelte";
 
   let game: Observable<Game>;
   let mounted = false;
@@ -116,9 +118,12 @@
     const roundResults = [...($game.roundResults ?? []).map(round => ({...round}))];
     const round = $game.round ?? 0;
 
+    console.log(round);
+
     if ($game.currentRound?.coin) {
       roundResults[round] = roundResults[round] ?? {coins: 0};
-      roundResults[round].coins++;
+      const coins = roundResults[round].coins ?? 0;
+      roundResults[round].coins = (typeof coins === 'number' && !isNaN(coins)? coins : 0) + 1;
     }
 
     await gameDB.games.update($game.id, {
@@ -135,7 +140,22 @@
       },
     });
   }
+  const handleResultChange = ({round, roundResult}: {round: number, roundResult: GameRoundResult}) => {
+    const original = $game.roundResults ?? [];
 
+    if (original.length < round - 1) {
+      return; // dafuq
+    }
+    if (original.length < round) {
+      original.push(roundResult);
+    } else {
+      original[round] = roundResult;
+    }
+
+    gameDB.games.update($game.id, {
+      roundResults: original,
+    });
+  }
 
   let loading = true;
 
@@ -157,6 +177,7 @@
 
   $: currentSelectionMap = buildCurrentSelectionMap($game);
   $: currentMountainCoins = $game?.currentRound;
+  $: currentResult = $game?.roundResults?.[$game?.round ?? 0];
 
   $: isFinished = $game?.round !== undefined && $game?.round > 4;
 </script>
@@ -172,16 +193,20 @@
                    on:clickCell={handleCellClick}/>
 
         <div class="my-2">
-            <Coins coins={$game.roundResults?.map(({coins}) => coins ?? 0)} coin={$game?.currentRound?.coin}
+            <Coins coins={$game.roundResults?.map(r => r ?? ({})).map(({coins}) => typeof coins === 'number' && !isNaN(coins) ? coins : 0)} coin={$game?.currentRound?.coin}
                    round={$game.round} on:toggle={handleCoinToggle}/>
+        </div>
+
+        <div class="my-4">
+            <Scores round={$game.round} roundResults={$game.roundResults} on:change={({detail}) => handleResultChange(detail)}/>
         </div>
 
         {isFinished ? 'Final Result' : `Round ${$game.round ?? 0}`}
 
         {#if !isFinished}
             <div class="mt-4">
-                <Button on:click={handleAdvanceToNextRoundClick}>
-                    {$game.round > 3 ? 'Finish Game' : 'Advance to next Round'}
+                <Button on:click={handleAdvanceToNextRoundClick} disabled={currentResult?.points0 === undefined || currentResult.points1 === undefined}>
+                    {$game.round > 2 ? 'Finish Game' : 'Advance to next Round'}
                 </Button>
             </div>
         {/if}

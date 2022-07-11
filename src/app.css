@@ -6,3 +6,7 @@
     box-sizing: border-box;
     position: relative;
 }
+
+input, [contenteditable="true"], textarea {
+    @apply bg-transparent outline-none focus:outline-none;
+}
