@@ -15,6 +15,7 @@
   import type {Game} from '../../lib/models/game';
   import {goto} from '$app/navigation';
   import type {GameMap} from '../../lib/models/game-map';
+  import Coins from "../../lib/components/coins/Coins.svelte";
 
   let game: Observable<Game>;
   let mounted = false;
@@ -42,7 +43,7 @@
       },
     });
   };
-  const handleEndGameClick = () => gameDB.games.delete($game.id)
+  const handleDeleteGameClick = () => gameDB.games.delete($game.id)
     .then(() => goto('/'));
 
   const handleChangeSelection = async (selection: Terrain) => {
@@ -57,6 +58,29 @@
         selection,
       },
     });
+  }
+  const handleAdvanceToNextRoundClick = async () => {
+    if (isFinished) {
+      return;
+    }
+
+    await handlePersistMap();
+
+    await gameDB.transaction('rw', gameDB.games, async () => {
+      const g = await gameDB.games.get($game.id);
+
+      const roundResults = g.roundResults ?? [];
+
+      while (roundResults.length < (g.round ?? 0)) {
+        roundResults.push({});
+      }
+
+      await gameDB.games.update(g.id, {
+        roundResults,
+        currentRound: undefined,
+        round: (g.round ?? 0) + 1,
+      });
+    })
   }
 
   const buildCurrentSelectionMap = (game: Game): Partial<GameMap> => {
@@ -78,7 +102,7 @@
   }
 
   const handlePersistMap = async () => {
-    if (!$game?.currentRound?.map?.length) {
+    if (!$game?.currentRound?.map?.length && !$game?.currentRound?.coin) {
       return;
     }
 
@@ -89,11 +113,28 @@
       terrain: selectedMap[y]?.[x]?.terrain ?? cell.terrain,
     })));
 
+    const roundResults = [...($game.roundResults ?? []).map(round => ({...round}))];
+    const round = $game.round ?? 0;
+
+    if ($game.currentRound?.coin) {
+      roundResults[round] = roundResults[round] ?? {coins: 0};
+      roundResults[round].coins++;
+    }
+
     await gameDB.games.update($game.id, {
       currentRound: undefined,
+      roundResults: roundResults.length ? roundResults : undefined,
       map,
     });
   };
+  const handleCoinToggle = () => {
+    gameDB.games.update($game.id, {
+      currentRound: {
+        ...($game.currentRound ?? {}),
+        coin: !$game.currentRound?.coin,
+      },
+    });
+  }
 
 
   let loading = true;
@@ -115,6 +156,9 @@
   }
 
   $: currentSelectionMap = buildCurrentSelectionMap($game);
+  $: currentMountainCoins = $game?.currentRound;
+
+  $: isFinished = $game?.round !== undefined && $game?.round > 4;
 </script>
 
 {#if loading && !isNaN(parseInt($page?.params?.gameId))}
@@ -127,8 +171,23 @@
         <GameField map={$game.map} {currentSelectionMap} canSelect={!!$game.currentRound?.selection}
                    on:clickCell={handleCellClick}/>
 
-        <div class="flex">
-            <Button class="mt-4" on:click={() => handleEndGameClick()}>End Game</Button>
+        <div class="my-2">
+            <Coins coins={$game.roundResults?.map(({coins}) => coins ?? 0)} coin={$game?.currentRound?.coin}
+                   round={$game.round} on:toggle={handleCoinToggle}/>
+        </div>
+
+        {isFinished ? 'Final Result' : `Round ${$game.round ?? 0}`}
+
+        {#if !isFinished}
+            <div class="mt-4">
+                <Button on:click={handleAdvanceToNextRoundClick}>
+                    {$game.round > 3 ? 'Finish Game' : 'Advance to next Round'}
+                </Button>
+            </div>
+        {/if}
+
+        <div class="flex mt-20 py-20">
+            <Button on:click={handleDeleteGameClick}>Delete Game</Button>
         </div>
     </div>
 {:else}
