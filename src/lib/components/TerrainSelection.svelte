@@ -1,9 +1,14 @@
 <script lang="ts">
-  import type {Terrain} from '../models/Terrain';
-  import {buildableTerrains} from '../models/Terrain';
+  import type {Terrain} from '../models/terrain';
+  import {buildableTerrains} from '../models/terrain';
   import TerrainComp from './terrain/Terrain.svelte';
+  import {createEventDispatcher} from 'svelte';
+  import Button from "./Button.svelte";
+
+  const dispatch = createEventDispatcher();
 
   export let selection: Terrain | undefined;
+  export let canPersist = false;
   export let width: number;
 </script>
 
@@ -18,9 +23,14 @@
         <div class="cell transition-all"
              class:border-black={selection === terrain}
              class:opacity-40={selection && selection !== terrain}
-             on:click={() => selection = terrain !== selection ? terrain : undefined}
+             on:click={() => dispatch('change', terrain !== selection ? terrain : undefined)}
         >
             <TerrainComp {terrain} />
         </div>
     {/each}
+    <div>
+        <Button disabled={canPersist} on:click={() => dispatch('persist')}>
+            Persist
+        </Button>
+    </div>
 </div>

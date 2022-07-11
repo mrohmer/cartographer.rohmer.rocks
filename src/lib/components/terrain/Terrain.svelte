@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Terrain} from '../models/Terrain';
+    import type {Terrain} from '../../models/terrain';
 
     export let terrain: Terrain = undefined;
     export let isRuin: boolean = false;

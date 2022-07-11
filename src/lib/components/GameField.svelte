@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type {GameMap} from '../models/GameMap';
+  import type {GameMap} from '../models/game-map';
   import {createEventDispatcher} from 'svelte';
   import Terrain from "./terrain/Terrain.svelte";
 
   const dispatch = createEventDispatcher();
 
   export let map: GameMap;
+  export let currentSelectionMap: Partial<GameMap>;
   export let canSelect: boolean;
 
   let width: number;
@@ -16,60 +17,80 @@
         @apply flex;
         height: calc((100% / 11) - (0.25rem / 11));
     }
-    .row--border {
+
+    .row--field-border {
         @apply h-1;
     }
-    .border {
+
+    .field-border {
         @apply w-1 h-1 border-r-2 border-b-2;
     }
-    .border--vertical {
+
+    .field-border--vertical {
         @apply h-full;
     }
-    .border--horizontal {
+
+    .field-border--horizontal {
         width: calc((100% / 11) - (0.25rem / 11));
     }
-    .border--even {
+
+    .field-border--even {
         @apply bg-gray-500;
     }
 
     .cell {
-        @apply h-full border-r-2 border-b-2 overflow-hidden text-center h-full transition-colors;
+        @apply h-full border-r-2 border-b-2 text-center h-full;
         width: calc((100% / 11) - (0.25rem / 11));
     }
 </style>
 
 <div bind:clientWidth={width} style="height: {width}px">
-    <div class="row row--border">
-        <div class="border border--corner"></div>
+    <div class="row row--field-border">
+        <div class="field-border field-border--corner"></div>
         {#each Array(11) as row, i}
-            <div class="border border--horizontal" class:border--even={i % 2 === 0}></div>
+            <div class="field-border field-border--horizontal" class:field-border--even={i % 2 === 0}></div>
         {/each}
-        <div class="border border--corner"></div>
+        <div class="field-border field-border--corner"></div>
     </div>
 
     {#each map as row, i}
         <div class="row">
-            <div class="border border--vertical" class:border--even={i % 2 === 0}></div>
+            <div class="field-border field-border--vertical" class:field-border--even={i % 2 === 0}></div>
             {#each row as cell, j}
                 <div class="cell"
                      class:cell--ruin={cell.isRuin}
                      class:cursor-pointer={canSelect && !['wasteland', 'mountain'].includes(cell.terrain)}
-                     class:cursor-not-allowed={['wasteland', 'mountain'].includes(cell.terrain)}
+                     class:cursor-not-allowed={!!cell.terrain}
                      on:click={() => dispatch('clickCell', {x: j, y: i})}
                 >
-                    <Terrain terrain={cell.terrain} isRuin={cell.isRuin} />
+                    <div class="h-full w-full absolute bg-zinc-700 blur m-auto opacity-0"
+                         class:opacity-50={!!currentSelectionMap?.[i]?.[j]?.terrain}
+                         class:transition-opacity={!!currentSelectionMap?.[i]?.[j]?.terrain}
+                    ></div>
+
+                    <div class="h-full w-full transition-transform"
+                         class:-translate-y-0.5={!!currentSelectionMap?.[i]?.[j]?.terrain}
+                         class:-translate-x-0.5={!!currentSelectionMap?.[i]?.[j]?.terrain}
+                    >
+                        <Terrain terrain={currentSelectionMap?.[i]?.[j]?.terrain ?? cell.terrain} isRuin={cell.isRuin}/>
+                        <div class="h-full w-full absolute inset-0 border-zinc-800"
+                             class:border={!!currentSelectionMap?.[i]?.[j]?.terrain}
+                             class:transition-border-width={!!currentSelectionMap?.[i]?.[j]?.terrain}
+                        >
+                        </div>
+                    </div>
                 </div>
             {/each}
-            <div class="border border--vertical" class:border--even={i % 2 === 0}></div>
+            <div class="field-border field-border--vertical" class:field-border--even={i % 2 === 0}></div>
         </div>
     {/each}
 
-    <div class="row row--border">
-        <div class="border border--corner"></div>
+    <div class="row row--field-border">
+        <div class="field-border field-border--corner"></div>
         {#each Array(11) as row, i}
-            <div class="border border--horizontal" class:border--even={i % 2 === 0}></div>
+            <div class="field-border field-border--horizontal" class:field-border--even={i % 2 === 0}></div>
         {/each}
-        <div class="border border--corner"></div>
+        <div class="field-border field-border--corner"></div>
     </div>
 </div>
 

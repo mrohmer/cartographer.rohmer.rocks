@@ -12,6 +12,9 @@ module.exports = {
         'mountain': '#4f1e0d',
         'wasteland': '#444',
       },
+      transitionProperty: {
+        'border-width': 'border-width',
+      }
     }
   },
   plugins: [
