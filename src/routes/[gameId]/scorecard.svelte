@@ -18,6 +18,7 @@
   import Coins from "../../lib/components/coins/Coins.svelte";
   import type {GameRoundResult} from '../../lib/models/game-round-result';
   import Scores from "../../lib/components/scoring/Scores.svelte";
+  import {countSurroundings, countUniqueSurroundings} from '../../lib/utils/count-surroundings';
 
   let game: Observable<Game>;
   let mounted = false;
@@ -118,12 +119,10 @@
     const roundResults = [...($game.roundResults ?? []).map(round => ({...round}))];
     const round = $game.round ?? 0;
 
-    console.log(round);
-
     if ($game.currentRound?.coin) {
       roundResults[round] = roundResults[round] ?? {coins: 0};
       const coins = roundResults[round].coins ?? 0;
-      roundResults[round].coins = (typeof coins === 'number' && !isNaN(coins)? coins : 0) + 1;
+      roundResults[round].coins = (typeof coins === 'number' && !isNaN(coins) ? coins : 0) + 1;
     }
 
     await gameDB.games.update($game.id, {
@@ -140,12 +139,15 @@
       },
     });
   }
-  const handleResultChange = ({round, roundResult}: {round: number, roundResult: GameRoundResult}) => {
+  const handleResultChange = ({round, roundResult}: { round: number, roundResult: GameRoundResult }) => {
     const original = $game.roundResults ?? [];
 
     if (original.length < round - 1) {
       return; // dafuq
     }
+
+    roundResult.monsterPoints = getMonsterPoints($game.map);
+
     if (original.length < round) {
       original.push(roundResult);
     } else {
@@ -155,6 +157,23 @@
     gameDB.games.update($game.id, {
       roundResults: original,
     });
+  }
+
+  const getMonsterPoints = (map: GameMap): number => {
+    if (!map) {
+      return 0;
+    }
+
+    const monsterPositions=  map
+      .map((row, y) => row.map((cell, x) => ({
+        x,
+        y,
+        terrain: cell.terrain,
+      })))
+      .flat()
+      .filter(({terrain}) => terrain === 'monster');
+
+    return countUniqueSurroundings(map, monsterPositions, undefined, {neglectOutOfBounds: true});
   }
 
   let loading = true;
@@ -177,7 +196,17 @@
 
   $: currentSelectionMap = buildCurrentSelectionMap($game);
   $: currentMountainCoins = $game?.currentRound;
-  $: currentResult = $game?.roundResults?.[$game?.round ?? 0];
+  $: currentResult = (() => {
+    const result = $game?.roundResults?.[$game?.round ?? 0];
+
+    const monsterPoints = getMonsterPoints($game?.map);
+
+    return {
+      ...(result ?? {}),
+      monsterPoints,
+    };
+  })();
+  $: roundResults = ($game?.roundResults ?? [{}]).map((result, index) => index === ($game?.round ?? 0) ? currentResult : result);
 
   $: isFinished = $game?.round !== undefined && $game?.round > 4;
 </script>
@@ -193,19 +222,22 @@
                    on:clickCell={handleCellClick}/>
 
         <div class="my-2">
-            <Coins coins={$game.roundResults?.map(r => r ?? ({})).map(({coins}) => typeof coins === 'number' && !isNaN(coins) ? coins : 0)} coin={$game?.currentRound?.coin}
+            <Coins coins={$game.roundResults?.map(r => r ?? ({})).map(({coins}) => typeof coins === 'number' && !isNaN(coins) ? coins : 0)}
+                   coin={$game?.currentRound?.coin}
                    round={$game.round} on:toggle={handleCoinToggle}/>
         </div>
 
         <div class="my-4">
-            <Scores round={$game.round} roundResults={$game.roundResults} on:change={({detail}) => handleResultChange(detail)}/>
+            <Scores round={$game.round} roundResults={roundResults}
+                    on:change={({detail}) => handleResultChange(detail)}/>
         </div>
 
         {isFinished ? 'Final Result' : `Round ${$game.round ?? 0}`}
 
         {#if !isFinished}
             <div class="mt-4">
-                <Button on:click={handleAdvanceToNextRoundClick} disabled={currentResult?.points0 === undefined || currentResult.points1 === undefined}>
+                <Button on:click={handleAdvanceToNextRoundClick}
+                        disabled={currentResult?.points0 === undefined || currentResult.points1 === undefined}>
                     {$game.round > 2 ? 'Finish Game' : 'Advance to next Round'}
                 </Button>
             </div>

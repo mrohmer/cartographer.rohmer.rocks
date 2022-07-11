@@ -36,7 +36,6 @@
     updateValues(result ?? {});
   }
 </script>
-
 <div class="flex rounded border border-black overflow-hidden h-14" class:opacity-40={disabled}>
     <div class="w-1/3 h-full border-r border-black">
         <div class="w-full h-1/2 border-b border-black">
