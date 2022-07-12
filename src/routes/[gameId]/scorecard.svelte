@@ -126,15 +126,21 @@
     }
 
     const mountainsScored = roundResults?.filter((r, i) => r && i <= round).map(r => r?.mountainsScored ?? []).flat() ?? [];
-    const unscoredMountains = findItemsWithTerrain($game.map, 'mountain')
+    const unscoredMountains = findItemsWithTerrain(map, 'mountain')
       .filter(({x, y}) => !mountainsScored.find(({x: mx, y: my}) => mx === x && my === y))
-      .filter(mountain => countSurroundings($game.map, mountain, 'NOT_EMPTY') === 4)
+      .filter(mountain => countSurroundings(map, mountain, 'NOT_EMPTY') === 4)
       .map(({x, y}) => ({x, y}))
     ;
 
     if (unscoredMountains.length) {
       roundResults[round] = roundResults[round] ?? {};
       roundResults[round].mountainsScored = [...(roundResults[round].mountainsScored ?? []), ...unscoredMountains];
+    }
+
+    const monsterPoints = getMonsterPoints(map);
+    if (monsterPoints) {
+      roundResults[round] = roundResults[round] ?? {};
+      roundResults[round].monsterPoints = monsterPoints
     }
 
     await gameDB.games.update($game.id, {
@@ -157,8 +163,6 @@
     if (original.length < round - 1) {
       return; // dafuq
     }
-
-    roundResult.monsterPoints = getMonsterPoints($game.map);
 
     if (original.length < round) {
       original.push(roundResult);
@@ -211,17 +215,7 @@
 
   $: currentSelectionMap = buildCurrentSelectionMap($game);
   $: currentMountainCoins = $game?.currentRound;
-  $: currentResult = (() => {
-    const result = $game?.roundResults?.[$game?.round ?? 0];
-
-    const monsterPoints = getMonsterPoints($game?.map);
-
-    return {
-      ...(result ?? {}),
-      monsterPoints,
-    };
-  })();
-  $: roundResults = ($game?.roundResults ?? [{}]).map((result, index) => index === ($game?.round ?? 0) ? currentResult : result);
+  $: currentResult = $game?.roundResults?.[$game?.round ?? 0];
 
   $: isFinished = $game?.round !== undefined && $game?.round > 4;
 </script>
@@ -243,7 +237,7 @@
         </div>
 
         <div class="my-4">
-            <Scores round={$game.round} roundResults={roundResults}
+            <Scores round={$game.round} roundResults={$game.roundResults}
                     on:change={({detail}) => handleResultChange(detail)}/>
         </div>
 
