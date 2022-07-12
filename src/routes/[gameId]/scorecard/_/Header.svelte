@@ -1,7 +1,7 @@
 <script lang="ts">
-  import {faChevronLeft as homeIcon} from '@fortawesome/free-solid-svg-icons/faChevronLeft.js';
-  import {faEllipsisV as menuIcon} from '@fortawesome/free-solid-svg-icons/faEllipsisV.js';
-  import {faTrash as trashIcon} from '@fortawesome/free-solid-svg-icons/faTrash.js';
+  import {faChevronLeft as homeIcon} from '@fortawesome/free-solid-svg-icons/faChevronLeft';
+  import {faEllipsisV as menuIcon} from '@fortawesome/free-solid-svg-icons/faEllipsisV';
+  import {faTrash as trashIcon} from '@fortawesome/free-solid-svg-icons/faTrash';
   import Icon from "$lib/components/Icon.svelte";
   import {createEventDispatcher} from 'svelte';
   import {_} from "svelte-i18n";
