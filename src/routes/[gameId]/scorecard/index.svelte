@@ -239,6 +239,7 @@
     </Header>
     <div class="max-w-[500px] mx-auto p-2">
         <TerrainSelection selection={$game.currentRound?.selection}
+                          canPersist={!!$game?.currentRound?.map?.length || !!$game?.currentRound?.coin}
                           on:change={({detail}) => handleChangeSelection(detail)}
                           on:persist={() => handlePersistMap()}/>
         <GameField map={$game.map} {currentSelectionMap}

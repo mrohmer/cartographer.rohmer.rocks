@@ -31,7 +31,7 @@
     <div class="flex-1"></div>
     <div>
         <button class="font-semibold py-3 px-1"
-                disabled={canPersist}
+                disabled={!canPersist}
                 class:opacity-50={!canPersist}
                 class:cursor-not-allowed={!canPersist}
                 on:click={() => canPersist && dispatch('persist')}
