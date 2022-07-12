@@ -8,9 +8,6 @@
 
   const dispatch = createEventDispatcher();
 
-  $: {
-    console.log(coins, coinTypes);
-  }
   $: coinsPerRound = coins?.map(({mountain, standard}) => (mountain ?? 0) + (standard ?? 0)) ?? []
   $: persistentCoinCount = coinsPerRound?.reduce((prev, curr) => prev + curr, 0) ?? 0;
   $: totalCoinCount = persistentCoinCount + (coin ? 1 : 0);
