@@ -4,6 +4,7 @@ export const sum = (...args: (number | undefined)[]) => args.reduce((prev: numbe
 
 export const sumRoundResult = (result: GameRoundResult): number => sum(
   result?.coins,
+  result?.mountainsScored?.length ?? 0,
   result?.points0,
   result?.points1,
   -(result?.monsterPoints ?? 0)

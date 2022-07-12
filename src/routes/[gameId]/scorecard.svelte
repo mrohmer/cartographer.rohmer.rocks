@@ -125,6 +125,18 @@
       roundResults[round].coins = (typeof coins === 'number' && !isNaN(coins) ? coins : 0) + 1;
     }
 
+    const mountainsScored = roundResults?.filter((r, i) => r && i <= round).map(r => r?.mountainsScored ?? []).flat() ?? [];
+    const unscoredMountains = findItemsWithTerrain($game.map, 'mountain')
+      .filter(({x, y}) => !mountainsScored.find(({x: mx, y: my}) => mx === x && my === y))
+      .filter(mountain => countSurroundings($game.map, mountain, 'NOT_EMPTY') === 4)
+      .map(({x, y}) => ({x, y}))
+    ;
+
+    if (unscoredMountains.length) {
+      roundResults[round] = roundResults[round] ?? {};
+      roundResults[round].mountainsScored = [...(roundResults[round].mountainsScored ?? []), ...unscoredMountains];
+    }
+
     await gameDB.games.update($game.id, {
       currentRound: undefined,
       roundResults: roundResults.length ? roundResults : undefined,
@@ -159,19 +171,22 @@
     });
   }
 
-  const getMonsterPoints = (map: GameMap): number => {
-    if (!map) {
-      return 0;
-    }
-
-    const monsterPositions=  map
+  const findItemsWithTerrain = (map: GameMap, terrain: Terrain): (Record<'x' | 'y', number> & Record<'terrain', Terrain>)[] => {
+    return map
       .map((row, y) => row.map((cell, x) => ({
         x,
         y,
         terrain: cell.terrain,
       })))
       .flat()
-      .filter(({terrain}) => terrain === 'monster');
+      .filter(({terrain: t}) => t === terrain);
+  }
+  const getMonsterPoints = (map: GameMap): number => {
+    if (!map) {
+      return 0;
+    }
+
+    const monsterPositions = findItemsWithTerrain(map, 'monster');
 
     return countUniqueSurroundings(map, monsterPositions, undefined, {neglectOutOfBounds: true});
   }
@@ -222,7 +237,7 @@
                    on:clickCell={handleCellClick}/>
 
         <div class="my-2">
-            <Coins coins={$game.roundResults?.map(r => r ?? ({})).map(({coins}) => typeof coins === 'number' && !isNaN(coins) ? coins : 0)}
+            <Coins coins={$game.roundResults?.map(r => r ?? ({})).map(({coins, mountainsScored}) => ({standard: typeof coins === 'number' && !isNaN(coins) ? coins : 0, mountain: mountainsScored?.length ?? 0}))}
                    coin={$game?.currentRound?.coin}
                    round={$game.round} on:toggle={handleCoinToggle}/>
         </div>

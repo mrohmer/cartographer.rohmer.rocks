@@ -28,6 +28,7 @@
 
   $: total = result ? sum(
     result.coins,
+    result?.mountainsScored?.length ?? 0,
     valuePoints0 ? parseInt(valuePoints0) : result.points0,
     valuePoints1 ? parseInt(valuePoints1) : result.points1,
     -(result.monsterPoints ?? 0)
@@ -35,6 +36,7 @@
   $: {
     updateValues(result ?? {});
   }
+  $: coins = (result?.coins ?? 0) + (result?.mountainsScored?.length ?? 0);
 </script>
 <div class="flex rounded border border-black overflow-hidden h-14" class:opacity-40={disabled}>
     <div class="w-1/3 h-full border-r border-black">
@@ -48,9 +50,9 @@
                    maxlength="2" {disabled} on:keydown={handleInput} on:input={handleChange}/>
         </div>
         <div class="w-full h-1/2 flex flex-col justify-center text-center">
-            {#if result?.coins !== undefined}
+            {#if !!result}
                 <div>
-                    {result?.coins}
+                    {coins}
                 </div>
             {:else }
                 &nbsp;
