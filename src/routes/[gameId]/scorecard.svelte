@@ -19,9 +19,12 @@
   import type {GameRoundResult} from '../../lib/models/game-round-result';
   import Scores from "../../lib/components/scoring/Scores.svelte";
   import {countSurroundings, countUniqueSurroundings} from '../../lib/utils/count-surroundings';
+  import DiagonalLineToggle from "../../lib/components/DiagonalLineToggle.svelte";
 
   let game: Observable<Game>;
   let mounted = false;
+
+  let showDiagonalHelperLines = false;
 
   const handleCellClick = async ({detail: {x, y}}) => {
     if (
@@ -227,7 +230,9 @@
         <TerrainSelection selection={$game.currentRound?.selection}
                           on:change={({detail}) => handleChangeSelection(detail)}
                           on:persist={() => handlePersistMap()}/>
-        <GameField map={$game.map} {currentSelectionMap} canSelect={!!$game.currentRound?.selection}
+        <GameField map={$game.map} {currentSelectionMap}
+                   canSelect={!!$game.currentRound?.selection}
+                   showDiagonalHelperLines={showDiagonalHelperLines}
                    on:clickCell={handleCellClick}/>
 
         <div class="my-2">
@@ -251,6 +256,10 @@
                 </Button>
             </div>
         {/if}
+
+        <div class="mt-5">
+            <DiagonalLineToggle bind:state={showDiagonalHelperLines} />
+        </div>
 
         <div class="flex mt-20 py-20">
             <Button on:click={handleDeleteGameClick}>Delete Game</Button>

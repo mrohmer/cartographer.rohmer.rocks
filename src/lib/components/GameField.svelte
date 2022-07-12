@@ -8,6 +8,7 @@
   export let map: GameMap;
   export let currentSelectionMap: Partial<GameMap>;
   export let canSelect: boolean;
+  export let showDiagonalHelperLines = false;
 
   let width: number;
 </script>
@@ -72,7 +73,10 @@
                          class:-translate-y-0.5={!!currentSelectionMap?.[i]?.[j]?.terrain}
                          class:-translate-x-0.5={!!currentSelectionMap?.[i]?.[j]?.terrain}
                     >
-                        <Terrain terrain={currentSelectionMap?.[i]?.[j]?.terrain ?? cell.terrain} isRuin={cell.isRuin}/>
+                        <Terrain terrain={currentSelectionMap?.[i]?.[j]?.terrain ?? cell.terrain}
+                                 isRuin={cell.isRuin}
+                                 showDiagonalHelperLine={showDiagonalHelperLines && i >= j}
+                        />
                         <div class="h-full w-full absolute inset-0 border-zinc-800"
                              class:border={!!currentSelectionMap?.[i]?.[j]?.terrain}
                              class:transition-border-width={!!currentSelectionMap?.[i]?.[j]?.terrain}

@@ -3,6 +3,7 @@
 
     export let terrain: Terrain = undefined;
     export let isRuin: boolean = false;
+    export let showDiagonalHelperLine = false;
 </script>
 
 <style lang="postcss">
@@ -44,4 +45,5 @@
     <div>
         {terrain !== 'wasteland' ? terrain?.substring(0, 3) ?? '' : ''}
     </div>
+    <div class="absolute inset-0 w-[146%] h-[3px] border-y-[1px] border-zinc-200 bg-zinc-300 rotate-45 origin-center transition-opacity my-auto -mx-[22%]" class:opacity-0={!showDiagonalHelperLine}></div>
 </div>
