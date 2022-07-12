@@ -1,9 +1,8 @@
 <script lang="ts">
-  import type {Terrain} from '../models/terrain';
-  import {buildableTerrains} from '../models/terrain';
-  import TerrainComp from './terrain/Terrain.svelte';
+  import type {Terrain} from '$lib/models/terrain';
+  import {buildableTerrains} from '$lib/models/terrain';
+  import TerrainComp from '$lib/components/terrain/Terrain.svelte';
   import {createEventDispatcher} from 'svelte';
-  import Button from "./Button.svelte";
   import {_} from "svelte-i18n";
 
   const dispatch = createEventDispatcher();
@@ -29,9 +28,15 @@
             <TerrainComp {terrain} />
         </div>
     {/each}
+    <div class="flex-1"></div>
     <div>
-        <Button disabled={canPersist} on:click={() => dispatch('persist')}>
+        <button class="font-semibold py-3 px-1"
+                disabled={canPersist}
+                class:opacity-50={!canPersist}
+                class:cursor-not-allowed={!canPersist}
+                on:click={() => canPersist && dispatch('persist')}
+        >
             {$_('pages.scorecard.btn.persist')}
-        </Button>
+        </button>
     </div>
 </div>

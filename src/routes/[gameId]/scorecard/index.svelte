@@ -3,17 +3,15 @@
 </script>
 <script lang="ts">
   import GameField from "$lib/components/GameField.svelte";
-  import TerrainSelection from "$lib/components/TerrainSelection.svelte";
+  import TerrainSelection from "./_/TerrainSelection.svelte";
   import type {Terrain} from '$lib/models/Terrain';
   import {onMount} from 'svelte';
-  import Button from "$lib/components/Button.svelte";
   import Loading from "$lib/components/Loading.svelte";
   import {page} from '$app/stores';
   import {liveQuery} from 'dexie';
   import type {Observable} from 'dexie';
   import {gameDB} from '$lib/db';
   import type {Game} from '$lib/models/game';
-  import {goto} from '$app/navigation';
   import type {GameMap} from '$lib/models/game-map';
   import Coins from "$lib/components/coins/Coins.svelte";
   import type {GameRoundResult} from '$lib/models/game-round-result';
