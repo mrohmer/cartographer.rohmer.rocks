@@ -8,6 +8,8 @@
 
   const dispatch = createEventDispatcher();
 
+  let width: number;
+
   $: coinsPerRound = coins?.map(({mountain, standard}) => (mountain ?? 0) + (standard ?? 0)) ?? []
   $: persistentCoinCount = coinsPerRound?.reduce((prev, curr) => prev + curr, 0) ?? 0;
   $: totalCoinCount = persistentCoinCount + (coin ? 1 : 0);
@@ -20,12 +22,15 @@
   $: coinTypes = coins?.map(({mountain, standard}) => [...(Array.from(Array(mountain ?? 0)).map(() => 'mountain')), ...(Array.from(Array(standard ?? 0)).map(() => 'standard'))]).flat();
 </script>
 
-<div class="flex">
+<div class="flex flex-wrap justify-center" bind:clientWidth={width}>
     {#each Array(14) as _, i}
         {#each borders.filter(b => b === i) as _, b}
             <div class="w-0.5 h-5 bg-black" class:ml-px={b > 0}></div>
         {/each}
-        <div class="w-5 h-5 mx-0.5 leading-5 select-none">
+        {#if width && width < 350 && i === 7}
+            <div class="basis-full h-0"></div>
+        {/if}
+        <div class="w-5 h-5 m-0.5 leading-5 select-none">
             <div class="border border-black rounded-full h-2 w-2 absolute bg-zinc-700 blur opacity-0 inset-0 mt-3 ml-2"
                  class:opacity-100={canSelectCoin && i === persistentCoinCount && coin}
                  class:transition-opacity={canSelectCoin && i === persistentCoinCount && coin}></div>
