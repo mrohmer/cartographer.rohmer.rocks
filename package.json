@@ -25,6 +25,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"dexie": "^3.2.2"
+		"dexie": "^3.2.2",
+		"svelte-i18n": "^3.4.0"
 	}
 }

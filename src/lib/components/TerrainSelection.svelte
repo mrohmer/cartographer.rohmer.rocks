@@ -4,6 +4,7 @@
   import TerrainComp from './terrain/Terrain.svelte';
   import {createEventDispatcher} from 'svelte';
   import Button from "./Button.svelte";
+  import {_} from "svelte-i18n";
 
   const dispatch = createEventDispatcher();
 
@@ -30,7 +31,7 @@
     {/each}
     <div>
         <Button disabled={canPersist} on:click={() => dispatch('persist')}>
-            Persist
+            {$_('pages.scorecard.btn.persist')}
         </Button>
     </div>
 </div>

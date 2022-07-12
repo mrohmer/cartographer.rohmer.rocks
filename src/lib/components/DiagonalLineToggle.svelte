@@ -1,5 +1,6 @@
 <script lang="ts">
   import Terrain from "./terrain/Terrain.svelte";
+  import {_} from "svelte-i18n";
 
   export let state = false;
 </script>
@@ -20,6 +21,6 @@
         <Terrain showDiagonalHelperLine={true} />
     </div>
     <div class="flex-1">
-        Enable Diagonal Helper Lines
+        {$_('pages.scorecard.btn.enable_diagonal_helper_lines')}
     </div>
 </div>

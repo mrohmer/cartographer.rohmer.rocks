@@ -1,0 +1,49 @@
+{
+  "pages": {
+    "index": {
+      "new_game": {
+        "headline": "Start New Game",
+        "btn": {
+          "normal_map": "Normal Map (A-Site)",
+          "wasteland_map": "Wasteland Map (B-Site)"
+        }
+      },
+      "game": "Game"
+    },
+    "scorecard": {
+      "btn": {
+        "persist": "persist",
+        "advance_season": "Next Season",
+        "advance_finish": "Finish Game",
+        "delete_game": "Delete Game",
+        "enable_diagonal_helper_lines": "Enable Diagonal Helper Lines"
+      },
+      "seasons": {
+        "spring": "Spring",
+        "summer": "Summer",
+        "autumn": "Autumn",
+        "winter": "Winter"
+      },
+      "finished": "Game Finished",
+      "not_found": "Game not found"
+    }
+  },
+  "terrains": {
+    "forest": "Forest",
+    "village": "Village",
+    "farm": "Farm",
+    "water": "Water",
+    "monster": "Monster",
+    "mountain": "Mountain",
+    "wasteland": "Wasteland"
+  },
+  "coins": {
+    "title": {
+      "mountain": "This coin was earned by a mountain."
+    },
+    "chars": {
+      "mountain": "M",
+      "default": "C"
+    }
+  }
+}

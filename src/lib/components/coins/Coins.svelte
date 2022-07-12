@@ -1,7 +1,8 @@
 <script lang="ts">
   import {createEventDispatcher} from 'svelte';
+  import { _ } from 'svelte-i18n';
 
-  export let coins: Partial<Record<'standard'|'mountain', number>>[] = [];
+  export let coins: Partial<Record<'standard' | 'mountain', number>>[] = [];
   export let coin: boolean;
 
   export let round = true;
@@ -19,12 +20,15 @@
   $: border4 = coinsPerRound?.[3] !== undefined ? border3 + coinsPerRound[3] : undefined;
   $: borders = [border1, border2, border3, border4].filter((_, i) => typeof round === 'number' && i < round);
   $: canSelectCoin = round === undefined || round <= 4;
-  $: coinTypes = coins?.map(({mountain, standard}) => [...(Array.from(Array(mountain ?? 0)).map(() => 'mountain')), ...(Array.from(Array(standard ?? 0)).map(() => 'standard'))]).flat();
+  $: coinTypes = coins?.map(({
+                               mountain,
+                               standard
+                             }) => [...(Array.from(Array(mountain ?? 0)).map(() => 'mountain')), ...(Array.from(Array(standard ?? 0)).map(() => 'standard'))]).flat();
 </script>
 
 <div class="flex flex-wrap justify-center" bind:clientWidth={width}>
-    {#each Array(14) as _, i}
-        {#each borders.filter(b => b === i) as _, b}
+    {#each Array(14) as __, i}
+        {#each borders.filter(b => b === i) as ___, b}
             <div class="w-0.5 h-5 bg-black" class:ml-px={b > 0}></div>
         {/each}
         {#if width && width < 350 && i === 7}
@@ -40,11 +44,13 @@
                  class:-translate-y-0.5={canSelectCoin && i === persistentCoinCount && coin}
                  on:click={() => canSelectCoin && i === persistentCoinCount && dispatch('toggle')}>
                 <div class="bg-yellow-500 w-full h-full rounded-full text-xs text-center flex flex-col justify-center text-center"
-                     title="{coinTypes?.[i] === 'mountain' ? 'This Coin was earned by a mountain.' : ''}"
+                     title="{coinTypes?.[i] === 'mountain' ? $_('coins.title.mountain') : ''}"
                      class:opacity-40={i + 1 > totalCoinCount}>
                     <div>
                         {#if coinTypes?.[i] === 'mountain'}
-                            M
+                            {$_('coins.chars.mountain')}
+                        {:else}
+                            {$_('coins.chars.default')}
                         {/if}
                     </div>
                 </div>

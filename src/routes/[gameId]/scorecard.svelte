@@ -20,6 +20,9 @@
   import Scores from "../../lib/components/scoring/Scores.svelte";
   import {countSurroundings, countUniqueSurroundings} from '../../lib/utils/count-surroundings';
   import DiagonalLineToggle from "../../lib/components/DiagonalLineToggle.svelte";
+  import { _, isLoading as i18nLoading } from 'svelte-i18n';
+
+  const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];
 
   let game: Observable<Game>;
   let mounted = false;
@@ -221,9 +224,10 @@
   $: currentResult = $game?.roundResults?.[$game?.round ?? 0];
 
   $: isFinished = $game?.round !== undefined && $game?.round > 4;
+  $: season = !isFinished ? SEASON_MAP[$game?.round ?? 0] : undefined;
 </script>
 
-{#if loading && !isNaN(parseInt($page?.params?.gameId))}
+{#if $i18nLoading || loading && !isNaN(parseInt($page?.params?.gameId))}
     <Loading/>
 {:else if $game}
     <div class="max-w-[500px] mx-auto p-2">
@@ -246,13 +250,13 @@
                     on:change={({detail}) => handleResultChange(detail)}/>
         </div>
 
-        {isFinished ? 'Final Result' : `Round ${$game.round ?? 0}`}
+        {isFinished ? $_('pages.scorecard.finished') : $_(`pages.scorecard.seasons.${season}`)}
 
         {#if !isFinished}
             <div class="mt-4">
                 <Button on:click={handleAdvanceToNextRoundClick}
                         disabled={currentResult?.points0 === undefined || currentResult.points1 === undefined}>
-                    {$game.round > 2 ? 'Finish Game' : 'Advance to next Round'}
+                    {$game.round >= 3 ? $_('pages.scorecard.btn.advance_final') : $_('pages.scorecard.btn.advance_season')}
                 </Button>
             </div>
         {/if}
@@ -262,11 +266,11 @@
         </div>
 
         <div class="flex mt-20 py-20">
-            <Button on:click={handleDeleteGameClick}>Delete Game</Button>
+            <Button on:click={handleDeleteGameClick}>{$_('pages.scorecard.btn.delete_game')}</Button>
         </div>
     </div>
 {:else}
     <div class="max-w-[500px] mx-auto p-2">
-        <p>No game found</p>
+        <p>{$_('pages.scorecard.not_found')}</p>
     </div>
 {/if}

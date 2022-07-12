@@ -11,6 +11,7 @@
   import type {Observable} from 'dexie';
   import type {Game} from '../lib/models/game';
   import {liveQuery} from 'dexie';
+  import { _, isLoading as i18nLoading } from 'svelte-i18n';
 
   let mounted = false;
   let games: Observable<Game[]>;
@@ -39,19 +40,19 @@
   }
 </script>
 
-{#if loading}
+{#if loading || $i18nLoading}
     <Loading/>
 {:else}
-    <h3>Start new Game</h3>
+    <h3>{$_('pages.index.new_game.headline')}</h3>
     <div class="flex">
-        <Button class="block" on:click={() => handleNewGameClick('normal')}>Normal Map</Button>
-        <Button class="block" on:click={() => handleNewGameClick('wasteland')}>Wasteland Map</Button>
+        <Button class="block" on:click={() => handleNewGameClick('normal')}>{$_('pages.index.new_game.btn.normal_map')}</Button>
+        <Button class="block" on:click={() => handleNewGameClick('wasteland')}>{$_('pages.index.new_game.btn.wasteland_map')}</Button>
     </div>
 
     {#if $games?.length}
         <div class="mb-2">
             {#each $games as game}
-                <a class="block mr-2" href={`/${game.id}/scorecard`}>Game {game.id}</a>
+                <a class="block mr-2" href={`/${game.id}/scorecard`}>{$_('pages.index.game')} {game.id}</a>
             {/each}
         </div>
     {/if}

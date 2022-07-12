@@ -1,5 +1,7 @@
 <script lang="ts">
     import type {Terrain} from '../../models/terrain';
+    import { _ } from 'svelte-i18n';
+
 
     export let terrain: Terrain = undefined;
     export let isRuin: boolean = false;
@@ -43,7 +45,7 @@
      class:terrain--water={terrain === 'water'}
      class:terrain--monster={terrain === 'monster'}>
     <div>
-        {terrain !== 'wasteland' ? terrain?.substring(0, 3) ?? '' : ''}
+        {terrain && terrain !== 'wasteland' ? $_(`terrains.${terrain}`)?.substring(0, 3).toLocaleLowerCase() : ''}
     </div>
     <div class="absolute inset-0 w-[146%] h-[3px] border-y-[1px] border-zinc-200 bg-zinc-300 rotate-45 origin-center transition-opacity my-auto -mx-[22%]" class:opacity-0={!showDiagonalHelperLine}></div>
 </div>

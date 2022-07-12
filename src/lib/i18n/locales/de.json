@@ -1,0 +1,49 @@
+{
+  "pages": {
+    "index": {
+      "new_game": {
+        "headline": "Neues Spiel starten",
+        "btn": {
+          "normal_map": "Normale Karte (A-Seite)",
+          "wasteland_map": "Ödnis Karte (B-Seite)"
+        }
+      },
+      "game": "Spiel"
+    },
+    "scorecard": {
+      "btn": {
+        "persist": "festlegen",
+        "advance_season": "Nächste Jahreszeit",
+        "advance_finish": "Spiel beenden",
+        "delete_game": "Spiel löschen",
+        "enable_diagonal_helper_lines": "Diagonale Hilfslinien aktivieren"
+      },
+      "seasons": {
+        "spring": "Frühling",
+        "summer": "Sommer",
+        "autumn": "Herbst",
+        "winter": "Winter"
+      },
+      "finished": "Spiel beendet",
+      "not_found": "Spiel nicht gefunden"
+    }
+  },
+  "terrains": {
+    "forest": "Wald",
+    "village": "Dort",
+    "farm": "Acker",
+    "water": "Wasser",
+    "monster": "Monster",
+    "mountain": "Gebirge",
+    "wasteland": "Ödnis"
+  },
+  "coins": {
+    "title": {
+      "mountain": "Diese Münze wurde durch ein Gebirge verdient."
+    },
+    "chars": {
+      "mountain": "G",
+      "default": "C"
+    }
+  }
+}
