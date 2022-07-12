@@ -38,10 +38,10 @@
                  class:-translate-y-0.5={canSelectCoin && i === persistentCoinCount && coin}
                  on:click={() => canSelectCoin && i === persistentCoinCount && dispatch('toggle')}>
                 <div class="bg-yellow-500 w-full h-full rounded-full text-xs text-center flex flex-col justify-center text-center"
-                     title="{coinTypes[i] === 'mountain' ? 'This Coin was earned by a mountain.' : ''}"
+                     title="{coinTypes?.[i] === 'mountain' ? 'This Coin was earned by a mountain.' : ''}"
                      class:opacity-40={i + 1 > totalCoinCount}>
                     <div>
-                        {#if coinTypes[i] === 'mountain'}
+                        {#if coinTypes?.[i] === 'mountain'}
                             M
                         {/if}
                     </div>
