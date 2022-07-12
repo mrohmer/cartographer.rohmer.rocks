@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Terrain from "./terrain/Terrain.svelte";
+  import Terrain from "$lib/components/terrain/Terrain.svelte";
   import {_} from "svelte-i18n";
 
   export let state = false;
@@ -7,17 +7,17 @@
 
 <style lang="postcss">
     .btn {
-        @apply flex cursor-pointer items-center transition-opacity;
+        @apply flex cursor-pointer items-center;
     }
     .terrain {
-        @apply w-10 h-10 transition-transform origin-center border mr-3;
+        @apply w-8 h-8 transition-all origin-center border border-black mr-3;
     }
     .btn:active .terrain {
         @apply scale-90;
     }
 </style>
-<div class="btn" on:click={() => (state = !state)} class:opacity-50={!state}>
-    <div class="terrain">
+<div class="btn" on:click={() => (state = !state)}>
+    <div class="terrain" class:opacity-50={!state}>
         <Terrain showDiagonalHelperLine={true} />
     </div>
     <div class="flex-1">

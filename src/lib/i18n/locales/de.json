@@ -13,7 +13,7 @@
     "scorecard": {
       "btn": {
         "persist": "festlegen",
-        "advance_season": "Nächste Jahreszeit",
+        "advance_season": "Zur nächste Jahreszeit",
         "advance_finish": "Spiel beenden",
         "delete_game": "Spiel löschen",
         "enable_diagonal_helper_lines": "Diagonale Hilfslinien aktivieren"

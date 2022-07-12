@@ -25,6 +25,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fortawesome/fontawesome-free": "^5.15.4",
+		"@fortawesome/free-solid-svg-icons": "^5.15.4",
 		"dexie": "^3.2.2",
 		"svelte-i18n": "^3.4.0"
 	}

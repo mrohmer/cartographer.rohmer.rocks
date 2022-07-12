@@ -11,16 +11,16 @@
   import {page} from '$app/stores';
   import {liveQuery} from 'dexie';
   import type {Observable} from 'dexie';
-  import {gameDB} from '../../lib/db';
-  import type {Game} from '../../lib/models/game';
+  import {gameDB} from '$lib/db';
+  import type {Game} from '$lib/models/game';
   import {goto} from '$app/navigation';
-  import type {GameMap} from '../../lib/models/game-map';
-  import Coins from "../../lib/components/coins/Coins.svelte";
-  import type {GameRoundResult} from '../../lib/models/game-round-result';
-  import Scores from "../../lib/components/scoring/Scores.svelte";
-  import {countSurroundings, countUniqueSurroundings} from '../../lib/utils/count-surroundings';
-  import DiagonalLineToggle from "../../lib/components/DiagonalLineToggle.svelte";
+  import type {GameMap} from '$lib/models/game-map';
+  import Coins from "$lib/components/coins/Coins.svelte";
+  import type {GameRoundResult} from '$lib/models/game-round-result';
+  import Scores from "$lib/components/scoring/Scores.svelte";
+  import {countSurroundings, countUniqueSurroundings} from '$lib/utils/count-surroundings';
   import { _, isLoading as i18nLoading } from 'svelte-i18n';
+  import Header from "./_/Header.svelte";
 
   const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];
 
@@ -52,8 +52,6 @@
       },
     });
   };
-  const handleDeleteGameClick = () => gameDB.games.delete($game.id)
-    .then(() => goto('/'));
 
   const handleChangeSelection = async (selection: Terrain) => {
     if (!selection && $game.currentRound?.map?.length) {
@@ -230,6 +228,17 @@
 {#if $i18nLoading || loading && !isNaN(parseInt($page?.params?.gameId))}
     <Loading/>
 {:else if $game}
+    <Header round={$game.round}
+            nextButtonDisabled={currentResult?.points0 === undefined || currentResult.points1 === undefined}
+            bind:showDiagonalHelperLines={showDiagonalHelperLines}
+            on:advance={handleAdvanceToNextRoundClick}
+    >
+        {#if isFinished}
+            {$_('pages.scorecard.finished')}
+        {:else}
+            {$_(`pages.scorecard.seasons.${season}`)}
+        {/if}
+    </Header>
     <div class="max-w-[500px] mx-auto p-2">
         <TerrainSelection selection={$game.currentRound?.selection}
                           on:change={({detail}) => handleChangeSelection(detail)}
@@ -248,25 +257,6 @@
         <div class="my-4">
             <Scores round={$game.round} roundResults={$game.roundResults}
                     on:change={({detail}) => handleResultChange(detail)}/>
-        </div>
-
-        {isFinished ? $_('pages.scorecard.finished') : $_(`pages.scorecard.seasons.${season}`)}
-
-        {#if !isFinished}
-            <div class="mt-4">
-                <Button on:click={handleAdvanceToNextRoundClick}
-                        disabled={currentResult?.points0 === undefined || currentResult.points1 === undefined}>
-                    {$game.round >= 3 ? $_('pages.scorecard.btn.advance_final') : $_('pages.scorecard.btn.advance_season')}
-                </Button>
-            </div>
-        {/if}
-
-        <div class="mt-5">
-            <DiagonalLineToggle bind:state={showDiagonalHelperLines} />
-        </div>
-
-        <div class="flex mt-20 py-20">
-            <Button on:click={handleDeleteGameClick}>{$_('pages.scorecard.btn.delete_game')}</Button>
         </div>
     </div>
 {:else}

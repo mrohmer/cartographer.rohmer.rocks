@@ -13,7 +13,7 @@
     "scorecard": {
       "btn": {
         "persist": "persist",
-        "advance_season": "Next Season",
+        "advance_season": "To Next Season",
         "advance_finish": "Finish Game",
         "delete_game": "Delete Game",
         "enable_diagonal_helper_lines": "Enable Diagonal Helper Lines"
