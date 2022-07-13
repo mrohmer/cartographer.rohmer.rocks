@@ -7,6 +7,10 @@
     position: relative;
 }
 
+body {
+    background: #F2F0F0;
+}
+
 input, [contenteditable="true"], textarea {
     @apply bg-transparent outline-none focus:outline-none;
 }
