@@ -1,4 +1,9 @@
 {
+  "game": {
+    "article": "Der",
+    "name": "Kartograph",
+    "scorecard": "Online-Scorekarte"
+  },
   "meta": {
     "title": "Kartograph Scorekarte",
     "description": "Einfache Online-Scorekarte für der Kartograph"
@@ -8,11 +13,24 @@
       "new_game": {
         "headline": "Neues Spiel starten",
         "btn": {
-          "normal_map": "Normale Karte (A-Seite)",
-          "wasteland_map": "Ödnis Karte (B-Seite)"
+          "normal_map": {
+            "title": "Normale Karte",
+            "site": "A-Seite"
+          },
+          "wasteland_map": {
+            "title": "Ödnis Karte",
+            "site": "B-Seite"
+          }
         }
       },
-      "game": "Spiel"
+      "previous_games": {
+        "headline": "Vorherige Spiele",
+        "empty": {
+          "headline": "Du hast noch keine vorherigen Spiele",
+          "text": "Deine gestarteten Spiele werden gespeichert und dann hier angezeigt."
+        },
+        "game": "Spiel"
+      }
     },
     "scorecard": {
       "btn": {

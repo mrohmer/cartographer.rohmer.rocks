@@ -2,7 +2,7 @@
   export const prerender = true;
 </script>
 <script lang="ts">
-  import GameField from "./_/components/GameField.svelte";
+  import GameField from "$lib/components/GameField.svelte";
   import TerrainSelection from "./_/components/TerrainSelection.svelte";
   import type {Terrain} from '$lib/models/Terrain';
   import {onMount} from 'svelte';

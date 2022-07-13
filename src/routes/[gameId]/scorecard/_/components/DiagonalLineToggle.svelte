@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Terrain from "./terrain/Terrain.svelte";
+  import Terrain from "$lib/components/terrain/Terrain.svelte";
   import {_} from "svelte-i18n";
 
   export let state = false;

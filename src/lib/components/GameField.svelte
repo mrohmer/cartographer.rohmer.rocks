@@ -9,6 +9,7 @@
   export let currentSelectionMap: Partial<GameMap>;
   export let canSelect: boolean;
   export let showDiagonalHelperLines = false;
+  export let showIcons = true;
 
   let width: number;
 </script>
@@ -76,6 +77,7 @@
                         <Terrain terrain={currentSelectionMap?.[i]?.[j]?.terrain ?? cell.terrain}
                                  isRuin={cell.isRuin}
                                  showDiagonalHelperLine={showDiagonalHelperLines && i >= j}
+                                 showIcon={showIcons}
                         />
                         <div class="h-full w-full absolute inset-0 border-zinc-800"
                              class:border={!!currentSelectionMap?.[i]?.[j]?.terrain}

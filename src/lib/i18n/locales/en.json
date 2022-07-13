@@ -1,4 +1,9 @@
 {
+  "game": {
+    "article": "The",
+    "name": "Cartographer",
+    "scorecard": "Online Scorecard"
+  },
   "meta": {
     "title": "Cartographer Scorecard",
     "description": "Simple Online-Scorecard fot The Cartographer"
@@ -7,12 +12,23 @@
     "index": {
       "new_game": {
         "headline": "Start New Game",
-        "btn": {
-          "normal_map": "Normal Map (A-Site)",
-          "wasteland_map": "Wasteland Map (B-Site)"
+        "normal_map": {
+          "title": "Normal Map",
+          "site": "A-Site"
+        },
+        "wasteland_map": {
+          "title": "Wasteland Map",
+          "site": "B-Site"
         }
       },
-      "game": "Game"
+      "previous_games": {
+        "headline": "Previous Games",
+        "empty": {
+          "headline": "You don't have any previous games",
+          "text": "Your started games will be saved & listed here."
+        },
+        "game": "Game"
+      }
     },
     "scorecard": {
       "btn": {

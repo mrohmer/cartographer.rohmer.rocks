@@ -4,19 +4,21 @@
 <script lang="ts">
   import {createGameMap} from '../lib/utils/create-game-map';
   import {onMount} from 'svelte';
-  import Button from "../lib/components/Button.svelte";
   import Loading from "../lib/components/Loading.svelte";
   import {gameDB} from '../lib/db';
   import {goto} from '$app/navigation';
   import type {Observable} from 'dexie';
   import type {Game} from '../lib/models/game';
   import {liveQuery} from 'dexie';
-  import { _, isLoading as i18nLoading } from 'svelte-i18n';
+  import {_, isLoading as i18nLoading} from 'svelte-i18n';
+  import MiniMap from "./_/components/MiniMap.svelte";
+  import MapButton from "./_/components/MapButton.svelte";
 
   let mounted = false;
   let games: Observable<Game[]>;
 
   let loading = true;
+  let width = 0;
 
   onMount(() => (mounted = true));
 
@@ -34,26 +36,82 @@
       games = liveQuery(async () => {
         const result = await gameDB.games.toArray();
         loading = false;
-        return result;
+        return result.sort((a, b) => b.id - a.id);
       });
     }
   }
+  $: viewportXs = width > 0 && width < 420;
 </script>
 
 {#if loading || $i18nLoading}
     <Loading/>
 {:else}
-    <h3>{$_('pages.index.new_game.headline')}</h3>
-    <div class="flex">
-        <Button class="block" on:click={() => handleNewGameClick('normal')}>{$_('pages.index.new_game.btn.normal_map')}</Button>
-        <Button class="block" on:click={() => handleNewGameClick('wasteland')}>{$_('pages.index.new_game.btn.wasteland_map')}</Button>
-    </div>
-
-    {#if $games?.length}
-        <div class="mb-2">
-            {#each $games as game}
-                <a class="block mr-2" href={`/${game.id}/scorecard`}>{$_('pages.index.game')} {game.id}</a>
-            {/each}
+    <div class="max-w-[500px] mx-auto" bind:clientWidth={width}>
+        <div class="text-center font-cinzel uppercase mt-4 mb-8">
+            <div class="inline-block">
+                <div class="text-yellow-600">
+                    <div class="text-xl text-left pl-[5.4rem] -mb-[0.4rem]" style="text-shadow: 1px  1px 1px black, 1px -1px 1px black, -1px  1px 1px black, -1px -1px 1px black;">{$_('game.article', {default: ''})}</div>
+                    <div class="text-6xl"  style="text-shadow: 1px  1px 2px black, 1px -1px 2px black, -1px  1px 2px black, -1px -1px 2px black;">{$_('game.name', {default: ''})}</div>
+                </div>
+                <div class="flex items-center -mt-[0.4rem]">
+                    <div class="flex-1 h-px bg-black"></div>
+                    <div class="mx-2">{$_('game.scorecard', {default: ''})}</div>
+                    <div class="flex-1 h-px bg-black"></div>
+                </div>
+            </div>
         </div>
-    {/if}
+
+        <div class="mt-5">
+            <h2 class="text-center text-xl mb-2">{$_('pages.index.new_game.headline')}</h2>
+            <div class="flex space-x-0.5">
+                <div class="flex-1 transition-colors hover:bg-stone-200" class:p-3={!viewportXs} class:p-1={viewportXs}>
+                    <MapButton on:click={() => handleNewGameClick('normal')}>
+                        <div class:flex={!viewportXs} class:space-x-0.5={!viewportXs} class:justify-center={!viewportXs}>
+                            <div>
+                                {$_('pages.index.new_game.btn.normal_map.title')}
+                            </div>
+                            <div class="font-extralight" class:text-xs={viewportXs}>
+                                ({$_('pages.index.new_game.btn.normal_map.site')})
+                            </div>
+                        </div>
+                    </MapButton>
+                </div>
+                <div class="flex-1 p-3 hover:bg-stone-200" class:p-3={!viewportXs} class:p-1={viewportXs}>
+                    <MapButton type="wasteland" on:click={() => handleNewGameClick('wasteland')}>
+                        <div class:flex={!viewportXs} class:space-x-0.5={!viewportXs} class:justify-center={!viewportXs}>
+                            <div>
+                                {$_('pages.index.new_game.btn.wasteland_map.title')}
+                            </div>
+                            <div class="font-extralight" class:text-xs={viewportXs}>
+                                ({$_('pages.index.new_game.btn.wasteland_map.site')})
+                            </div>
+                        </div>
+                    </MapButton>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10 mb-5">
+            <h2 class="text-center text-xl mb-2">{$_('pages.index.previous_games.headline')}</h2>
+            {#if $games?.length}
+                <div>
+                    {#each $games as game}
+                        <a class="flex p-1 items-center transition-colors hover:bg-stone-200" href={`/${game.id}/scorecard`}>
+                            <div class="w-[4.5rem] h-[4.5rem] mr-4">
+                                <MiniMap map={game.map} />
+                            </div>
+                            <div class="text-xl font-light">
+                                {$_('pages.index.previous_games.game')} {game.id}
+                            </div>
+                        </a>
+                    {/each}
+                </div>
+            {:else}
+                <div class="text-center text-stone-400 font-extralight">
+                    <h3>{$_('pages.index.previous_games.empty.headline')}</h3>
+                    <p class="text-xs mt-1">{$_('pages.index.previous_games.empty.text')}</p>
+                </div>
+            {/if}
+        </div>
+    </div>
 {/if}

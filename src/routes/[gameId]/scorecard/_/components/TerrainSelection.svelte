@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {Terrain} from '$lib/models/terrain';
   import {buildableTerrains} from '$lib/models/terrain';
-  import TerrainComp from './terrain/Terrain.svelte';
+  import TerrainComp from '$lib/components/terrain/Terrain.svelte';
   import {createEventDispatcher} from 'svelte';
   import {_} from "svelte-i18n";
 
