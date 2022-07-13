@@ -23,7 +23,7 @@
   const handleDeleteGameClick = () => gameDB.games.delete(Number($page?.params?.gameId))
     .then(() => goto('/'));
 
-  $: isFinished = round !== undefined && round > 4;
+  $: isFinished = round !== undefined && round > 3;
 </script>
 <div class="fixed left-0 top-0 right-0 w-full shadow bg-white z-50">
     <div class="flex max-w-[500px] mx-auto p-2 items-center"
@@ -38,7 +38,7 @@
             <div class="ml-2">
                 <button class="px-4 py-1 font-semibold" on:click={() => !nextButtonDisabled && dispatch('advance')}
                         disabled={nextButtonDisabled}>
-                    {round >= 3 ? $_('pages.scorecard.btn.advance_final') : $_('pages.scorecard.btn.advance_season')}
+                    {round >= 3 ? $_('pages.scorecard.btn.advance_finish') : $_('pages.scorecard.btn.advance_season')}
                 </button>
             </div>
         {/if}

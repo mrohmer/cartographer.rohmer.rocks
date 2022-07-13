@@ -61,7 +61,7 @@
   $: currentMountainCoins = $game?.currentRound;
   $: currentResult = $game?.roundResults?.[$game?.round ?? 0];
 
-  $: isFinished = $game?.round !== undefined && $game?.round > 4;
+  $: isFinished = $game?.round !== undefined && $game?.round > 3;
   $: season = !isFinished ? SEASON_MAP[$game?.round ?? 0] : undefined;
 </script>
 
