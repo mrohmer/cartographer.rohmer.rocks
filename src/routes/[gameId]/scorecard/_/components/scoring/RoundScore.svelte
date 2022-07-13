@@ -49,14 +49,10 @@
             <input type="text" class="w-full h-full border-0 bg-transparent text-center" bind:value={valuePoints0}
                    maxlength="2" {disabled} on:keydown={handleInput} on:input={handleChange}/>
         </div>
-        <div class="w-full h-1/2 flex flex-col justify-center text-center">
-            {#if !!result}
-                <div>
-                    {coins}
-                </div>
-            {:else }
-                &nbsp;
-            {/if}
+        <div class="w-full h-1/2 flex flex-col justify-center text-center cursor-not-allowed">
+            <div>
+                {coins}
+            </div>
         </div>
     </div>
     <div class="w-1/3 h-full border-r border-black">
@@ -69,15 +65,11 @@
             <input type="text" class="w-full h-full border-0 bg-transparent text-center" bind:value={valuePoints1}
                    maxlength="2" {disabled} on:keydown={handleInput} on:input={handleChange}/>
         </div>
-        <div class="w-full h-1/2 flex flex-col justify-center text-center">
-            {#if result?.monsterPoints !== undefined}
-                {result?.monsterPoints > 0 ? `-${result?.monsterPoints}` : '0'}
-            {:else }
-                &nbsp;
-            {/if}
+        <div class="w-full h-1/2 flex flex-col justify-center text-center cursor-not-allowed">
+            {!!result?.monsterPoints && result?.monsterPoints > 0 ? `-${result?.monsterPoints}` : '0'}
         </div>
     </div>
-    <div class="w-1/3 h-full flex flex-col justify-center text-center">
+    <div class="w-1/3 h-full flex flex-col justify-center text-center cursor-not-allowed">
         <div>
             {total ?? ''}
         </div>

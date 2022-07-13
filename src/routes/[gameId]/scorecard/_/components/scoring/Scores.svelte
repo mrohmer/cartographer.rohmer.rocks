@@ -26,6 +26,8 @@
 
   export let round: number;
   export let roundResults: GameRoundResult[];
+
+  $: total = roundResults?.length ? sumRoundResults(roundResults) : 0;
 </script>
 
 <div class="flex my-4">
@@ -46,12 +48,8 @@
     {/each}
 
     <div class="text-center flex flex-col justify-center text-2xl">
-        <div>
-            {#if roundResults?.length}
-                {sumRoundResults(roundResults)}
-            {:else}
-                &nbsp;
-            {/if}
+        <div class="transition-opacity" class:opacity-30={!total}>
+            {total}
         </div>
     </div>
 </div>
