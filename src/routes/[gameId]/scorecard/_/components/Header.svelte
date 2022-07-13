@@ -36,8 +36,12 @@
         </div>
         {#if !isFinished}
             <div class="ml-2">
-                <button class="px-4 py-1 font-semibold" on:click={() => !nextButtonDisabled && dispatch('advance')}
-                        disabled={nextButtonDisabled}>
+                <button class="px-4 py-1 transition-opacity"
+                        class:font-semibold={!nextButtonDisabled}
+                        class:opacity-50={nextButtonDisabled}
+                        disabled={nextButtonDisabled}
+                        on:click={() => !nextButtonDisabled && dispatch('advance')}
+                >
                     {round >= 3 ? $_('pages.scorecard.btn.advance_finish') : $_('pages.scorecard.btn.advance_season')}
                 </button>
             </div>

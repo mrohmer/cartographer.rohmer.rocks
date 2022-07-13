@@ -12,6 +12,9 @@
   );
 
   const handleChange = (round: number, roundResult: GameRoundResult) => {
+    if (!roundResults) {
+      roundResults = [];
+    }
     while (roundResults.length < round) {
       roundResults.push(undefined);
     }
