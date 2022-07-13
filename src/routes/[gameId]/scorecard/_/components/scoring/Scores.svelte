@@ -3,7 +3,7 @@
   import RoundScore from "./RoundScore.svelte";
   import {createEventDispatcher} from 'svelte';
   import {debounceTime} from '$lib/utils/debounce-time';
-  import {sumRoundResults} from "$lib/utils/sum.js";
+  import {sumRoundResults} from "$lib/utils/sum";
 
   const dispatch = createEventDispatcher();
 

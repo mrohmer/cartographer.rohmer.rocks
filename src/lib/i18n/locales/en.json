@@ -4,6 +4,9 @@
     "name": "Cartographer",
     "scorecard": "Online Scorecard"
   },
+  "footer": {
+    "rights_disclaimer": "The Cartographer is a brand of <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>This is an online alternative to the scorecard included in the game for personal usage."
+  },
   "meta": {
     "title": "Cartographer Scorecard",
     "description": "Simple Online-Scorecard fot The Cartographer"

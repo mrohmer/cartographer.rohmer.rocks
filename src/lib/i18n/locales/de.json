@@ -4,6 +4,9 @@
     "name": "Kartograph",
     "scorecard": "Online-Scorekarte"
   },
+  "footer": {
+    "rights_disclaimer": "Der Kartopgraph ist eine Marke von <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>Dies ist eine Online Alternative zur im Spiel enthaltenen Scorekarte zum reinen Privatgericht."
+  },
   "meta": {
     "title": "Kartograph Scorekarte",
     "description": "Einfache Online-Scorekarte für der Kartograph"

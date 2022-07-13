@@ -19,7 +19,7 @@
 <style lang="postcss">
 
     .loader {
-        @apply h-screen w-screen flex justify-center items-center;
+        @apply h-screen w-screen flex justify-center items-center fixed inset-0 z-50 bg-stone-100;
     }
     .loader-block {
         @apply w-8 h-8 opacity-0 mx-0.5 my-1 bg-stone-100;

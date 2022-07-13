@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <div class="mt-10 mb-5">
+        <div class="mt-10">
             <h2 class="text-center text-xl mb-2">{$_('pages.index.previous_games.headline')}</h2>
             {#if $games?.length}
                 <div>
