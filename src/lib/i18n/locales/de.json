@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Kartograph Scorekarte",
+    "description": "Einfache Online-Scorekarte für der Kartograph"
+  },
   "pages": {
     "index": {
       "new_game": {

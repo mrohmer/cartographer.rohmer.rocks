@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Cartographer Scorecard",
+    "description": "Simple Online-Scorecard fot The Cartographer"
+  },
   "pages": {
     "index": {
       "new_game": {
