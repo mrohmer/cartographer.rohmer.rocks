@@ -33,7 +33,8 @@
           "text": "Deine gestarteten Spiele werden gespeichert und dann hier angezeigt."
         },
         "game": "Spiel",
-        "last_played": "Zuletzt gespielt"
+        "last_played": "zuletzt gespielt",
+        "as": "als"
       }
     },
     "scorecard": {
@@ -43,6 +44,11 @@
         "advance_finish": "Spiel beenden",
         "delete_game": "Spiel löschen",
         "enable_diagonal_helper_lines": "Diagonale Hilfslinien aktivieren"
+      },
+      "inputs": {
+        "name": "Name",
+        "title": "Titel",
+        "country": "Land"
       },
       "seasons": {
         "spring": "Frühling",

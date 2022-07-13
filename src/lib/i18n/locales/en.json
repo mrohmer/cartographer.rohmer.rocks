@@ -31,7 +31,8 @@
           "text": "Your started games will be saved & listed here."
         },
         "game": "Game",
-        "last_played": "last played"
+        "last_played": "last played",
+        "as": "as"
       }
     },
     "scorecard": {
@@ -41,6 +42,11 @@
         "advance_finish": "Finish Game",
         "delete_game": "Delete Game",
         "enable_diagonal_helper_lines": "Enable Diagonal Helper Lines"
+      },
+      "inputs": {
+        "name": "Name",
+        "title": "Title",
+        "country": "Country"
       },
       "seasons": {
         "spring": "Spring",

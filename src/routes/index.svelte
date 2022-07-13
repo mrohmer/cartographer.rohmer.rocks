@@ -50,8 +50,10 @@
         <div class="text-center font-cinzel uppercase mt-4 mb-8">
             <div class="inline-block">
                 <div class="text-yellow-600">
-                    <div class="text-xl text-left pl-[5.4rem] -mb-[0.4rem]" style="text-shadow: 1px  1px 1px black, 1px -1px 1px black, -1px  1px 1px black, -1px -1px 1px black;">{$_('game.article', {default: ''})}</div>
-                    <div class="text-6xl"  style="text-shadow: 1px  1px 2px black, 1px -1px 2px black, -1px  1px 2px black, -1px -1px 2px black;">{$_('game.name', {default: ''})}</div>
+                    <div class="text-xl text-left pl-[5.4rem] -mb-[0.4rem]"
+                         style="text-shadow: 1px  1px 1px black, 1px -1px 1px black, -1px  1px 1px black, -1px -1px 1px black;">{$_('game.article', {default: ''})}</div>
+                    <div class="text-6xl"
+                         style="text-shadow: 1px  1px 2px black, 1px -1px 2px black, -1px  1px 2px black, -1px -1px 2px black;">{$_('game.name', {default: ''})}</div>
                 </div>
                 <div class="flex items-center -mt-[0.4rem]">
                     <div class="flex-1 h-px bg-black"></div>
@@ -66,7 +68,8 @@
             <div class="flex space-x-0.5">
                 <div class="flex-1 transition-colors hover:bg-stone-200" class:p-3={!viewportXs} class:p-1={viewportXs}>
                     <MapButton on:click={() => handleNewGameClick('normal')}>
-                        <div class:flex={!viewportXs} class:space-x-0.5={!viewportXs} class:justify-center={!viewportXs}>
+                        <div class:flex={!viewportXs} class:space-x-0.5={!viewportXs}
+                             class:justify-center={!viewportXs}>
                             <div>
                                 {$_('pages.index.new_game.btn.normal_map.title')}
                             </div>
@@ -78,7 +81,8 @@
                 </div>
                 <div class="flex-1 p-3 hover:bg-stone-200" class:p-3={!viewportXs} class:p-1={viewportXs}>
                     <MapButton type="wasteland" on:click={() => handleNewGameClick('wasteland')}>
-                        <div class:flex={!viewportXs} class:space-x-0.5={!viewportXs} class:justify-center={!viewportXs}>
+                        <div class:flex={!viewportXs} class:space-x-0.5={!viewportXs}
+                             class:justify-center={!viewportXs}>
                             <div>
                                 {$_('pages.index.new_game.btn.wasteland_map.title')}
                             </div>
@@ -96,16 +100,26 @@
             {#if $games?.length}
                 <div>
                     {#each $games as game}
-                        <a class="flex p-1 items-center transition-colors hover:bg-stone-200" href={`/${game.id}/scorecard`}>
+                        <a class="flex p-1 items-center transition-colors hover:bg-stone-200"
+                           href={`/${game.id}/scorecard`}>
                             <div class="w-[4.5rem] h-[4.5rem] mr-4">
-                                <MiniMap map={game.map} />
+                                <MiniMap map={game.map}/>
                             </div>
-                            <div>
-                                <div class="text-xl font-light">
-                                    {$_('pages.index.previous_games.game')} {game.id}
+                            <div class="flex-1 overflow-hidden">
+                                <div class="text-xl font-light w-full text-ellipsis overflow-hidden">
+                                    {#if game.info?.country?.trim()}
+                                        {game.info?.country?.trim()}
+                                    {:else}
+                                        {$_('pages.index.previous_games.game')} {game.id}
+                                    {/if}
                                 </div>
-                                <div class="text-xs font-extralight">
-                                    {$_('pages.index.previous_games.last_played')}: {$date(game.updated ?? game.created, { format: 'medium' } )}
+                                <div class="text-xs font-extralight w-full text-ellipsis overflow-hidden">
+                                    {$_('pages.index.previous_games.last_played')}: {$date(game.updated ?? game.created, {format: 'short'})}
+                                    {#if game.info?.name?.trim() || game.info?.title?.trim()}
+                                        {$_('pages.index.previous_games.as')}
+                                        {game.info?.title?.trim() ?? ''}
+                                        {game.info?.name?.trim() ?? ''}
+                                    {/if}
                                 </div>
                             </div>
                         </a>

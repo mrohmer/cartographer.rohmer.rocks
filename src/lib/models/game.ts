@@ -14,4 +14,5 @@ export interface Game {
     map?: Record<'x'|'y', number>[];
     coin?: boolean;
   }
+  info?: Partial<Record<'name'|'title'|'country', string>>;
 }

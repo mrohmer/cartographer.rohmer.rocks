@@ -18,8 +18,17 @@
   import {_, isLoading as i18nLoading} from 'svelte-i18n';
   import Header from "./_/components/Header.svelte";
   import {buildCurrentSelectionMap} from './_/utils';
-  import {persist,advanceToNextRound,toggleCoin,updateResult,changeSelection,toggleCellSelection} from './_/db';
+  import {
+    persist,
+    advanceToNextRound,
+    toggleCoin,
+    updateResult,
+    changeSelection,
+    toggleCellSelection,
+    updateInfo
+  } from './_/db';
   import SeasonBackground from "./_/components/SeasonBackground.svelte";
+  import Input from "../../../lib/components/Input.svelte";
 
   const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];
 
@@ -37,7 +46,11 @@
 
   const handleCoinToggle = () => $game.id ? toggleCoin($game.id) : undefined;
 
-  const handleResultChange = ({round, roundResult}: { round: number, roundResult: GameRoundResult }) => $game.id ? updateResult($game.id, round, roundResult) : undefined;
+  const handleResultChange = ({
+                                round,
+                                roundResult
+                              }: { round: number, roundResult: GameRoundResult }) => $game.id ? updateResult($game.id, round, roundResult) : undefined;
+
 
   let loading = true;
 
@@ -68,7 +81,7 @@
 {#if $i18nLoading || loading && !isNaN(parseInt($page?.params?.gameId))}
     <Loading/>
 {:else if $game}
-    <SeasonBackground round={$game.round} />
+    <SeasonBackground round={$game.round}/>
     <Header round={$game.round}
             nextButtonDisabled={currentResult?.points0 === undefined || currentResult.points1 === undefined}
             bind:showDiagonalHelperLines={showDiagonalHelperLines}
@@ -81,6 +94,30 @@
         {/if}
     </Header>
     <div class="max-w-[500px] mx-auto p-2">
+        <div class="flex space-x-2 mb-5">
+            <div class="flex-1">
+                <Input id="name" value={$game.info?.name}
+                       maxLength="50"
+                       on:input={event => updateInfo($game.id, {name: event.target.value?.trim()})}>
+                    {$_('pages.scorecard.inputs.name')}
+                </Input>
+            </div>
+            <div class="flex-1">
+                <Input id="title" value={$game.info?.title}
+                       maxLength="50"
+                       on:input={event => updateInfo($game.id, {title: event.target.value?.trim()})}>
+                    {$_('pages.scorecard.inputs.title')}
+                </Input>
+            </div>
+        </div>
+        <div class="mb-5">
+            <Input id="country" value={$game.info?.country}
+                   maxLength="50"
+                   on:input={event => updateInfo($game.id, {country: event.target.value?.trim()})}>
+                {$_('pages.scorecard.inputs.country')}
+            </Input>
+        </div>
+
         <TerrainSelection selection={$game.currentRound?.selection}
                           canPersist={!!$game?.currentRound?.map?.length || !!$game?.currentRound?.coin}
                           on:change={({detail}) => handleChangeSelection(detail)}
