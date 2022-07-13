@@ -8,7 +8,7 @@
 }
 
 body {
-    background: #F2F0F0;
+    @apply bg-stone-100;
 }
 
 input, [contenteditable="true"], textarea {

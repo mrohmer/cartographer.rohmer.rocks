@@ -22,8 +22,7 @@
         @apply h-screen w-screen flex justify-center items-center;
     }
     .loader-block {
-        @apply w-8 h-8 opacity-0 mx-0.5 my-1;
-        background: #fdfdfd;
+        @apply w-8 h-8 opacity-0 mx-0.5 my-1 bg-stone-100;
         animation: show 0.88s step-end infinite alternate, pulse 0.88s linear infinite alternate;
     }
     .loader-row:nth-child(1) .loader-block:nth-child(1) {
@@ -58,10 +57,10 @@
     @keyframes pulse {
         from,
         40% {
-            background: #020202;
+            @apply bg-stone-700;
         }
         to {
-            background: #262626;
+            @apply bg-stone-600;
         }
     }
 </style>
