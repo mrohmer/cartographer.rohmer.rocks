@@ -19,6 +19,7 @@
   import Header from "./_/components/Header.svelte";
   import {buildCurrentSelectionMap} from './_/utils';
   import {persist,advanceToNextRound,toggleCoin,updateResult,changeSelection,toggleCellSelection} from './_/db';
+  import SeasonBackground from "./_/components/SeasonBackground.svelte";
 
   const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];
 
@@ -67,6 +68,7 @@
 {#if $i18nLoading || loading && !isNaN(parseInt($page?.params?.gameId))}
     <Loading/>
 {:else if $game}
+    <SeasonBackground round={$game.round} />
     <Header round={$game.round}
             nextButtonDisabled={currentResult?.points0 === undefined || currentResult.points1 === undefined}
             bind:showDiagonalHelperLines={showDiagonalHelperLines}
