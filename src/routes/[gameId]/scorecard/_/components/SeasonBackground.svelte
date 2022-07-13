@@ -3,7 +3,7 @@
 </script>
 <style lang="postcss">
     .background {
-        @apply fixed inset-0 w-full h-full pointer-events-none z-0 opacity-30 transition-all;
+        @apply absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30 transition-all;
     }
     .background--spring {
         background: radial-gradient(circle 400px at 0 0, #B2D730 20%, #B2D730AA 40%, #FAFE6AAA, transparent);
