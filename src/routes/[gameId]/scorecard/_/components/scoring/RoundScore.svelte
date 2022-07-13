@@ -22,8 +22,8 @@
   const handleInput = (event) => event.which < 48 || event.which > 57 && event.preventDefault();
 
   const updateValues = ({points0, points1}: GameRoundResult) => {
-    valuePoints0 = points0 === undefined ? '' : points0.toFixed(0);
-    valuePoints1 = points1 === undefined ? '' : points1.toFixed(0);
+    valuePoints0 = points0 === undefined || isNaN(points0) || typeof points0 !== 'number' ? '' : points0.toFixed(0);
+    valuePoints1 = points1 === undefined || isNaN(points1) || typeof points1 !== 'number' ? '' : points1.toFixed(0);
   };
 
   $: total = result ? sum(
