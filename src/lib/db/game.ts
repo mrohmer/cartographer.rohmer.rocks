@@ -10,6 +10,14 @@ export class GameDB extends Dexie {
     this.version(1).stores({
       games: '++id'
     });
+
+    this.games.hook('creating', (_, game) => {
+      game.created = new Date();
+    });
+    this.games.hook('updating', (modifications) => ({
+        ...modifications,
+        updated: new Date(),
+    }));
   }
 }
 

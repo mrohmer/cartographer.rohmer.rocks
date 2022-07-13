@@ -7,6 +7,8 @@ export interface Game {
   map: GameMap;
   roundResults?: GameRoundResult[];
   round?: 0|1|2|3;
+  created: Date;
+  updated: Date;
   currentRound?: {
     selection?: Terrain;
     map?: Record<'x'|'y', number>[];

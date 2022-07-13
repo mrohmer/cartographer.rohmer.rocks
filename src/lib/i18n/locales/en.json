@@ -30,7 +30,8 @@
           "headline": "You don't have any previous games",
           "text": "Your started games will be saved & listed here."
         },
-        "game": "Game"
+        "game": "Game",
+        "last_played": "last played"
       }
     },
     "scorecard": {

@@ -10,7 +10,7 @@
   import type {Observable} from 'dexie';
   import type {Game} from '../lib/models/game';
   import {liveQuery} from 'dexie';
-  import {_, isLoading as i18nLoading} from 'svelte-i18n';
+  import {_, date, isLoading as i18nLoading} from 'svelte-i18n';
   import MiniMap from "./_/components/MiniMap.svelte";
   import MapButton from "./_/components/MapButton.svelte";
 
@@ -27,7 +27,7 @@
 
     const id = await gameDB.games.add({
       map,
-    });
+    } as any);
     await goto(`/${id}/scorecard`);
   }
 
@@ -36,7 +36,7 @@
       games = liveQuery(async () => {
         const result = await gameDB.games.toArray();
         loading = false;
-        return result.sort((a, b) => b.id - a.id);
+        return result.sort((a, b) => +(b.updated ?? b.created) - +(a.updated ?? a.created));
       });
     }
   }
@@ -100,8 +100,13 @@
                             <div class="w-[4.5rem] h-[4.5rem] mr-4">
                                 <MiniMap map={game.map} />
                             </div>
-                            <div class="text-xl font-light">
-                                {$_('pages.index.previous_games.game')} {game.id}
+                            <div>
+                                <div class="text-xl font-light">
+                                    {$_('pages.index.previous_games.game')} {game.id}
+                                </div>
+                                <div class="text-xs font-extralight">
+                                    {$_('pages.index.previous_games.last_played')}: {$date(game.updated ?? game.created, { format: 'medium' } )}
+                                </div>
                             </div>
                         </a>
                     {/each}

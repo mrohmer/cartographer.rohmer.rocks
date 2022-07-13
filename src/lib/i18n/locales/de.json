@@ -32,7 +32,8 @@
           "headline": "Du hast noch keine vorherigen Spiele",
           "text": "Deine gestarteten Spiele werden gespeichert und dann hier angezeigt."
         },
-        "game": "Spiel"
+        "game": "Spiel",
+        "last_played": "Zuletzt gespielt"
       }
     },
     "scorecard": {
