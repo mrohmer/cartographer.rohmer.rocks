@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {GameMap} from '../models/game-map';
+  import type {GameMap} from '$lib/models/game-map';
   import {createEventDispatcher} from 'svelte';
   import Terrain from "./terrain/Terrain.svelte";
 

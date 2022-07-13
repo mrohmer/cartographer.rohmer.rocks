@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type {Terrain} from '../../models/terrain';
+    import type {Terrain} from '$lib/models/terrain';
     import { _ } from 'svelte-i18n';
-    import Icon from "../Icon.svelte";
+    import Icon from "$lib/components/Icon.svelte";
     import {faTree as forestIcon} from '@fortawesome/free-solid-svg-icons/faTree';
     import {faHome as villageIcon} from '@fortawesome/free-solid-svg-icons/faHome';
     import {faSkull as monsterIcon} from '@fortawesome/free-solid-svg-icons/faSkull';
