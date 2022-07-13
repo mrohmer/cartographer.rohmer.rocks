@@ -6,7 +6,7 @@ export const init = (): void => {
 
   i18nInit({
     fallbackLocale: 'en',
-    initialLocale: 'en', // getLocaleFromNavigator(),
+    initialLocale: getLocaleFromNavigator(),
   });
 }
 
