@@ -15,13 +15,15 @@
     "index": {
       "new_game": {
         "headline": "Start New Game",
-        "normal_map": {
-          "title": "Normal Map",
-          "site": "A-Site"
-        },
-        "wasteland_map": {
-          "title": "Wasteland Map",
-          "site": "B-Site"
+        "btn": {
+          "normal_map": {
+            "title": "Normal Map",
+            "site": "A-Site"
+          },
+          "wasteland_map": {
+            "title": "Wasteland Map",
+            "site": "B-Site"
+          }
         }
       },
       "previous_games": {
