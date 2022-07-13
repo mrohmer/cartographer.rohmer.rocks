@@ -42,7 +42,7 @@
     <div class="w-1/3 h-full border-r border-black">
         <div class="w-full h-1/2 border-b border-black">
             <div class="absolute inset-0 flex flex-col justify-center text-center opacity-60 h-full text-orange-500">
-                <div>
+                <div class:opacity-60={valuePoints0}>
                     {points0Char ?? ''}
                 </div>
             </div>
@@ -58,7 +58,7 @@
     <div class="w-1/3 h-full border-r border-black">
         <div class="w-full h-1/2 border-b border-black">
             <div class="absolute inset-0 flex flex-col justify-center text-center opacity-60 h-full text-orange-500">
-                <div>
+                <div class:opacity-60={valuePoints1}>
                     {points1Char ?? ''}
                 </div>
             </div>
