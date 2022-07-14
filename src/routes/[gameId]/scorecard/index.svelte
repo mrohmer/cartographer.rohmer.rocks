@@ -28,7 +28,7 @@
     updateInfo
   } from './_/db';
   import SeasonBackground from "./_/components/SeasonBackground.svelte";
-  import Input from "../../../lib/components/Input.svelte";
+  import Input from "$lib/components/Input.svelte";
 
   const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];
 

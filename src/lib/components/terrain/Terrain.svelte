@@ -8,6 +8,7 @@
   import {faWater as waterIcon} from '@fortawesome/free-solid-svg-icons/faWater';
   import {faMountain as mountainIcon} from '@fortawesome/free-solid-svg-icons/faMountain';
   import {faWheatAlt as farmIcon} from '@fortawesome/free-solid-svg-icons/faWheatAlt';
+  import RuinIcon from "./RuinIcon.svelte";
 
   const ICON_MAP: Partial<Record<Terrain, any>> = {
     forest: forestIcon,
@@ -68,6 +69,19 @@
      class:terrain--water={terrain === 'water'}
      class:terrain--monster={terrain === 'monster'}>
     {#if showIcon}
+        {#if isRuin}
+            <div class="absolute inset-0 w-3/5 h-3/5 m-auto origin-center transition-transform "
+                 class:scale-110={!terrain}
+                 class:fill-neutral-400={!terrain}
+                 class:fill-neutral-300={terrain}
+                 class:origin-top-right={terrain}
+                 class:scale-50={terrain}
+                 class:translate-x-1.5={terrain}
+                 class:-translate-y-1.5={terrain}
+            >
+                <RuinIcon />
+            </div>
+        {/if}
         <div title={$_(`terrains.${terrain}`, {default: ''})}>
             {#if terrain in ICON_MAP}
                 <Icon icon={ICON_MAP[terrain]} class="fill-white"/>

@@ -2,13 +2,13 @@
   export const prerender = true;
 </script>
 <script lang="ts">
-  import {createGameMap} from '../lib/utils/create-game-map';
+  import {createGameMap} from '$lib/utils/create-game-map';
   import {onMount} from 'svelte';
-  import Loading from "../lib/components/Loading.svelte";
-  import {gameDB} from '../lib/db';
+  import Loading from "$lib/components/Loading.svelte";
+  import {gameDB} from '$lib/db';
   import {goto} from '$app/navigation';
   import type {Observable} from 'dexie';
-  import type {Game} from '../lib/models/game';
+  import type {Game} from '$lib/models/game';
   import {liveQuery} from 'dexie';
   import {_, date, isLoading as i18nLoading} from 'svelte-i18n';
   import MiniMap from "./_/components/MiniMap.svelte";
