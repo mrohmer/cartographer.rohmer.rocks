@@ -37,6 +37,7 @@
         {#if !isFinished}
             <div class="ml-2">
                 <button class="px-4 py-1 transition-opacity"
+                        class:animate-pulse={!nextButtonDisabled}
                         class:font-semibold={!nextButtonDisabled}
                         class:opacity-50={nextButtonDisabled}
                         disabled={nextButtonDisabled}
