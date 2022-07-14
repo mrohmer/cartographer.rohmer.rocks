@@ -78,8 +78,6 @@
 
   $: isFinished = $game?.round !== undefined && $game?.round > 3;
   $: season = !isFinished ? SEASON_MAP[$game?.round ?? 0] : undefined;
-
-  $: console.log($game?.roundResults);
 </script>
 
 {#if $i18nLoading || loading && !isNaN(parseInt($page?.params?.gameId))}

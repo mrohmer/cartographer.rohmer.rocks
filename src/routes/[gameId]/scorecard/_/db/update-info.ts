@@ -7,7 +7,6 @@ export const updateInfo = (id: number, info: Required<Game>['info']) => gameDB.t
     throw new Error('not found');
   }
 
-  console.log('input');
   gameDB.games.update(id, {
     info: {
       ...game.info,
