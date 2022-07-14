@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {Terrain} from '$lib/models/terrain';
+  import type {TerrainAndEraser} from '$lib/models/terrain';
   import {_} from 'svelte-i18n';
   import Icon from "$lib/components/Icon.svelte";
   import {faTree as forestIcon} from '@fortawesome/free-solid-svg-icons/faTree';
@@ -8,18 +8,21 @@
   import {faWater as waterIcon} from '@fortawesome/free-solid-svg-icons/faWater';
   import {faMountain as mountainIcon} from '@fortawesome/free-solid-svg-icons/faMountain';
   import {faWheatAlt as farmIcon} from '@fortawesome/free-solid-svg-icons/faWheatAlt';
+  import {faEraser as eraserIcon} from '@fortawesome/free-solid-svg-icons/faEraser';
   import RuinIcon from "./RuinIcon.svelte";
+  import type {IconDefinition} from '@fortawesome/free-solid-svg-icons';
 
-  const ICON_MAP: Partial<Record<Terrain, any>> = {
+  const ICON_MAP: Partial<Record<TerrainAndEraser, IconDefinition>> = {
     forest: forestIcon,
     village: villageIcon,
     monster: monsterIcon,
     water: waterIcon,
     mountain: mountainIcon,
     farm: farmIcon,
+    eraser: eraserIcon,
   }
 
-  export let terrain: Terrain = undefined;
+  export let terrain: TerrainAndEraser = undefined;
   export let isRuin: boolean = false;
   export let showDiagonalHelperLine = false;
   export let showIcon = true;
@@ -35,27 +38,30 @@
     }
 
     .terrain--mountain {
-        @apply bg-mountain text-white;
+        @apply bg-mountain text-white fill-white;
     }
 
     .terrain--forest {
-        @apply bg-forest text-white;
+        @apply bg-forest text-white fill-white;
     }
 
     .terrain--village {
-        @apply bg-village text-white;
+        @apply bg-village text-white fill-white;
     }
 
     .terrain--farm {
-        @apply bg-farm text-white;
+        @apply bg-farm text-white fill-white;
     }
 
     .terrain--water {
-        @apply bg-water text-white;
+        @apply bg-water text-white fill-white;
     }
 
     .terrain--monster {
-        @apply bg-monster text-white;
+        @apply bg-monster text-white fill-white;
+    }
+    .terrain--eraser {
+        @apply bg-white text-black fill-black;
     }
 </style>
 
@@ -67,7 +73,9 @@
      class:terrain--village={terrain === 'village'}
      class:terrain--farm={terrain === 'farm'}
      class:terrain--water={terrain === 'water'}
-     class:terrain--monster={terrain === 'monster'}>
+     class:terrain--monster={terrain === 'monster'}
+     class:terrain--eraser={terrain === 'eraser'}
+>
     {#if showIcon}
         {#if isRuin}
             <div class="absolute inset-0 w-3/5 h-3/5 m-auto origin-center transition-transform "
@@ -84,7 +92,7 @@
         {/if}
         <div title={$_(`terrains.${terrain}`, {default: ''})}>
             {#if terrain in ICON_MAP}
-                <Icon icon={ICON_MAP[terrain]} class="fill-white"/>
+                <Icon icon={ICON_MAP[terrain]}/>
             {:else if terrain && terrain !== 'wasteland'}
                 {$_(`terrains.${terrain}`)?.substring(0, 3).toLocaleLowerCase()}
             {/if}

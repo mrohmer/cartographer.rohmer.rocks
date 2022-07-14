@@ -2,6 +2,7 @@
   import type {GameMap} from '$lib/models/game-map';
   import {createEventDispatcher} from 'svelte';
   import Terrain from "./terrain/Terrain.svelte";
+  import type {TerrainAndEraser} from '../models/terrain';
 
   const dispatch = createEventDispatcher();
 
@@ -10,6 +11,7 @@
   export let canSelect: boolean;
   export let showDiagonalHelperLines = false;
   export let showIcons = true;
+  export let isEraser = false;
 
   const cellIsWastelandOrMountain = (y: number, x: number): boolean => ['mountain', 'wasteland'].includes(map?.[y]?.[x]?.terrain);
   const shouldCloseGapToRight = (y: number, x: number): boolean =>
@@ -22,6 +24,13 @@
     && cellIsWastelandOrMountain(y, x)
     && cellIsWastelandOrMountain(y + 1, x + 1);
   let width: number;
+
+  const getTerrain = (mapTerrain: TerrainAndEraser, selectedTerrain: TerrainAndEraser): Terrain => {
+    if (selectedTerrain === 'eraser') {
+      return mapTerrain;
+    }
+    return selectedTerrain ?? mapTerrain;
+  };
 </script>
 
 <style lang="postcss">
@@ -71,7 +80,7 @@
             {#each row as cell, j}
                 <div class="cell"
                      class:cursor-pointer={canSelect && !['wasteland', 'mountain'].includes(cell.terrain)}
-                     class:cursor-not-allowed={!!cell.terrain}
+                     class:cursor-not-allowed={!!cell.terrain === !isEraser || ['wasteland', 'mountain'].includes(cell.terrain)}
                      on:click={() => dispatch('clickCell', {x: j, y: i})}
                 >
                     {#if shouldCloseGapToRight(i, j)}
@@ -93,7 +102,7 @@
                          class:-translate-y-0.5={!!currentSelectionMap?.[i]?.[j]?.terrain}
                          class:-translate-x-0.5={!!currentSelectionMap?.[i]?.[j]?.terrain}
                     >
-                        <Terrain terrain={currentSelectionMap?.[i]?.[j]?.terrain ?? cell.terrain}
+                        <Terrain terrain={getTerrain(cell?.terrain, currentSelectionMap?.[i]?.[j]?.terrain)}
                                  isRuin={cell.isRuin}
                                  showDiagonalHelperLine={showDiagonalHelperLines && i >= j}
                                  showIcon={showIcons}

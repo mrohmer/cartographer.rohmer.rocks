@@ -68,7 +68,8 @@
     "water": "Water",
     "monster": "Monster",
     "mountain": "Mountain",
-    "wasteland": "Wasteland"
+    "wasteland": "Wasteland",
+    "eraser": "Eraser"
   },
   "coins": {
     "title": {

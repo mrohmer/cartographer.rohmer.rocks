@@ -1,7 +1,7 @@
 import {gameDB} from '$lib/db';
-import type {Terrain} from '$lib/models/terrain';
+import type {TerrainAndEraser} from '$lib/models/terrain';
 
-export const changeSelection = (id: number, selection: Terrain) => gameDB.transaction('rw', gameDB.games, async () => {
+export const changeSelection = (id: number, selection: TerrainAndEraser) => gameDB.transaction('rw', gameDB.games, async () => {
   const game = await gameDB.games.get(id);
   if (!game) {
     throw new Error('not found');
@@ -10,6 +10,15 @@ export const changeSelection = (id: number, selection: Terrain) => gameDB.transa
   if (!selection && game.currentRound?.map?.length) {
     // cannot deselect when map has members
     return
+  }
+
+  if (selection === 'eraser' && game.currentRound?.map?.length) {
+    // cannot select eraser when map has members
+    return;
+  }
+  if (selection !== 'eraser' && game.currentRound?.selection === 'eraser' && game.currentRound?.map?.length) {
+    // cannot deselect eraser when map has members
+    return;
   }
 
   await gameDB.games.update(id, {

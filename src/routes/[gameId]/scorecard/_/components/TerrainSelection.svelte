@@ -19,7 +19,7 @@
 </style>
 
 <div class="flex my-2 justify-center" bind:clientWidth={width} style="height: {width / 11}px">
-    {#each buildableTerrains as terrain}
+    {#each [...buildableTerrains, 'eraser'] as terrain}
         <div class="cell transition-all"
              class:border-black={selection === terrain}
              class:opacity-40={selection && selection !== terrain}

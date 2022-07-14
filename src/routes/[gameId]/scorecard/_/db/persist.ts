@@ -15,10 +15,18 @@ export const persistTransactionless = async (id: number) => {
 
   const selectedMap = buildCurrentSelectionMap(game);
 
-  const map = game.map.map((row, y) => row.map((cell, x) => ({
-    ...cell,
-    terrain: selectedMap?.[y]?.[x]?.terrain ?? cell.terrain,
-  }))) as GameMap;
+  const map = game.map.map((row, y) => row.map((cell, x) => {
+    if (selectedMap?.[y]?.[x]?.terrain === 'eraser') {
+      return {
+        ...cell,
+        terrain: undefined,
+      }
+    }
+    return {
+      ...cell,
+      terrain: selectedMap?.[y]?.[x]?.terrain ?? cell.terrain,
+    }
+  })) as GameMap;
 
   const roundResults = [...(game.roundResults ?? []).map(round => ({...round}))];
   const round = game.round ?? 0;

@@ -1,5 +1,5 @@
 import type {GameMap} from './game-map';
-import type {Terrain} from './terrain';
+import type {TerrainAndEraser} from './terrain';
 import type {GameRoundResult} from './game-round-result';
 
 export interface Game {
@@ -10,7 +10,7 @@ export interface Game {
   created: Date;
   updated: Date;
   currentRound?: {
-    selection?: Terrain;
+    selection?: TerrainAndEraser;
     map?: Record<'x'|'y', number>[];
     coin?: boolean;
   }

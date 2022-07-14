@@ -1,7 +1,7 @@
 import type {Game} from '$lib/models/game';
-import type {Terrain} from '$lib/models/terrain';
+import type {TerrainAndEraser} from '$lib/models/terrain';
 
-export const buildCurrentSelectionMap = (game: Game): Record<string, Record<string, Record<'terrain', Terrain>>> | undefined => {
+export const buildCurrentSelectionMap = (game: Game): Record<string, Record<string, Record<'terrain', TerrainAndEraser>>> | undefined => {
   if (!game) {
     return undefined;
   }
@@ -14,5 +14,5 @@ export const buildCurrentSelectionMap = (game: Game): Record<string, Record<stri
       ...(prev[y] ?? {}),
       [x]: {terrain},
     },
-  }), {} as Record<string, Record<string, Terrain>>);
+  }), {} as Record<string, Record<string, Record<'terrain', TerrainAndEraser>>>);
 }

@@ -23,7 +23,6 @@
 <svg
         aria-hidden="true"
         class="icon {klass ?? ''}"
-        class:fill-black={!klass || /fill-/.test(klass)}
         role="img"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="{viewBox}"

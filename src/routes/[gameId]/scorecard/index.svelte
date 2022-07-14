@@ -126,6 +126,7 @@
                    {currentSelectionMap}
                    canSelect={!!$game.currentRound?.selection}
                    showDiagonalHelperLines={showDiagonalHelperLines}
+                   isEraser={$game.currentRound?.selection === 'eraser'}
                    on:clickCell={handleCellClick}/>
 
         <div class="my-2">

@@ -9,4 +9,6 @@ export const staticTerrains = [
   'mountain',
   'wasteland',
 ] as const;
-export type Terrain = typeof buildableTerrains[number] & typeof staticTerrains[number];
+export type Terrain = typeof buildableTerrains[number] | typeof staticTerrains[number];
+export type Eraser = 'eraser';
+export type TerrainAndEraser = Terrain | Eraser;
