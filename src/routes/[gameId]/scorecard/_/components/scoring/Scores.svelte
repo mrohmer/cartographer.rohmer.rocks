@@ -37,7 +37,8 @@
                 result={roundResults?.[i]}
                 points0Char={chars[i]}
                 points1Char={chars[(i + 1) % chars.length]}
-                disabled={i === 0 ? !!round : round !== i}
+                previous={!!round && round > i}
+                future={(round ?? 0) < i}
                 on:change={({detail}) => handleChange(i, detail)}
         />
         <div class="min-w-[20px] text-center flex flex-col justify-center">
