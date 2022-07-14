@@ -68,7 +68,7 @@
      class:terrain--water={terrain === 'water'}
      class:terrain--monster={terrain === 'monster'}>
     {#if showIcon}
-        <div title={$_(`terrains.${terrain}`)}>
+        <div title={$_(`terrains.${terrain}`, {default: ''})}>
             {#if terrain in ICON_MAP}
                 <Icon icon={ICON_MAP[terrain]} class="fill-white"/>
             {:else if terrain && terrain !== 'wasteland'}
