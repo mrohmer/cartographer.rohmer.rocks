@@ -9,7 +9,7 @@ module.exports = {
         'farm': '#9a6533',
         'water': '#005690',
         'monster': '#611e7f',
-        'mountain': '#4f1e0d',
+        'mountain': '#A4918A',
         'wasteland': '#555',
       },
       transitionProperty: {
