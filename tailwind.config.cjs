@@ -10,7 +10,7 @@ module.exports = {
         'water': '#005690',
         'monster': '#611e7f',
         'mountain': '#4f1e0d',
-        'wasteland': '#444',
+        'wasteland': '#555',
       },
       transitionProperty: {
         'border-width': 'border-width',

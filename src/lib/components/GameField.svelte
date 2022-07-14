@@ -11,6 +11,16 @@
   export let showDiagonalHelperLines = false;
   export let showIcons = true;
 
+  const cellIsWastelandOrMountain = (y: number, x: number): boolean => ['mountain', 'wasteland'].includes(map?.[y]?.[x]?.terrain);
+  const shouldCloseGapToRight = (y: number, x: number): boolean =>
+    cellIsWastelandOrMountain(y, x) && cellIsWastelandOrMountain(y, x + 1);
+  const shouldCloseGapToBottom = (y: number, x: number): boolean =>
+    cellIsWastelandOrMountain(y, x) && cellIsWastelandOrMountain(y + 1, x);
+  const shouldCloseGapToBottomRight = (y: number, x: number): boolean =>
+    shouldCloseGapToRight(y, x)
+    && shouldCloseGapToBottom(y, x)
+    && cellIsWastelandOrMountain(y, x)
+    && cellIsWastelandOrMountain(y + 1, x + 1);
   let width: number;
 </script>
 
@@ -60,11 +70,20 @@
             <div class="field-border field-border--vertical" class:field-border--even={i % 2 === 0}></div>
             {#each row as cell, j}
                 <div class="cell"
-                     class:cell--ruin={cell.isRuin}
                      class:cursor-pointer={canSelect && !['wasteland', 'mountain'].includes(cell.terrain)}
                      class:cursor-not-allowed={!!cell.terrain}
                      on:click={() => dispatch('clickCell', {x: j, y: i})}
                 >
+                    {#if shouldCloseGapToRight(i, j)}
+                        <div class="w-1 h-full bg-wasteland absolute top-0 right-0 -mr-1"></div>
+                    {/if}
+                    {#if shouldCloseGapToBottom(i, j)}
+                        <div class="w-full h-1 bg-wasteland absolute bottom-0 right-0 -mb-1"></div>
+                    {/if}
+                    {#if shouldCloseGapToBottomRight(i, j)}
+                        <div class="w-1 h-1 bg-wasteland absolute bottom-0 right-0 -mb-1 -mr-1"></div>
+                    {/if}
+
                     <div class="h-full w-full absolute bg-zinc-700 blur m-auto opacity-0"
                          class:opacity-50={!!currentSelectionMap?.[i]?.[j]?.terrain}
                          class:transition-opacity={!!currentSelectionMap?.[i]?.[j]?.terrain}
