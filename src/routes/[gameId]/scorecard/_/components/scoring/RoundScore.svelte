@@ -10,37 +10,53 @@
   export let points1Char: 'A' | 'B' | 'C' | 'D';
   export let future = false;
 
-  let valuePoints0: string;
-  let valuePoints1: string;
+  export let otherRoundCoins = 0;
 
-  const handleChange = () => dispatch('change', {
-    ...(typeof result === 'object' ? result : {}),
+  let valuePoints0: number;
+  let valuePoints1: number;
+  let valueCoins: number;
 
-    points0: valuePoints0 ? parseInt(valuePoints0) : undefined,
-    points1: valuePoints1 ? parseInt(valuePoints1) : undefined,
-  });
+  const handleChange = () => {
+    valueCoins = Math.min(valueCoins, 14 - otherRoundCoins);
+    dispatch('change', {
+      ...(typeof result === 'object' ? result : {}),
 
-  const handleInput = (event) => event.which < 48 || event.which > 57 && event.preventDefault();
+      coins: {
+        ...(result?.coins ?? {}),
+        normal: valueCoins ? valueCoins : undefined,
+      },
+      points0: valuePoints0 ? valuePoints0 : undefined,
+      points1: valuePoints1 ? valuePoints1 : undefined,
+    })
+  };
 
+  const handleCoinChange = (event) => {
+    if (event.target.value > (14 - otherRoundCoins)) {
+      event.preventDefault();
+    }
+  }
+
+  const sanitizeNumber = (v: number | undefined) => v === undefined || isNaN(v) || typeof v !== 'number' ? undefined : v;
   const updateValues = ({points0, points1, coins}: GameRoundResult) => {
-    valuePoints0 = points0 === undefined || isNaN(points0) || typeof points0 !== 'number' ? '' : points0.toFixed(0);
-    valuePoints1 = points1 === undefined || isNaN(points1) || typeof points1 !== 'number' ? '' : points1.toFixed(0);
+    valuePoints0 = sanitizeNumber(points0);
+    valuePoints1 = sanitizeNumber(points1);
+    valueCoins = sanitizeNumber(coins?.normal);
   };
 
   $: total = result ? sum(
-    result?.coins?.normal,
+    valueCoins ?? result?.coins?.normal,
     result?.coins?.mountain,
-    valuePoints0 ? parseInt(valuePoints0) : result.points0,
-    valuePoints1 ? parseInt(valuePoints1) : result.points1,
+    valuePoints0 ?? result.points0,
+    valuePoints1 ?? result.points1,
     -(result.monsterPoints ?? 0)
   ) : undefined;
   $: {
     updateValues(result ?? {});
   }
-  $: coins = sum(result?.coins?.normal, result?.coins?.mountain);
+  $: coins = sum(valueCoins ?? result?.coins?.normal, result?.coins?.mountain);
 </script>
 
-<div class="flex rounded border border-black overflow-hidden h-14" class:opacity-40={future}>
+<div class="flex rounded border border-black overflow-hidden h-14 w-full" class:opacity-40={future}>
     <div class="w-1/3 h-full border-r border-black">
         <div class="w-full h-1/2 border-b border-black">
             <div class="absolute inset-0 flex flex-col justify-center text-center opacity-60 h-full text-orange-500">
@@ -48,13 +64,12 @@
                     {points0Char ?? ''}
                 </div>
             </div>
-            <input type="text" class="w-full h-full border-0 bg-transparent text-center" bind:value={valuePoints0}
-                   maxlength="2" disabled={future} on:keydown={handleInput} on:input={handleChange}/>
+            <input type="number" class="w-full h-full border-0 bg-transparent text-center" bind:value={valuePoints0}
+                   min="0" max="99" disabled={future} on:input={handleChange}/>
         </div>
-        <div class="w-full h-1/2 flex flex-col justify-center text-center cursor-not-allowed">
-            <div>
-                {coins}
-            </div>
+        <div class="w-full h-1/2 text-center">
+            <input type="number" class="w-full h-full border-0 bg-transparent text-center" bind:value={valueCoins}
+                   min={result?.coins?.mountain ?? 0} max={14 - otherRoundCoins} disabled={future} on:input={handleChange}/>
         </div>
     </div>
     <div class="w-1/3 h-full border-r border-black">
@@ -64,11 +79,13 @@
                     {points1Char ?? ''}
                 </div>
             </div>
-            <input type="text" class="w-full h-full border-0 bg-transparent text-center" bind:value={valuePoints1}
-                   maxlength="2" disabled={future} on:keydown={handleInput} on:input={handleChange}/>
+            <input type="number" class="w-full h-full border-0 bg-transparent text-center" bind:value={valuePoints1}
+                   min="0" max="99" disabled={future} on:input={handleChange}/>
         </div>
         <div class="w-full h-1/2 flex flex-col justify-center text-center cursor-not-allowed">
-            {!!result?.monsterPoints && result?.monsterPoints > 0 ? `-${result?.monsterPoints}` : '0'}
+            {#if !future}
+                {!!result?.monsterPoints && result?.monsterPoints > 0 ? `-${result?.monsterPoints}` : '0'}
+            {/if}
         </div>
     </div>
     <div class="w-1/3 h-full flex flex-col justify-center text-center cursor-not-allowed">

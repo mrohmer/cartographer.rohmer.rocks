@@ -22,6 +22,12 @@
     propagateChange[round](roundResult);
   };
 
+  const getOtherRoundCoins = (r: GameRoundResult[]|undefined, index: number) =>
+    r
+      ?.filter((_, i) => i !== index)
+      .map(r => (r?.coins?.normal ?? 0) + (r?.coins?.mountain ?? 0))
+      .reduce((a, b) => a + b, 0) ?? 0;
+
   const chars = ['A', 'B', 'C', 'D'];
 
   export let round: number;
@@ -37,8 +43,8 @@
                 result={roundResults?.[i]}
                 points0Char={chars[i]}
                 points1Char={chars[(i + 1) % chars.length]}
-                previous={!!round && round > i}
                 future={(round ?? 0) < i}
+                otherRoundCoins={getOtherRoundCoins(roundResults, i)}
                 on:change={({detail}) => handleChange(i, detail)}
         />
         <div class="min-w-[20px] text-center flex flex-col justify-center">
