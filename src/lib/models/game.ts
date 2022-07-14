@@ -4,7 +4,7 @@ import type {GameRoundResult} from './game-round-result';
 
 export interface Game {
   id?: number;
-  map: GameMap;
+  type: 'normal'|'wasteland';
   roundResults?: GameRoundResult[];
   round?: 0|1|2|3;
   created: Date;

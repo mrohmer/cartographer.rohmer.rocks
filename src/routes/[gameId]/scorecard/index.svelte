@@ -29,6 +29,8 @@
   } from './_/db';
   import SeasonBackground from "./_/components/SeasonBackground.svelte";
   import Input from "$lib/components/Input.svelte";
+  import {buildMap} from "../../../lib/utils/build-map";
+  import {createGameMap} from "../../../lib/utils/create-game-map.js";
 
   const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];
 
@@ -70,12 +72,14 @@
     }
   }
 
-  $: currentSelectionMap = buildCurrentSelectionMap($game);
+  $: currentSelectionMap = buildCurrentSelectionMap($game?.currentRound);
   $: currentMountainCoins = $game?.currentRound;
   $: currentResult = $game?.roundResults?.[$game?.round ?? 0];
 
   $: isFinished = $game?.round !== undefined && $game?.round > 3;
   $: season = !isFinished ? SEASON_MAP[$game?.round ?? 0] : undefined;
+
+  $: console.log($game?.roundResults);
 </script>
 
 {#if $i18nLoading || loading && !isNaN(parseInt($page?.params?.gameId))}
@@ -122,7 +126,7 @@
                           canPersist={!!$game?.currentRound?.map?.length || !!$game?.currentRound?.coin}
                           on:change={({detail}) => handleChangeSelection(detail)}
                           on:persist={() => handlePersistMap()}/>
-        <GameField map={$game.map}
+        <GameField map={buildMap($game.roundResults) ?? createGameMap($game.type)}
                    {currentSelectionMap}
                    canSelect={!!$game.currentRound?.selection}
                    showDiagonalHelperLines={showDiagonalHelperLines}
@@ -130,7 +134,7 @@
                    on:clickCell={handleCellClick}/>
 
         <div class="my-2">
-            <Coins coins={$game.roundResults?.map(r => r ?? ({})).map(({coins, mountainsScored}) => ({standard: typeof coins === 'number' && !isNaN(coins) ? coins : 0, mountain: mountainsScored?.length ?? 0}))}
+            <Coins coins={$game.roundResults?.map(r => r ?? ({})).map(({coins}) => ({normal: typeof coins?.normal === 'number' && !isNaN(coins?.normal) ? coins?.normal : 0, mountain: typeof coins?.mountain === 'number' && !isNaN(coins?.mountain) ? coins?.mountain : 0}))}
                    coin={$game?.currentRound?.coin}
                    round={$game.round} on:toggle={handleCoinToggle}/>
         </div>

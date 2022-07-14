@@ -13,6 +13,7 @@
   import {_, date, isLoading as i18nLoading} from 'svelte-i18n';
   import MiniMap from "./_/components/MiniMap.svelte";
   import MapButton from "./_/components/MapButton.svelte";
+  import {buildMap} from "../lib/utils/build-map";
 
   let mounted = false;
   let games: Observable<Game[]>;
@@ -27,6 +28,7 @@
 
     const id = await gameDB.games.add({
       map,
+      type,
     } as any);
     await goto(`/${id}/scorecard`);
   }
@@ -103,7 +105,7 @@
                         <a class="flex p-1 items-center transition-colors hover:bg-stone-200"
                            href={`/${game.id}/scorecard`}>
                             <div class="w-[4.5rem] h-[4.5rem] mr-4">
-                                <MiniMap map={game.map}/>
+                                <MiniMap map={buildMap(game.roundResults)}/>
                             </div>
                             <div class="flex-1 overflow-hidden">
                                 <div class="text-xl font-light w-full text-ellipsis overflow-hidden">

@@ -27,8 +27,8 @@
   };
 
   $: total = result ? sum(
-    result.coins,
-    result?.mountainsScored?.length ?? 0,
+    result?.coins?.normal,
+    result?.coins?.mountain,
     valuePoints0 ? parseInt(valuePoints0) : result.points0,
     valuePoints1 ? parseInt(valuePoints1) : result.points1,
     -(result.monsterPoints ?? 0)
@@ -36,7 +36,7 @@
   $: {
     updateValues(result ?? {});
   }
-  $: coins = (result?.coins ?? 0) + (result?.mountainsScored?.length ?? 0);
+  $: coins = sum(result?.coins?.normal, result?.coins?.mountain);
 </script>
 <div class="flex rounded border border-black overflow-hidden h-14" class:opacity-40={disabled}>
     <div class="w-1/3 h-full border-r border-black">

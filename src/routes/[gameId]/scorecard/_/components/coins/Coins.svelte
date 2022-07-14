@@ -2,7 +2,7 @@
   import {createEventDispatcher} from 'svelte';
   import { _ } from 'svelte-i18n';
 
-  export let coins: Partial<Record<'standard' | 'mountain', number>>[] = [];
+  export let coins: Partial<Record<'normal' | 'mountain', number>>[] = [];
   export let coin: boolean;
 
   export let round = true;
@@ -11,7 +11,7 @@
 
   let width: number;
 
-  $: coinsPerRound = coins?.map(({mountain, standard}) => (mountain ?? 0) + (standard ?? 0)) ?? []
+  $: coinsPerRound = coins?.map(({mountain, normal}) => (mountain ?? 0) + (normal ?? 0)) ?? []
   $: persistentCoinCount = coinsPerRound?.reduce((prev, curr) => prev + curr, 0) ?? 0;
   $: totalCoinCount = persistentCoinCount + (coin ? 1 : 0);
   $: border1 = coinsPerRound?.[0];
@@ -22,8 +22,8 @@
   $: canSelectCoin = round === undefined || round <= 4;
   $: coinTypes = coins?.map(({
                                mountain,
-                               standard
-                             }) => [...(Array.from(Array(mountain ?? 0)).map(() => 'mountain')), ...(Array.from(Array(standard ?? 0)).map(() => 'standard'))]).flat();
+                               normal
+                             }) => [...(Array.from(Array(mountain ?? 0)).map(() => 'mountain')), ...(Array.from(Array(normal ?? 0)).map(() => 'normal'))]).flat();
 </script>
 
 <div class="flex flex-wrap justify-center" bind:clientWidth={width}>
