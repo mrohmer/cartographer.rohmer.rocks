@@ -26,8 +26,8 @@
         ...(result?.coins ?? {}),
         normal: valueCoins > 0 ? valueCoins - mountainCoins : undefined,
       },
-      points0: valuePoints0 ? valuePoints0 : undefined,
-      points1: valuePoints1 ? valuePoints1 : undefined,
+      points0: valuePoints0,
+      points1: valuePoints1,
     })
   };
 
