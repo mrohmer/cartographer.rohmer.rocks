@@ -2,7 +2,6 @@
   export const prerender = true;
 </script>
 <script lang="ts">
-  import {createGameMap} from '$lib/utils/create-game-map';
   import {onMount} from 'svelte';
   import Loading from "$lib/components/Loading.svelte";
   import {gameDB} from '$lib/db';

@@ -30,7 +30,7 @@
   import SeasonBackground from "./_/components/SeasonBackground.svelte";
   import Input from "$lib/components/Input.svelte";
   import {buildMap} from "../../../lib/utils/build-map";
-  import {createGameMap} from "../../../lib/utils/create-game-map.js";
+  import {createGameMap} from "$lib/utils/create-game-map";
 
   const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];
 

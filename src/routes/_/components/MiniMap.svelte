@@ -1,7 +1,7 @@
 <script lang="ts">
   import GameField from "$lib/components/GameField.svelte";
   import type {GameMap} from '$lib/models/game-map';
-  import {createGameMap} from "$lib/utils/create-game-map.js";
+  import {createGameMap} from "$lib/utils/create-game-map";
 
   export let map: GameMap;
 </script>
