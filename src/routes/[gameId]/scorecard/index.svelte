@@ -31,6 +31,7 @@
   import Input from "$lib/components/Input.svelte";
   import {buildMap} from "../../../lib/utils/build-map";
   import {createGameMap} from "$lib/utils/create-game-map";
+  import {buildableTerrains} from '../../../lib/models/terrain';
 
   const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];
 
@@ -75,6 +76,7 @@
   $: currentSelectionMap = buildCurrentSelectionMap($game?.currentRound);
   $: currentMountainCoins = $game?.currentRound;
   $: currentResult = $game?.roundResults?.[$game?.round ?? 0];
+  $: hasAnyBuildableTerrainsInMap = !!buildMap($game?.roundResults)?.some(row => row.some(cell => buildableTerrains.includes(cell.terrain)));
 
   $: isFinished = $game?.round !== undefined && $game?.round > 3;
   $: season = !isFinished ? SEASON_MAP[$game?.round ?? 0] : undefined;
@@ -122,6 +124,8 @@
 
         <TerrainSelection selection={$game.currentRound?.selection}
                           canPersist={!!$game?.currentRound?.map?.length || !!$game?.currentRound?.coin}
+                          hasSelectedCells={!!$game?.currentRound?.map?.length}
+                          hasEraser={hasAnyBuildableTerrainsInMap}
                           on:change={({detail}) => handleChangeSelection(detail)}
                           on:persist={() => handlePersistMap()}/>
         <GameField map={buildMap($game.roundResults) ?? createGameMap($game.type)}

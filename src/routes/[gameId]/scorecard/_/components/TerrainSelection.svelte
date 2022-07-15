@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {Terrain} from '$lib/models/terrain';
+  import type {TerrainAndEraser} from '$lib/models/terrain';
   import {buildableTerrains} from '$lib/models/terrain';
   import TerrainComp from '$lib/components/terrain/Terrain.svelte';
   import {createEventDispatcher} from 'svelte';
@@ -7,9 +7,18 @@
 
   const dispatch = createEventDispatcher();
 
-  export let selection: Terrain | undefined;
+  export let selection: TerrainAndEraser | undefined;
+  export let hasSelectedCells = false;
+  export let hasEraser = false;
   export let canPersist = false;
   export let width: number;
+
+  const getTerrains = (s: TerrainAndEraser | undefined, hsc: boolean): TerrainAndEraser[] => {
+    if (hasSelectedCells) {
+      return selection === 'eraser' ? ['eraser'] : buildableTerrains;
+    }
+    return [...buildableTerrains, hasEraser ? 'eraser' : undefined].filter(i => !!i);
+  }
 </script>
 
 <style lang="postcss">
@@ -19,7 +28,9 @@
 </style>
 
 <div class="flex my-2 justify-center" bind:clientWidth={width} style="height: {width / 11}px">
-    {#each [...buildableTerrains, 'eraser'] as terrain}
+    {#each getTerrains(selection, hasSelectedCells) as terrain}
+        {#if selection === 'eraser' && terrain !== 'eraser' }
+        {/if}
         <div class="cell transition-all"
              class:border-black={selection === terrain}
              class:opacity-40={selection && selection !== terrain}
