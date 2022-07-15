@@ -472,9 +472,16 @@
       "type": "image/png"
     }
   ],
-  "url_handlers": [
+  "shortcuts" : [
     {
-      "origin": "https://cartographer.rohmer.rocks"
+      "name": "Neue normale Karte",
+      "url": "/new",
+      "description": "Starte ein neues Spiel auf der normalen Karte"
+    },
+    {
+      "name": "Neue Ödnis-Karte",
+      "url": "/new/wasteland",
+      "description": "Starte ein neues Spiel auf der Ödnis-Karte"
     }
   ]
 }

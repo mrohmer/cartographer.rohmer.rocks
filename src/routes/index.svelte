@@ -24,13 +24,14 @@
   onMount(() => (mounted = true));
 
   const handleNewGameClick = async (type: 'normal' | 'wasteland') => {
-    const map = createGameMap(type);
-
-    const id = await gameDB.games.add({
-      map,
-      type,
-    } as any);
-    await goto(`/${id}/scorecard`);
+    switch (type) {
+      case 'normal':
+        await goto('/new');
+        break;
+      case 'wasteland':
+        await goto('/new/wasteland');
+        break;
+    }
   }
 
   $: {
