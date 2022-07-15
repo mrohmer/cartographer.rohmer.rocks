@@ -17,35 +17,29 @@
   let valueCoins: number;
 
   const handleChange = () => {
-    valueCoins = Math.min(valueCoins, 14 - otherRoundCoins);
+    valueCoins = Math.min(valueCoins ?? 0, 14 - otherRoundCoins);
+    const mountainCoins = result?.coins?.mountain ?? 0;
     dispatch('change', {
       ...(typeof result === 'object' ? result : {}),
 
       coins: {
         ...(result?.coins ?? {}),
-        normal: valueCoins ? valueCoins : undefined,
+        normal: valueCoins > 0 ? valueCoins - mountainCoins : undefined,
       },
       points0: valuePoints0 ? valuePoints0 : undefined,
       points1: valuePoints1 ? valuePoints1 : undefined,
     })
   };
 
-  const handleCoinChange = (event) => {
-    if (event.target.value > (14 - otherRoundCoins)) {
-      event.preventDefault();
-    }
-  }
-
   const sanitizeNumber = (v: number | undefined) => v === undefined || isNaN(v) || typeof v !== 'number' ? undefined : v;
   const updateValues = ({points0, points1, coins}: GameRoundResult) => {
     valuePoints0 = sanitizeNumber(points0);
     valuePoints1 = sanitizeNumber(points1);
-    valueCoins = sanitizeNumber(coins?.normal);
+    valueCoins = !future ? sum(sanitizeNumber(coins?.normal), sanitizeNumber(coins?.mountain)) : undefined;
   };
 
   $: total = result ? sum(
-    valueCoins ?? result?.coins?.normal,
-    result?.coins?.mountain,
+    valueCoins ?? sum(result?.coins?.normal, result?.coins?.mountain),
     valuePoints0 ?? result.points0,
     valuePoints1 ?? result.points1,
     -(result.monsterPoints ?? 0)
