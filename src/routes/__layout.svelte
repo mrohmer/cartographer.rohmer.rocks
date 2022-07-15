@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-  import { waitLocale } from 'svelte-i18n'
+  import {waitLocale} from 'svelte-i18n'
   import {init} from '$lib/i18n';
 
   export async function load() {
@@ -10,20 +10,23 @@
   }
 </script>
 <script lang="ts">
-    import '../app.css';
-    import {_} from "svelte-i18n";
-    import PoweredBy from '$lib/components/PoweredBy.svelte';
-    import ExpansionPanel from "../lib/components/ExpansionPanel.svelte";
+  import '../app.css';
+  import {_, locale} from "svelte-i18n";
+  import PoweredBy from '$lib/components/PoweredBy.svelte';
+  import ExpansionPanel from "../lib/components/ExpansionPanel.svelte";
 </script>
 
 <svelte:head>
     <title>{$_('meta.title', {default: 'Kartograph Scorekarte'})}</title>
     <meta name="description" content="{$_('meta.description', {default: ''})}">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#000000"/>
+    {#if $locale}
+        <meta http-equiv="content-language" content={$locale}/>
+    {/if}
 </svelte:head>
 
-<slot />
+<slot/>
 
 <div class="mt-20 mb-5 px-2">
     <div class="text-center font-extralight text-xs mb-3">
@@ -33,7 +36,7 @@
         <PoweredBy name="Matthias Rohmer"
                    url="https://matthias.rohmer.rocks"
                    technologies={['svelte', 'netlify']}
-                   sourceCodeUrl="https://github.com/mrohmer/cartographer.rohmer.rocks" />
+                   sourceCodeUrl="https://github.com/mrohmer/cartographer.rohmer.rocks"/>
     </div>
     <div class="mt-3 text-xs font-extralight max-w-[300px] mx-auto">
         <ExpansionPanel>
