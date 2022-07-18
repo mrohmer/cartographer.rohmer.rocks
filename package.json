@@ -29,6 +29,7 @@
 		"@fortawesome/free-solid-svg-icons": "6.1.1",
 		"dexie": "^3.2.2",
 		"svelte-i18n": "^3.4.0",
-		"workbox-precaching": "^6.2.4"
+		"workbox-precaching": "^6.2.4",
+		"workbox-recipes": "^6.5.3"
 	}
 }
