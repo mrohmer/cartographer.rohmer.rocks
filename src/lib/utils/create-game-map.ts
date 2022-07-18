@@ -1,12 +1,16 @@
-import type {GameMap} from '../models/GameMap';
+import type {GameMap} from '../models/game-map';
 
-export const createGameMap = (type: 'normal' | 'wasteland' = 'normal'): GameMap => {
+export const createGameMap = (type: 'normal' | 'wasteland'|'error' = 'normal'): GameMap => {
   const row = Array.from(Array(11)).map(() => ({
     terrain: undefined,
     isRuin: false,
   })) as GameMap[number];
 
   const map = Array.from(Array(11)).map(() => row.map(i => ({...i}))) as GameMap;
+
+  if (type === 'error') {
+    return addTerrainsForErrorMap(map);
+  }
 
   if (type === 'wasteland') {
     return addTerrainsForWastelandMap(map);
@@ -52,6 +56,16 @@ const addTerrainsForWastelandMap = (map: GameMap): GameMap => {
   map[7][5].terrain = 'mountain';
   map[8][9].terrain = 'mountain';
   map[9][2].terrain = 'mountain';
+
+  return map;
+}
+const addTerrainsForErrorMap = (map: GameMap): GameMap => {
+  map = map.map((row, y) => row.map((column, x) => ({
+    ...column,
+    terrain: [y, x].some(i => i < 4 || i > 6) ? 'monster' : undefined,
+  }))) as GameMap;
+
+  map[5][5].terrain = 'village';
 
   return map;
 }

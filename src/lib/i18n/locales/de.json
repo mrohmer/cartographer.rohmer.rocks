@@ -5,7 +5,7 @@
     "scorecard": "Online-Scorekarte"
   },
   "footer": {
-    "rights_disclaimer": "Der Kartopgraph ist eine Marke von <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>Dies ist eine Online Alternative zur im Spiel enthaltenen Scorekarte zum reinen Privatgericht.",
+    "rights_disclaimer": "Der Kartopgraph ist eine Marke von <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>Dies ist eine Online Alternative zur im Spiel enthaltenen Scorekarte zum reinen Privatgebrauch.",
     "images_used": "Genutzte Bilder"
   },
   "meta": {
@@ -59,6 +59,18 @@
       },
       "finished": "Spiel beendet",
       "not_found": "Spiel nicht gefunden"
+    },
+    "error": {
+      "404": {
+        "headline": "Nicht gefunden \uD83E\uDD37",
+        "text": "Hier scheint kein guter Ort zu sein.",
+        "back_link": "Zurück zu einem sicheren Ort."
+      },
+      "500": {
+        "headline": "Fehler \uD83E\uDD14",
+        "text": "Die Monster scheinen etwas manipuliert zu haben.",
+        "back_link": "Zurück zu einem sicheren Ort."
+      }
     }
   },
   "terrains": {

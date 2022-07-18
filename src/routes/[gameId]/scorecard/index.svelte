@@ -1,5 +1,17 @@
 <script context="module" lang="ts">
+  import type {LoadEvent} from '@sveltejs/kit';
+
   export const prerender = true;
+  export function load({ params }: LoadEvent) {
+    if (!/^\d+$/.test(params.gameId)) {
+        return {
+          status: 404,
+        }
+    }
+    return {
+      status: 200,
+    };
+  }
 </script>
 <script lang="ts">
   import GameField from "$lib/components/GameField.svelte";
@@ -32,6 +44,7 @@
   import {buildMap} from "../../../lib/utils/build-map";
   import {createGameMap} from "$lib/utils/create-game-map";
   import {buildableTerrains} from '../../../lib/models/terrain';
+  import Error from "$lib/components/Error.svelte";
 
   const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];
 
@@ -82,7 +95,7 @@
   $: season = !isFinished ? SEASON_MAP[$game?.round ?? 0] : undefined;
 </script>
 
-{#if $i18nLoading || loading && !isNaN(parseInt($page?.params?.gameId))}
+{#if $i18nLoading || loading}
     <Loading/>
 {:else if $game}
     <SeasonBackground round={$game.round}/>
@@ -147,7 +160,5 @@
         </div>
     </div>
 {:else}
-    <div class="max-w-[500px] mx-auto p-2">
-        <p>{$_('pages.scorecard.not_found')}</p>
-    </div>
+    <Error status={404} />
 {/if}

@@ -59,6 +59,18 @@
       },
       "finished": "Game Finished",
       "not_found": "Game not found"
+    },
+    "error": {
+      "404": {
+        "headline": "Nothing found \uD83E\uDD37",
+        "text": "This does not seem to be a nice place.",
+        "back_link": "Back to a more safe space."
+      },
+      "500": {
+        "headline": "Error \uD83E\uDD14",
+        "text": "The monsters seem to have manipulated something.",
+        "back_link": "Back to a more safe space."
+      }
     }
   },
   "terrains": {
