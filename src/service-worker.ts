@@ -30,9 +30,8 @@ warmStrategyCache({
 setDefaultHandler(strategy);
 
 setCatchHandler(async ({request, event}) => {
-  request.destination === 'document' && console.log(/\/\d+\/scorecard(\?|#|$)/.test(request.url))
   if (request.destination === 'document') {
-    if (/\/\d+(\?|#|$)/.test(request.url)) {
+    if (/\/\d+\/scorecard(\?|#|$)/.test(request.url)) {
       return strategy.handle({event, request: FALLBACK_GAME_URL});
     }
     return strategy.handle({event, request: FALLBACK_URL});
