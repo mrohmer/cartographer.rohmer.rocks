@@ -1,6 +1,6 @@
 import {cartographerDB} from '$lib/db';
-import {staticTerrains} from '$lib/models/terrain';
-import {buildMap} from '$lib/utils/build-map';
+import {staticTerrains} from '$lib/models/games/cartographer/terrain';
+import {buildMap} from '$lib/utils/games/cartographer/build-map';
 
 export const toggleCellSelection = (id: number, {x, y}: Record<'x' | 'y', number>) => cartographerDB.transaction('rw', cartographerDB.games, async () => {
   const game = await cartographerDB.games.get(id);

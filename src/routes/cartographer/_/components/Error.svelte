@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {createGameMap} from '$lib/utils/create-game-map';
+  import {createGameMap} from '$lib/utils/games/cartographer/create-game-map';
   import GameField from "../../_/components/GameField.svelte";
   import {_} from "svelte-i18n";
 

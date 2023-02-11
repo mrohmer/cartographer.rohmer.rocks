@@ -1,16 +1,16 @@
 <script lang="ts">
   import GameField from "../../_/components/GameField.svelte";
   import TerrainSelection from "./_/components/TerrainSelection.svelte";
-  import type {Terrain} from '$lib/models/Terrain';
+  import type {Terrain} from '$lib/models/games/cartographer/Terrain';
   import {onMount} from 'svelte';
   import Loading from "../../_/components/Loading.svelte";
   import {page} from '$app/stores';
   import {liveQuery} from 'dexie';
   import type {Observable} from 'dexie';
   import {cartographerDB} from '$lib/db';
-  import type {Game} from '$lib/models/game';
+  import type {Game} from '$lib/models/games/cartographer/game';
   import Coins from "./_/components/coins/Coins.svelte";
-  import type {GameRoundResult} from '$lib/models/game-round-result';
+  import type {GameRoundResult} from '$lib/models/games/cartographer/game-round-result';
   import Scores from "./_/components/scoring/Scores.svelte";
   import {_, isLoading as i18nLoading} from 'svelte-i18n';
   import Header from "./_/components/Header.svelte";
@@ -26,9 +26,9 @@
   } from './_/db';
   import SeasonBackground from "./_/components/SeasonBackground.svelte";
   import Input from "$lib/components/Input.svelte";
-  import {buildMap} from "$lib/utils/build-map";
-  import {createGameMap} from "$lib/utils/create-game-map";
-  import {buildableTerrains} from '$lib/models/terrain';
+  import {buildMap} from "$lib/utils/games/cartographer/build-map";
+  import {createGameMap} from "$lib/utils/games/cartographer/create-game-map";
+  import {buildableTerrains} from '$lib/models/games/cartographer/terrain';
   import Error from "../../_/components/Error.svelte";
 
   const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];

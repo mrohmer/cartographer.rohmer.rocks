@@ -1,5 +1,5 @@
 import {cartographerDB} from '$lib/db';
-import type {TerrainAndEraser} from '$lib/models/terrain';
+import type {TerrainAndEraser} from '$lib/models/games/cartographer/terrain';
 
 export const changeSelection = (id: number, selection: TerrainAndEraser) => cartographerDB.transaction('rw', cartographerDB.games, async () => {
   const game = await cartographerDB.games.get(id);

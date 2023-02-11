@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {TerrainAndEraser} from '$lib/models/terrain';
+  import type {TerrainAndEraser} from '$lib/models/games/cartographer/terrain';
   import {_} from 'svelte-i18n';
   import Icon from "$lib/components/Icon.svelte";
   import {faTree as forestIcon} from '@fortawesome/free-solid-svg-icons/faTree';

@@ -1,5 +1,5 @@
-import type {GameMap} from '../models/game-map';
-import type {Terrain} from '../models/terrain';
+import type {GameMap} from '../../../models/games/cartographer/game-map';
+import type {Terrain} from '../../../models/games/cartographer/terrain';
 
 type Type = Terrain|undefined|'NOT_EMPTY';
 type Surrounding = Record<'x'|'y', number> & Record<'terrain', Terrain|undefined>;

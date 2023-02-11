@@ -1,9 +1,9 @@
 import {cartographerDB} from '$lib/db';
 import {buildCurrentSelectionMap, findItemsWithTerrain, getMonsterPoints} from '../utils';
-import {countSurroundings} from '$lib/utils/count-surroundings';
-import type {GameMap} from '$lib/models/game-map';
-import {buildMap} from '$lib/utils/build-map';
-import {createGameMap} from '$lib/utils/create-game-map';
+import {countSurroundings} from '$lib/utils/games/cartographer/count-surroundings';
+import type {GameMap} from '$lib/models/games/cartographer/game-map';
+import {buildMap} from '$lib/utils/games/cartographer/build-map';
+import {createGameMap} from '$lib/utils/games/cartographer/create-game-map';
 
 const getMountainCoins = (map: GameMap): number => findItemsWithTerrain(map, 'mountain')
   .filter(mountain => countSurroundings(map!, mountain, 'NOT_EMPTY') === 4)

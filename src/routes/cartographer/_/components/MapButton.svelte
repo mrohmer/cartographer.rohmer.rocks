@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {createGameMap} from '$lib/utils/create-game-map';
+    import {createGameMap} from '$lib/utils/games/cartographer/create-game-map';
     import MiniMap from "./MiniMap.svelte";
 
     export let type: 'normal' | 'wasteland';

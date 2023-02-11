@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type {TerrainAndEraser} from '$lib/models/terrain';
-  import {buildableTerrains} from '$lib/models/terrain';
+  import type {TerrainAndEraser} from '$lib/models/games/cartographer/terrain';
+  import {buildableTerrains} from '$lib/models/games/cartographer/terrain';
   import TerrainComp from '../../../../_/components/terrain/Terrain.svelte';
   import {createEventDispatcher} from 'svelte';
   import {_} from "svelte-i18n";

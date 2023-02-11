@@ -1,5 +1,5 @@
-import type {Game} from '$lib/models/game';
-import type {TerrainAndEraser} from '$lib/models/terrain';
+import type {Game} from '$lib/models/games/cartographer/game';
+import type {TerrainAndEraser} from '$lib/models/games/cartographer/terrain';
 
 export const buildCurrentSelectionMap = (currentRound: Required<Game>['currentRound']): Record<string, Record<string, Record<'terrain', TerrainAndEraser>>> | undefined => {
   if (!currentRound) {

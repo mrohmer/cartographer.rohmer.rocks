@@ -1,4 +1,4 @@
-import type {GameRoundResult} from '../models/game-round-result';
+import type {GameRoundResult} from '../../../models/games/cartographer/game-round-result';
 
 export const sum = (...args: (number | undefined)[]) => args.reduce((prev: number, curr) => prev + (typeof curr === 'number' ? curr! : 0), 0);
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type {GameRoundResult} from '$lib/models/game-round-result';
+  import type {GameRoundResult} from '$lib/models/games/cartographer/game-round-result';
   import {createEventDispatcher} from 'svelte';
-  import {sum} from '$lib/utils/sum';
+  import {sum} from '$lib/utils/games/cartographer/sum';
 
   const dispatch = createEventDispatcher();
 

@@ -1,5 +1,5 @@
-import type {GameMap} from '$lib/models/game-map';
-import type {Terrain} from '$lib/models/terrain';
+import type {GameMap} from '$lib/models/games/cartographer/game-map';
+import type {Terrain} from '$lib/models/games/cartographer/terrain';
 
 export const findItemsWithTerrain = (map: GameMap, terrain: Terrain): (Record<'x' | 'y', number> & Record<'terrain', Terrain>)[] => {
   return map

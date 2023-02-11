@@ -1,5 +1,5 @@
 import Dexie from 'dexie';
-import type {Game} from '../../models/game';
+import type {Game} from '../../models/games/cartographer/game';
 
 export class CartographerDB extends Dexie {
 

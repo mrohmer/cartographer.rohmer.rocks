@@ -1,5 +1,5 @@
 import {cartographerDB} from '$lib/db';
-import type {GameRoundResult} from '$lib/models/game-round-result';
+import type {GameRoundResult} from '$lib/models/games/cartographer/game-round-result';
 
 const sanitizePoints = (points: number | undefined): number | undefined => points !== undefined && !isNaN(points) && points >= 0 ? points : (points === undefined ? undefined : 0);
 

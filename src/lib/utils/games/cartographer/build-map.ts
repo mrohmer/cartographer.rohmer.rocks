@@ -1,5 +1,5 @@
-import type {GameRoundResult} from '../models/game-round-result';
-import type {GameMap} from '../models/game-map';
+import type {GameRoundResult} from '../../../models/games/cartographer/game-round-result';
+import type {GameMap} from '../../../models/games/cartographer/game-map';
 
 const mergeMaps = (map1: GameMap, map2: GameMap): GameMap =>
   map2.map((row, y) => row.map((cell, x) => ({

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type {GameMap} from '$lib/models/game-map';
+  import type {GameMap} from '$lib/models/games/cartographer/game-map';
   import {createEventDispatcher} from 'svelte';
   import Terrain from "./terrain/Terrain.svelte";
-  import type {TerrainAndEraser} from '$lib/models/terrain';
+  import type {TerrainAndEraser} from '$lib/models/games/cartographer/terrain';
 
   const dispatch = createEventDispatcher();
 

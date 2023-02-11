@@ -1,4 +1,4 @@
-import {createGameMap} from '$lib/utils/create-game-map';
+import {createGameMap} from '$lib/utils/games/cartographer/create-game-map';
 import {cartographerDB} from '$lib/db';
 import {goto} from '$app/navigation';
 

@@ -4,12 +4,12 @@
   import {cartographerDB} from '$lib/db';
   import {goto} from '$app/navigation';
   import type {Observable} from 'dexie';
-  import type {Game} from '$lib/models/game';
+  import type {Game} from '$lib/models/games/cartographer/game';
   import {liveQuery} from 'dexie';
   import {_, date, isLoading as i18nLoading} from 'svelte-i18n';
   import MiniMap from "./_/components/MiniMap.svelte";
   import MapButton from "./_/components/MapButton.svelte";
-  import {buildMap} from "$lib/utils/build-map";
+  import {buildMap} from "$lib/utils/games/cartographer/build-map";
 
   let mounted = false;
   let games: Observable<Game[]>;

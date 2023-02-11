@@ -1,4 +1,4 @@
-import type {GameMap} from '../models/game-map';
+import type {GameMap} from '../../../models/games/cartographer/game-map';
 
 export const createGameMap = (type: 'normal' | 'wasteland'|'error' = 'normal'): GameMap => {
   const row = Array.from(Array(11)).map(() => ({
