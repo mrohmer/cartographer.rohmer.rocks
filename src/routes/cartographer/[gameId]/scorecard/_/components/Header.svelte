@@ -6,7 +6,7 @@
   import {createEventDispatcher} from 'svelte';
   import {_} from "svelte-i18n";
   import DiagonalLineToggle from "./DiagonalLineToggle.svelte";
-  import {gameDB} from '$lib/db';
+  import {cartographerDB} from '$lib/db';
   import {goto} from '$app/navigation';
   import {page} from '$app/stores';
   import {clickOutside} from '$lib/directives/outside-click';
@@ -20,7 +20,7 @@
   let menuOpen = false;
   let height = 0;
 
-  const handleDeleteGameClick = () => gameDB.games.delete(Number($page?.params?.gameId))
+  const handleDeleteGameClick = () => cartographerDB.games.delete(Number($page?.params?.gameId))
     .then(() => goto('/cartographer'));
 
   $: isFinished = round !== undefined && round > 3;

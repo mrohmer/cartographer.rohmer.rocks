@@ -1,10 +1,10 @@
-import {gameDB} from '$lib/db';
+import {cartographerDB} from '$lib/db';
 import type {GameRoundResult} from '$lib/models/game-round-result';
 
 const sanitizePoints = (points: number | undefined): number | undefined => points !== undefined && !isNaN(points) && points >= 0 ? points : (points === undefined ? undefined : 0);
 
-export const updateResult = (id: number, round: number, roundResult: GameRoundResult) => gameDB.transaction('rw', gameDB.games, async () => {
-  const game = await gameDB.games.get(id);
+export const updateResult = (id: number, round: number, roundResult: GameRoundResult) => cartographerDB.transaction('rw', cartographerDB.games, async () => {
+  const game = await cartographerDB.games.get(id);
   if (!game) {
     throw new Error('not found');
   }
@@ -27,7 +27,7 @@ export const updateResult = (id: number, round: number, roundResult: GameRoundRe
     original[round] = roundResult;
   }
 
-  gameDB.games.update(id, {
+  cartographerDB.games.update(id, {
     roundResults: original,
   });
 })

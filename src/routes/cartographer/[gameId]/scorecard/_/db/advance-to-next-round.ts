@@ -1,8 +1,8 @@
-import {gameDB} from '$lib/db';
+import {cartographerDB} from '$lib/db';
 import {persistTransactionless} from './persist';
 
-export const advanceToNextRound = (id: number) => gameDB.transaction('rw', gameDB.games, async () => {
-  const game = await gameDB.games.get(id);
+export const advanceToNextRound = (id: number) => cartographerDB.transaction('rw', cartographerDB.games, async () => {
+  const game = await cartographerDB.games.get(id);
   if (!game) {
     throw new Error('not found');
   }
@@ -18,7 +18,7 @@ export const advanceToNextRound = (id: number) => gameDB.transaction('rw', gameD
     roundResults.push({});
   }
 
-  await gameDB.games.update(id, {
+  await cartographerDB.games.update(id, {
     roundResults,
     currentRound: undefined,
     round: (game.round ?? 0) + 1,

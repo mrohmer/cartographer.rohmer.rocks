@@ -1,9 +1,9 @@
-import {gameDB} from '$lib/db';
+import {cartographerDB} from '$lib/db';
 import {staticTerrains} from '$lib/models/terrain';
 import {buildMap} from '$lib/utils/build-map';
 
-export const toggleCellSelection = (id: number, {x, y}: Record<'x' | 'y', number>) => gameDB.transaction('rw', gameDB.games, async () => {
-  const game = await gameDB.games.get(id);
+export const toggleCellSelection = (id: number, {x, y}: Record<'x' | 'y', number>) => cartographerDB.transaction('rw', cartographerDB.games, async () => {
+  const game = await cartographerDB.games.get(id);
   if (!game) {
     throw new Error('not found');
   }
@@ -29,7 +29,7 @@ export const toggleCellSelection = (id: number, {x, y}: Record<'x' | 'y', number
     currentMap.push({x, y});
   }
 
-  await gameDB.games.update(id, {
+  await cartographerDB.games.update(id, {
     currentRound: {
       ...(game.currentRound ?? {}),
       map: currentMap,

@@ -1,8 +1,8 @@
-import {gameDB} from '$lib/db';
+import {cartographerDB} from '$lib/db';
 import type {TerrainAndEraser} from '$lib/models/terrain';
 
-export const changeSelection = (id: number, selection: TerrainAndEraser) => gameDB.transaction('rw', gameDB.games, async () => {
-  const game = await gameDB.games.get(id);
+export const changeSelection = (id: number, selection: TerrainAndEraser) => cartographerDB.transaction('rw', cartographerDB.games, async () => {
+  const game = await cartographerDB.games.get(id);
   if (!game) {
     throw new Error('not found');
   }
@@ -21,7 +21,7 @@ export const changeSelection = (id: number, selection: TerrainAndEraser) => game
     return;
   }
 
-  await gameDB.games.update(id, {
+  await cartographerDB.games.update(id, {
     currentRound: {
       ...(game.currentRound ?? {}),
       selection,

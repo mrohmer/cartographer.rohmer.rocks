@@ -1,12 +1,12 @@
-import {gameDB} from '$lib/db';
+import {cartographerDB} from '$lib/db';
 
-export const toggleCoin = (id: number) => gameDB.transaction('rw', gameDB.games, async () => {
-  const game = await gameDB.games.get(id);
+export const toggleCoin = (id: number) => cartographerDB.transaction('rw', cartographerDB.games, async () => {
+  const game = await cartographerDB.games.get(id);
   if (!game) {
     throw new Error('not found');
   }
 
-  await gameDB.games.update(id, {
+  await cartographerDB.games.update(id, {
     currentRound: {
       ...(game.currentRound ?? {}),
       coin: !game.currentRound?.coin,

@@ -1,4 +1,4 @@
-import {gameDB} from '$lib/db';
+import {cartographerDB} from '$lib/db';
 import {buildCurrentSelectionMap, findItemsWithTerrain, getMonsterPoints} from '../utils';
 import {countSurroundings} from '$lib/utils/count-surroundings';
 import type {GameMap} from '$lib/models/game-map';
@@ -10,7 +10,7 @@ const getMountainCoins = (map: GameMap): number => findItemsWithTerrain(map, 'mo
   .length;
 
 export const persistTransactionless = async (id: number) => {
-  const game = await gameDB.games.get(id);
+  const game = await cartographerDB.games.get(id);
   if (!game) {
     throw new Error('not found');
   }
@@ -73,9 +73,9 @@ export const persistTransactionless = async (id: number) => {
     }
   });
 
-  await gameDB.games.update(id, {
+  await cartographerDB.games.update(id, {
     currentRound: undefined,
     roundResults: roundResults.length ? roundResults : undefined,
   });
 }
-export const persist = async (id: number) => gameDB.transaction('rw', gameDB.games, () => persistTransactionless(id));
+export const persist = async (id: number) => cartographerDB.transaction('rw', cartographerDB.games, () => persistTransactionless(id));

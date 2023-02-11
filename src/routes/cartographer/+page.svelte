@@ -1,7 +1,7 @@
 <script lang="ts">
   import {onMount} from 'svelte';
   import Loading from "./_/components/Loading.svelte";
-  import {gameDB} from '$lib/db';
+  import {cartographerDB} from '$lib/db';
   import {goto} from '$app/navigation';
   import type {Observable} from 'dexie';
   import type {Game} from '$lib/models/game';
@@ -33,7 +33,7 @@
   $: {
     if (mounted) {
       games = liveQuery(async () => {
-        const result = await gameDB.games.toArray();
+        const result = await cartographerDB.games.toArray();
         loading = false;
         return result.sort((a, b) => +(b.updated ?? b.created) - +(a.updated ?? a.created));
       });

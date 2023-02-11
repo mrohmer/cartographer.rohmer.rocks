@@ -7,7 +7,7 @@
   import {page} from '$app/stores';
   import {liveQuery} from 'dexie';
   import type {Observable} from 'dexie';
-  import {gameDB} from '$lib/db';
+  import {cartographerDB} from '$lib/db';
   import type {Game} from '$lib/models/game';
   import Coins from "./_/components/coins/Coins.svelte";
   import type {GameRoundResult} from '$lib/models/game-round-result';
@@ -60,7 +60,7 @@
   $: {
     if (mounted && $page?.params?.gameId && !isNaN(parseInt($page?.params?.gameId))) {
       game = liveQuery(() =>
-        gameDB
+        cartographerDB
           .games
           .get(Number($page.params.gameId))
           .then((data) => {

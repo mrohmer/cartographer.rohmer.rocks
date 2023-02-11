@@ -1,12 +1,12 @@
 import Dexie from 'dexie';
-import type {Game} from '../models/game';
+import type {Game} from '../../models/game';
 
-export class GameDB extends Dexie {
+export class CartographerDB extends Dexie {
 
   games!: Dexie.Table<Game, number>;
 
   constructor() {
-    super('games');
+    super('cartographer');
     this.version(1).stores({
       games: '++id'
     });
@@ -21,4 +21,4 @@ export class GameDB extends Dexie {
   }
 }
 
-export const gameDB = new GameDB();
+export const cartographerDB = new CartographerDB();
