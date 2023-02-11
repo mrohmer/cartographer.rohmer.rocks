@@ -1,18 +1,3 @@
-<script context="module" lang="ts">
-  import type {LoadEvent} from '@sveltejs/kit';
-
-  export const prerender = true;
-  export function load({ params }: LoadEvent) {
-    if (!/^\d+$/.test(params.gameId)) {
-        return {
-          status: 404,
-        }
-    }
-    return {
-      status: 200,
-    };
-  }
-</script>
 <script lang="ts">
   import GameField from "$lib/components/GameField.svelte";
   import TerrainSelection from "./_/components/TerrainSelection.svelte";
