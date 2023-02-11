@@ -10,7 +10,10 @@ const config = {
 	}),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		prerender: {
+			entries: ['*', '/cartographer/0/scorecard']
+		}
 	}
 };
 
