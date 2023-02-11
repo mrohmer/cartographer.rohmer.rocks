@@ -1,95 +1,103 @@
 {
-  "game": {
-    "article": "The",
-    "name": "Cartographer",
-    "scorecard": "Online Scorecard"
+  "games": {
+    "cartographer": {
+      "game": {
+        "article": "The",
+        "name": "Cartographer",
+        "scorecard": "Online Scorecard"
+      },
+      "meta": {
+        "title": "Cartographer Scorecard",
+        "description": "Simple Online-Scorecard fot The Cartographer"
+      },
+      "pages": {
+        "index": {
+          "new_game": {
+            "headline": "Start New Game",
+            "btn": {
+              "normal_map": {
+                "title": "Normal Map",
+                "site": "A-Site"
+              },
+              "wasteland_map": {
+                "title": "Wasteland Map",
+                "site": "B-Site"
+              }
+            }
+          },
+          "previous_games": {
+            "headline": "Previous Games",
+            "empty": {
+              "headline": "You don't have any previous games",
+              "text": "Your started games will be saved & listed here."
+            },
+            "game": "Game",
+            "last_played": "last played",
+            "as": "as"
+          }
+        },
+        "scorecard": {
+          "btn": {
+            "persist": "persist",
+            "advance_season": "To Next Season",
+            "advance_finish": "Finish Game",
+            "delete_game": "Delete Game",
+            "enable_diagonal_helper_lines": "Enable Diagonal Helper Lines"
+          },
+          "inputs": {
+            "name": "Name",
+            "title": "Title",
+            "country": "Country"
+          },
+          "seasons": {
+            "spring": "Spring",
+            "summer": "Summer",
+            "autumn": "Autumn",
+            "winter": "Winter"
+          },
+          "finished": "Game Finished",
+          "not_found": "Game not found"
+        },
+        "error": {
+          "404": {
+            "headline": "Nothing found \uD83E\uDD37",
+            "text": "This does not seem to be a nice place.",
+            "back_link": "Back to a more safe space."
+          },
+          "500": {
+            "headline": "Error \uD83E\uDD14",
+            "text": "The monsters seem to have manipulated something.",
+            "back_link": "Back to a more safe space."
+          }
+        }
+      },
+      "terrains": {
+        "forest": "Forest",
+        "village": "Village",
+        "farm": "Farm",
+        "water": "Water",
+        "monster": "Monster",
+        "mountain": "Mountain",
+        "wasteland": "Wasteland",
+        "eraser": "Eraser"
+      },
+      "coins": {
+        "title": {
+          "mountain": "This coin was earned by a mountain."
+        },
+        "chars": {
+          "mountain": "M",
+          "default": "C"
+        }
+      }
+    }
+  },
+  "meta": {
+    "title": "Tabletop Game World by Matthias Rohmer",
+    "description": "Collection of multiple digital contents in connection to table top games."
   },
   "footer": {
     "rights_disclaimer": "The Cartographer is a brand of <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>This is an online alternative to the scorecard included in the game for personal usage.",
     "images_used": "Used images"
-  },
-  "meta": {
-    "title": "Cartographer Scorecard",
-    "description": "Simple Online-Scorecard fot The Cartographer"
-  },
-  "pages": {
-    "index": {
-      "new_game": {
-        "headline": "Start New Game",
-        "btn": {
-          "normal_map": {
-            "title": "Normal Map",
-            "site": "A-Site"
-          },
-          "wasteland_map": {
-            "title": "Wasteland Map",
-            "site": "B-Site"
-          }
-        }
-      },
-      "previous_games": {
-        "headline": "Previous Games",
-        "empty": {
-          "headline": "You don't have any previous games",
-          "text": "Your started games will be saved & listed here."
-        },
-        "game": "Game",
-        "last_played": "last played",
-        "as": "as"
-      }
-    },
-    "scorecard": {
-      "btn": {
-        "persist": "persist",
-        "advance_season": "To Next Season",
-        "advance_finish": "Finish Game",
-        "delete_game": "Delete Game",
-        "enable_diagonal_helper_lines": "Enable Diagonal Helper Lines"
-      },
-      "inputs": {
-        "name": "Name",
-        "title": "Title",
-        "country": "Country"
-      },
-      "seasons": {
-        "spring": "Spring",
-        "summer": "Summer",
-        "autumn": "Autumn",
-        "winter": "Winter"
-      },
-      "finished": "Game Finished",
-      "not_found": "Game not found"
-    },
-    "error": {
-      "404": {
-        "headline": "Nothing found \uD83E\uDD37",
-        "text": "This does not seem to be a nice place.",
-        "back_link": "Back to a more safe space."
-      },
-      "500": {
-        "headline": "Error \uD83E\uDD14",
-        "text": "The monsters seem to have manipulated something.",
-        "back_link": "Back to a more safe space."
-      }
-    }
-  },
-  "terrains": {
-    "forest": "Forest",
-    "village": "Village",
-    "farm": "Farm",
-    "water": "Water",
-    "monster": "Monster",
-    "mountain": "Mountain",
-    "wasteland": "Wasteland",
-    "eraser": "Eraser"
-  },
-  "coins": {
-    "title": {
-      "mountain": "This coin was earned by a mountain."
-    },
-    "chars": {
-      "mountain": "M",
-      "default": "C"
-    }
   }
 }

@@ -2,11 +2,11 @@
   import '../app.css';
   import {_, locale} from "svelte-i18n";
   import PoweredBy from '$lib/components/PoweredBy.svelte';
-  import ExpansionPanel from "../lib/components/ExpansionPanel.svelte";
+  import ExpansionPanel from "$lib/components/ExpansionPanel.svelte";
 </script>
 
 <svelte:head>
-    <title>{$_('meta.title', {default: 'Kartograph Scorekarte'})}</title>
+    <title>{$_('meta.title', {default: 'Tabletop Game World by Matthias Rohmer'})}</title>
     <meta name="description" content="{$_('meta.description', {default: ''})}">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#000000"/>

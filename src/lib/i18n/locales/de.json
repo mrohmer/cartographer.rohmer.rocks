@@ -1,95 +1,103 @@
 {
-  "game": {
-    "article": "Der",
-    "name": "Kartograph",
-    "scorecard": "Online-Scorekarte"
+  "games": {
+    "cartographer": {
+      "game": {
+        "article": "Der",
+        "name": "Kartograph",
+        "scorecard": "Online-Scorekarte"
+      },
+      "meta": {
+        "title": "Kartograph Scorekarte",
+        "description": "Einfache Online-Scorekarte für der Kartograph"
+      },
+      "pages": {
+        "index": {
+          "new_game": {
+            "headline": "Neues Spiel starten",
+            "btn": {
+              "normal_map": {
+                "title": "Normale Karte",
+                "site": "A-Seite"
+              },
+              "wasteland_map": {
+                "title": "Ödnis Karte",
+                "site": "B-Seite"
+              }
+            }
+          },
+          "previous_games": {
+            "headline": "Vorherige Spiele",
+            "empty": {
+              "headline": "Du hast noch keine vorherigen Spiele",
+              "text": "Deine gestarteten Spiele werden gespeichert und dann hier angezeigt."
+            },
+            "game": "Spiel",
+            "last_played": "zuletzt gespielt",
+            "as": "als"
+          }
+        },
+        "scorecard": {
+          "btn": {
+            "persist": "festlegen",
+            "advance_season": "Zur nächste Jahreszeit",
+            "advance_finish": "Spiel beenden",
+            "delete_game": "Spiel löschen",
+            "enable_diagonal_helper_lines": "Diagonale Hilfslinien aktivieren"
+          },
+          "inputs": {
+            "name": "Name",
+            "title": "Titel",
+            "country": "Land"
+          },
+          "seasons": {
+            "spring": "Frühling",
+            "summer": "Sommer",
+            "autumn": "Herbst",
+            "winter": "Winter"
+          },
+          "finished": "Spiel beendet",
+          "not_found": "Spiel nicht gefunden"
+        },
+        "error": {
+          "404": {
+            "headline": "Nicht gefunden \uD83E\uDD37",
+            "text": "Hier scheint kein guter Ort zu sein.",
+            "back_link": "Zurück zu einem sicheren Ort."
+          },
+          "500": {
+            "headline": "Fehler \uD83E\uDD14",
+            "text": "Die Monster scheinen etwas manipuliert zu haben.",
+            "back_link": "Zurück zu einem sicheren Ort."
+          }
+        }
+      },
+      "terrains": {
+        "forest": "Wald",
+        "village": "Dorf",
+        "farm": "Acker",
+        "water": "Wasser",
+        "monster": "Monster",
+        "mountain": "Gebirge",
+        "wasteland": "Ödnis",
+        "eraser": "Radiergummi"
+      },
+      "coins": {
+        "title": {
+          "mountain": "Diese Münze wurde durch ein Gebirge verdient."
+        },
+        "chars": {
+          "mountain": "G",
+          "default": "C"
+        }
+      }
+    }
+  },
+  "meta": {
+    "title": "Tabletop Spielewelt von Matthias Rohmer",
+    "description": "Sammlung verschiedener digitaler Inhalte in Verbindung mit Tabletop Spielen."
   },
   "footer": {
     "rights_disclaimer": "Der Kartopgraph ist eine Marke von <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>Dies ist eine Online Alternative zur im Spiel enthaltenen Scorekarte zum reinen Privatgebrauch.",
     "images_used": "Genutzte Bilder"
-  },
-  "meta": {
-    "title": "Kartograph Scorekarte",
-    "description": "Einfache Online-Scorekarte für der Kartograph"
-  },
-  "pages": {
-    "index": {
-      "new_game": {
-        "headline": "Neues Spiel starten",
-        "btn": {
-          "normal_map": {
-            "title": "Normale Karte",
-            "site": "A-Seite"
-          },
-          "wasteland_map": {
-            "title": "Ödnis Karte",
-            "site": "B-Seite"
-          }
-        }
-      },
-      "previous_games": {
-        "headline": "Vorherige Spiele",
-        "empty": {
-          "headline": "Du hast noch keine vorherigen Spiele",
-          "text": "Deine gestarteten Spiele werden gespeichert und dann hier angezeigt."
-        },
-        "game": "Spiel",
-        "last_played": "zuletzt gespielt",
-        "as": "als"
-      }
-    },
-    "scorecard": {
-      "btn": {
-        "persist": "festlegen",
-        "advance_season": "Zur nächste Jahreszeit",
-        "advance_finish": "Spiel beenden",
-        "delete_game": "Spiel löschen",
-        "enable_diagonal_helper_lines": "Diagonale Hilfslinien aktivieren"
-      },
-      "inputs": {
-        "name": "Name",
-        "title": "Titel",
-        "country": "Land"
-      },
-      "seasons": {
-        "spring": "Frühling",
-        "summer": "Sommer",
-        "autumn": "Herbst",
-        "winter": "Winter"
-      },
-      "finished": "Spiel beendet",
-      "not_found": "Spiel nicht gefunden"
-    },
-    "error": {
-      "404": {
-        "headline": "Nicht gefunden \uD83E\uDD37",
-        "text": "Hier scheint kein guter Ort zu sein.",
-        "back_link": "Zurück zu einem sicheren Ort."
-      },
-      "500": {
-        "headline": "Fehler \uD83E\uDD14",
-        "text": "Die Monster scheinen etwas manipuliert zu haben.",
-        "back_link": "Zurück zu einem sicheren Ort."
-      }
-    }
-  },
-  "terrains": {
-    "forest": "Wald",
-    "village": "Dorf",
-    "farm": "Acker",
-    "water": "Wasser",
-    "monster": "Monster",
-    "mountain": "Gebirge",
-    "wasteland": "Ödnis",
-    "eraser": "Radiergummi"
-  },
-  "coins": {
-    "title": {
-      "mountain": "Diese Münze wurde durch ein Gebirge verdient."
-    },
-    "chars": {
-      "mountain": "G",
-      "default": "C"
-    }
   }
 }

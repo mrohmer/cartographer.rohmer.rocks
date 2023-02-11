@@ -3,20 +3,52 @@ import {setDefaultHandler, setCatchHandler} from 'workbox-routing';
 import {NetworkFirst} from 'workbox-strategies';
 import {warmStrategyCache} from 'workbox-recipes';
 
+interface GameCatchHandler {
+  canHandle: (request: Request) => boolean;
+  handle: (request: Request) => Promise<Response>|undefined;
+}
+interface Game {
+  staticRoutesToCache?: string[],
+  catchHandler?: GameCatchHandler;
+}
 
-const FALLBACK_GAME_URL = '/0/scorecard';
-const FALLBACK_URL = '/404';
+type GameFactory = () => Game;
+const cartographer: GameFactory = () => {
+  const CARTOGRAPHER_FALLBACK_GAME_URL = '/cartographer/0/scorecard';
+  const CARTOGRAPHER_FALLBACK_URL = '/cartographer/404';
 
-const staticRoutesToCache = [
-  '/',
-  '/new',
-  '/new/wasteland',
+  return {
+    staticRoutesToCache: [
+      CARTOGRAPHER_FALLBACK_GAME_URL,
+      CARTOGRAPHER_FALLBACK_URL,
+      '/cartographer',
+      '/cartographer/new',
+      '/cartographer/new/wasteland',
+    ],
+    catchHandler: {
+      canHandle: request => request.url.startsWith('/cartographer'),
+      handle: request => {
+        if (/\/cartographer\/\d+\/scorecard(\?|#|$)/.test(request.url)) {
+          return strategy.handle({event, request: CARTOGRAPHER_FALLBACK_GAME_URL});
+        }
+        return strategy.handle({event, request: CARTOGRAPHER_FALLBACK_URL});
+      }
+    }
+  }
+}
+
+
+const games = [
+  cartographer(),
 ]
-
 const urls = [
-  FALLBACK_GAME_URL,
-  FALLBACK_URL,
-  ...staticRoutesToCache,
+  '/',
+  ...games
+    .filter(({staticRoutesToCache}) => staticRoutesToCache?.length)
+    .reduce(
+      (prev, {staticRoutesToCache}) => [...prev, ...staticRoutesToCache!],
+      [] as string[],
+    ),
   ...build,
   ...files,
 ];
@@ -31,10 +63,17 @@ setDefaultHandler(strategy);
 
 setCatchHandler(async ({request, event}) => {
   if (request.destination === 'document') {
-    if (/\/\d+\/scorecard(\?|#|$)/.test(request.url)) {
-      return strategy.handle({event, request: FALLBACK_GAME_URL});
+    const response = games
+      .filter(g => g.catchHandler?.canHandle(request))
+      .map(g => g.catchHandler!)
+      .reduce(
+        (prev, curr) => prev ?? curr.handle(request),
+        undefined as Promise<Response>|undefined,
+      );
+
+    if (response) {
+      return response;
     }
-    return strategy.handle({event, request: FALLBACK_URL});
   }
   return Response.error();
 })
