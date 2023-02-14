@@ -38,55 +38,63 @@
     : undefined;
 </script>
 
-<a href="/dorfromantik" class="block mb-3">
-    &lt; Zurück zur Übersicht
-</a>
+<div class="flex flex-col gap-y-3">
 
-<div class="mb-3">
-    <TextInput id="name" bind:value={campaign.name} on:input={update}>
-        Name
-    </TextInput>
+    <a href="/dorfromantik" class="block">
+        &lt; Zurück zur Übersicht
+    </a>
 
     <div>
-        {$_('games.dorfromantik.pages.index.campaigns.details.last_played', {values: {date: campaign.updated ?? campaign.created}})}
+        <TextInput id="name" bind:value={campaign.name} on:input={update}>
+            Name
+        </TextInput>
+
+        <div>
+            {$_('games.dorfromantik.pages.index.campaigns.details.last_played', {values: {date: campaign.updated ?? campaign.created}})}
+        </div>
+
+        <div>
+            <ExpansionPanel>
+                <svelte:fragment slot="title">
+                    Spieler
+                </svelte:fragment>
+                {#if campaign.players}
+                    {#each campaign.players as player, index}
+                        <TextInput id="player-{index}" bind:value={player} on:input={update}>
+                            Spieler {index + 1}
+                        </TextInput>
+                    {/each}
+                    <div on:click={() => campaign.players = [...(campaign.players ?? []), '']}>Add player</div>
+                {/if}
+            </ExpansionPanel>
+        </div>
     </div>
 
     <div>
-        <ExpansionPanel>
-            <svelte:fragment slot="title">
-                Spieler
-            </svelte:fragment>
-            {#if campaign.players}
-                {#each campaign.players as player, index}
-                    <TextInput id="player-{index}" bind:value={player} on:input={update}>
-                        Spieler {index + 1}
-                    </TextInput>
+        <h2>Erfolge</h2>
+        <a href="/dorfromantik/campaign/{+$page.params.campaignId}/achievements/campaign-path" class="block">Kampagnenblatt</a>
+        <a href="/dorfromantik/campaign/{+$page.params.campaignId}/achievements/boxes" class="block">Schachteln</a>
+    </div>
+    <div>
+        <h2>Spiele</h2>
+        <div>
+            <button on:click={startGame} class="block mb-2">Neues Spiel starten</button>
+            {#if games && $games?.length}
+                {#each $games as game, index}
+                    <a href="/dorfromantik/campaign/{+$page.params.campaignId}/game/{game.id}"
+                       class="block mb-2"
+                    >
+                        <div class="text-xl">
+                            Spiel {$games.length - index}
+                        </div>
+                        <div>
+                            Punkte: {calcGameResults(game.results).total}
+                        </div>
+                    </a>
                 {/each}
-                <div on:click={() => campaign.players = [...(campaign.players ?? []), '']}>Add player</div>
             {/if}
-        </ExpansionPanel>
-    </div>
-</div>
+        </div>
 
-<div>
-    <h2>Spiele</h2>
-    <div>
-        <button on:click={startGame} class="block mb-2">Neues Spiel starten</button>
-        {#if games && $games?.length}
-            {#each $games as game, index}
-                <a href="/dorfromantik/campaign/{+$page.params.campaignId}/game/{game.id}"
-                   class="block mb-2"
-                >
-                    <div class="text-xl">
-                        Spiel {$games.length - index}
-                    </div>
-                    <div>
-                        Punkte: {calcGameResults(game.results).total}
-                    </div>
-                </a>
-            {/each}
-        {/if}
+        <button on:click={deleteCampaign}>löschen</button>
     </div>
-
-    <button on:click={deleteCampaign}>löschen</button>
 </div>

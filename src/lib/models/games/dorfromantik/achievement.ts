@@ -13,16 +13,19 @@ export enum DorfromantikBoxAchievement {
   BOAT = 'boat',
   WATCH_TOWER = 'watchtower',
   FOREST_HUT = 'forestHut',
+  FLAG_FESTIVAL = 'flagFestival',
 }
 export enum DorfromantikCampaignPathAchievement {
   CIRCUS = 'circus',
   SIGNALMAN = 'signalman',
   SHEPHARD = 'shephard',
   HILL = 'hill',
+  FARM_YARD = 'farmYard',
   WAREHOUSE = 'warehouse',
   GRAIN_TUNNEL = 'grainTunnel',
   VILLAGE_TUNNEL = 'villageTunnel',
   FOREST_TUNNEL = 'forestTunnel',
   CLOUD = 'cloud',
-
+  CASTLE = 'castle',
+  FALLOW_DEER = 'fallowDeer',
 }

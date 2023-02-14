@@ -8,7 +8,7 @@ export interface DorfromantikCampaign {
   players?: string[];
 
   boxAchievements?: Achievements<DorfromantikBoxAchievement>;
-  campaingPath: Achievements<DorfromantikCampaignPathAchievement>;
+  campaignPathAchievements?: Achievements<DorfromantikCampaignPathAchievement>;
 }
 
 
