@@ -6,12 +6,18 @@
 
     let internalValue: string;
 
-    const updateIfDifferent = (v: string) => {
+    const updateInternalValueIfDifferent = (v: string) => {
       if (v?.trim() !== internalValue?.trim()) {
         internalValue = v;
       }
     }
-    $: updateIfDifferent(value);
+    const updateValueIfDifferent = (v: string) => {
+      if (v?.trim() !== value?.trim()) {
+        value = v;
+      }
+    }
+    $: updateInternalValueIfDifferent(value);
+    $: updateValueIfDifferent(internalValue);
 </script>
 
 <div class="w-full">

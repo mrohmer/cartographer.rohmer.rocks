@@ -90,6 +90,51 @@
           "default": "C"
         }
       }
+    },
+    "dorfromantik": {
+      "game": "Dorfromantik",
+      "meta": {
+        "title": "Dorfromantik Scorekarte",
+        "description": "Einfache Online-Scorekarte für Dorkfromantik"
+      },
+      "pages": {
+        "index": {
+          "campaigns": {
+            "start": "Neue Kampagne starten",
+            "headline": "Kampagnen",
+            "empty": "Keine gestarteten Kampagnen gefunden",
+            "details": {
+              "fallback_name": "Kampagne {key}",
+              "last_played": "zuletzt gespielt: {date, date, medium} um {date, time, short} Uhr",
+              "with": "mit {players}"
+            }
+          }
+        },
+        "new": {
+          "headline": "Neue Kampagne starten",
+          "fields": {
+            "name": {
+              "label": "Name"
+            },
+            "players": {
+              "label": "Spieler",
+              "add": "weiterer Spieler"
+            }
+          },
+          "submit": "Starten"
+        },
+        "campaign": {
+          "fields": {
+            "name": {
+              "label": "Name"
+            },
+            "players": {
+              "label": "Spieler",
+              "add": "weiterer Spieler"
+            }
+          }
+        }
+      }
     }
   },
   "meta": {

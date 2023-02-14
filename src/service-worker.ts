@@ -13,6 +13,7 @@ interface Game {
 }
 
 type GameFactory = () => Game;
+
 const cartographer: GameFactory = () => {
   const CARTOGRAPHER_FALLBACK_GAME_URL = '/cartographer/0/scorecard';
   const CARTOGRAPHER_FALLBACK_URL = '/cartographer/404';
@@ -36,10 +37,33 @@ const cartographer: GameFactory = () => {
     }
   }
 }
+const dorfromantik: GameFactory = () => {
+  const DORFROMANTIK_FALLBACK_CAMPAIGN_URL = '/dorfromantik/campaign/0';
+  const DORFROMANTIK_FALLBACK_URL = '/dorfromantik/404';
+
+  return {
+    staticRoutesToCache: [
+      DORFROMANTIK_FALLBACK_CAMPAIGN_URL,
+      DORFROMANTIK_FALLBACK_URL,
+      '/dorfromantik',
+      '/dorfromantik/campaign/new',
+    ],
+    catchHandler: {
+      canHandle: request => request.url.startsWith('/dorfromantik'),
+      handle: request => {
+        if (/\/dorfromantik\/\d+(\?|#|$)/.test(request.url)) {
+          return strategy.handle({event, request: DORFROMANTIK_FALLBACK_CAMPAIGN_URL});
+        }
+        return strategy.handle({event, request: DORFROMANTIK_FALLBACK_URL});
+      }
+    }
+  }
+}
 
 
 const games = [
   cartographer(),
+  dorfromantik(),
 ]
 const urls = [
   '/',
@@ -76,6 +100,8 @@ setCatchHandler(async ({request, event}) => {
     }
   }
   return Response.error();
-})
+});
 
-skipWaiting();
+(self as any).__WB_DISABLE_DEV_LOGS = true;
+
+(self as any).skipWaiting();

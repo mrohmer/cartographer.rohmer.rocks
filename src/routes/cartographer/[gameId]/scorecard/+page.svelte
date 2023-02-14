@@ -25,7 +25,7 @@
     updateInfo
   } from './_/db';
   import SeasonBackground from "./_/components/SeasonBackground.svelte";
-  import Input from "$lib/components/Input.svelte";
+  import TextInput from "$lib/components/controls/input/TextInput.svelte";
   import {buildMap} from "$lib/utils/games/cartographer/build-map";
   import {createGameMap} from "$lib/utils/games/cartographer/create-game-map";
   import {buildableTerrains} from '$lib/models/games/cartographer/terrain';
@@ -98,26 +98,26 @@
     <div class="max-w-[500px] mx-auto p-2">
         <div class="flex space-x-2 mb-5">
             <div class="flex-1">
-                <Input id="name" value={$game.info?.name}
+                <TextInput id="name" value={$game.info?.name}
                        maxLength="50"
                        on:input={event => updateInfo($game.id, {name: event.target.value?.trim()})}>
                     {$_('games.cartographer.pages.scorecard.inputs.name')}
-                </Input>
+                </TextInput>
             </div>
             <div class="flex-1">
-                <Input id="title" value={$game.info?.title}
+                <TextInput id="title" value={$game.info?.title}
                        maxLength="50"
                        on:input={event => updateInfo($game.id, {title: event.target.value?.trim()})}>
                     {$_('games.cartographer.pages.scorecard.inputs.title')}
-                </Input>
+                </TextInput>
             </div>
         </div>
         <div class="mb-5">
-            <Input id="country" value={$game.info?.country}
+            <TextInput id="country" value={$game.info?.country}
                    maxLength="50"
                    on:input={event => updateInfo($game.id, {country: event.target.value?.trim()})}>
                 {$_('games.cartographer.pages.scorecard.inputs.country')}
-            </Input>
+            </TextInput>
         </div>
 
         <TerrainSelection selection={$game.currentRound?.selection}
