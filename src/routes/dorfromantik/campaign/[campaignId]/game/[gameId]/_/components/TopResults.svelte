@@ -19,13 +19,13 @@
                       on:input>
         Wald
     </TopResultsColumn>
-    <TopResultsColumn bind:upperValue={results.orders.field}
-                      bind:lowerValue={results.flags.field}
+    <TopResultsColumn bind:upperValue={results.orders.grain}
+                      bind:lowerValue={results.flags.grain}
                       on:input>
         Feld
     </TopResultsColumn>
-    <TopResultsColumn bind:upperValue={results.orders.house}
-                      bind:lowerValue={results.flags.house}
+    <TopResultsColumn bind:upperValue={results.orders.village}
+                      bind:lowerValue={results.flags.village}
                       on:input>
         Haus
     </TopResultsColumn>

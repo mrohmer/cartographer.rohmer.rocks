@@ -14,10 +14,18 @@
   import {goto} from '$app/navigation';
   import {liveQuery} from 'dexie';
   import {browser} from '$app/environment';
+  import {calcGameResults} from '$lib/utils/games/dorfromantik/calc-game-results';
 
   export let data: Record<'campaign', DorfromantikCampaign> & Record<'game', DorfromantikGame>;
 
-  const update = () => dorfromantikDB.games.update(+$page.params.gameId, game);
+  let lastUpdate = +new Date();
+  const update = async () => {
+    await dorfromantikDB.games.update(+$page.params.gameId, game);
+    lastUpdate = +new Date();
+    game = {
+      ...game,
+    };
+  }
 
   let game: DorfromantikGame;
   const resetGame = (d) => game = deepmerge(
@@ -48,41 +56,7 @@
     : undefined;
   $: campaign = data.campaign ?? {};
   $: resetGame(data.game);
-  $: totalOrders = sum(
-    game?.results?.orders?.forest,
-    game?.results?.orders?.field,
-    game?.results?.orders?.house,
-    game?.results?.orders?.rail,
-    game?.results?.orders?.river,
-  );
-  $: totalFlagsAndLongest = sum(
-    game?.results?.flags?.forest,
-    game?.results?.flags?.field,
-    game?.results?.flags?.house,
-    game?.results?.longest?.rail,
-    game?.results?.longest?.river,
-  );
-  $: totalUnlocked = sum(
-    game?.results?.unlocked?.circus,
-    game?.results?.unlocked?.signalman,
-    game?.results?.unlocked?.shephard,
-    game?.results?.unlocked?.hill,
-    game?.results?.unlocked?.constructionSite,
-    game?.results?.unlocked?.balloonLaunchSide,
-    game?.results?.unlocked?.goldenHeart,
-    game?.results?.unlocked?.forestHut,
-    game?.results?.unlocked?.harvestFestival,
-    game?.results?.unlocked?.watchtower,
-    game?.results?.unlocked?.locomotive,
-    game?.results?.unlocked?.boat,
-    game?.results?.unlocked?.railroadStation,
-    game?.results?.unlocked?.harbor,
-  );
-  $: total = sum(
-    totalOrders,
-    totalFlagsAndLongest,
-    totalUnlocked,
-  )
+  $: total = lastUpdate && calcGameResults(game?.results);
 </script>
 
 <a href="/dorfromantik/campaign/{$page.params.campaignId}" class="block mb-3">
@@ -110,13 +84,17 @@
         <div class="p-2 border border-gray-300">
             <TopResults results={game.results}
                         number={nbr ? $nbr : 0}
-                        {totalOrders}
-                        {totalFlagsAndLongest} />
+                        totalOrders={total.totalOrders}
+                        totalFlagsAndLongest={total.totalFlagsAndLongest}
+                        on:input={update}
+            />
 
             <hr class="my-2">
             <div>
                 <div>Freigespielt</div>
-                <UnlockedResults results={game.results} {totalUnlocked} />
+                <UnlockedResults results={game.results} totalUnlocked={total.totalUnlocked}
+                                 on:input={update}
+                />
             </div>
 
             <hr class="my-2">
@@ -124,7 +102,7 @@
             <div class="flex gap-2 items-center">
                 <div class="flex-1">
                     <div>Mitspielende:</div>
-                    <div>{joinLast(game.players)}</div>
+                    <div>{joinLast(game.players?.sort())}</div>
                 </div>
                 <div class="px-2">
                     <div>Datum:</div>
@@ -134,7 +112,7 @@
                     Ergebnis:
                 </div>
                 <div class="w-12 text-2xl">
-                    {total}
+                    {total.total}
                 </div>
             </div>
         </div>

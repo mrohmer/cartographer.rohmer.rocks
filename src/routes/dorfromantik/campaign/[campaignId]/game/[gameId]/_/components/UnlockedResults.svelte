@@ -35,7 +35,7 @@
         >
             Hügel (im Abstand 2 = 2/Aufrag)
         </UnlockedResultsItem>
-        <UnlockedResultsItem bind:value={results.unlocked.constructionSite}
+        <UnlockedResultsItem bind:value={results.unlocked.constructionArea}
                              on:input
         >
             Baustelle (pro Gebiet 7+ = 7)

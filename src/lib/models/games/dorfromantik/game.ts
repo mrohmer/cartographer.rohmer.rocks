@@ -1,3 +1,7 @@
+import type {DorfromantikLandType} from './land-type';
+import type {DorfromantikRouteType} from './route-type';
+import type {DorfromantikBoxAchievement, DorfromantikCampaignPathAchievement} from './achievement';
+
 export interface DorfromantikGame {
   id?: number;
   created: Date;
@@ -10,27 +14,26 @@ export interface DorfromantikGame {
   players?: string[];
 
   results?: {
-    orders?: Partial<Record<LandType|RouteType, number>>;
-    flags?: Partial<Record<LandType, number>>;
-    longest?: Partial<Record<RouteType, number>>;
+    orders?: Partial<Record<DorfromantikLandType | DorfromantikRouteType, number>>;
+    flags?: Partial<Record<DorfromantikLandType, number>>;
+    longest?: Partial<Record<DorfromantikRouteType, number>>;
     unlocked?: Partial<Record<UnlockedType, number>>;
   };
 }
 
-export type LandType = 'forest'|'field'|'house';
-export type RouteType = 'rail'|'river';
-export type UnlockedType = 'redHeart'
-  |'circus'
-  |'signalman'
-  |'shephard'
-  |'hill'
-  |'constructionSite'
-  | 'balloonLaunchSide'
-  |'goldenHeart'
-  |'forestHut'
-  |'harvestFestival'
-  |'watchtower'
-  |'locomotive'
-  |'boat'
-  |'railroadStation'
-  |'harbor';
+export type UnlockedType =
+  DorfromantikCampaignPathAchievement.CIRCUS
+  | DorfromantikCampaignPathAchievement.SIGNALMAN
+  | DorfromantikCampaignPathAchievement.SHEPHARD
+  | DorfromantikCampaignPathAchievement.HILL
+  | DorfromantikBoxAchievement.RED_HEART
+  | DorfromantikBoxAchievement.CONSTRUCTION_AREA
+  | DorfromantikBoxAchievement.BALLOON_LAUNCH_SIDE
+  | DorfromantikBoxAchievement.GOLDEN_HEART
+  | DorfromantikBoxAchievement.FOREST_HUT
+  | DorfromantikBoxAchievement.HARVEST_FESTIVAL
+  | DorfromantikBoxAchievement.WATCH_TOWER
+  | DorfromantikBoxAchievement.LOCOMOTIVE
+  | DorfromantikBoxAchievement.BOAT
+  | DorfromantikBoxAchievement.RAILROAD_STATION
+  | DorfromantikBoxAchievement.HARBOR;

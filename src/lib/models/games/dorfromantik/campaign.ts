@@ -1,3 +1,5 @@
+import type {DorfromantikBoxAchievement, DorfromantikCampaignPathAchievement} from './achievement';
+
 export interface DorfromantikCampaign {
   id?: number;
   created: Date;
@@ -5,20 +7,12 @@ export interface DorfromantikCampaign {
   name?: string;
   players?: string[];
 
-  boxAchievements?: Partial<Record<
-    'onTheRoadToSuccess'
-    | 'railroadStation'
-    | 'balloonLaunchSide'
-    | 'constructionArea'
-    | 'harvestFestival'
-    | 'goldenHeart'
-    | 'harbor'
-    | 'heartsDesires'
-    | 'locomotive'
-    | 'readHeart'
-    | 'boat'
-    | 'watchtower'
-    | 'forestHut',
-    boolean
-  >>;
+  boxAchievements?: Achievements<DorfromantikBoxAchievement>;
+  campaingPath: Achievements<DorfromantikCampaignPathAchievement>;
 }
+
+
+type Achievements<
+  T extends DorfromantikBoxAchievement | DorfromantikCampaignPathAchievement
+>
+  = Partial<Record<T, number>>

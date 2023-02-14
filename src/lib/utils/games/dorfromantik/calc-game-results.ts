@@ -8,24 +8,25 @@ export const sum = (...data: (number|undefined)[]) => data.reduce(
 export const calcGameResults = (results: DorfromantikGame['results']): Record<`total${'' | 'Orders' | 'FlagsAndLongest' | 'Unlocked'}`, number> => {
   const totalOrders = sum(
     results?.orders?.forest,
-    results?.orders?.field,
-    results?.orders?.house,
+    results?.orders?.grain,
+    results?.orders?.village,
     results?.orders?.rail,
     results?.orders?.river,
   );
   const totalFlagsAndLongest = sum(
     results?.flags?.forest,
-    results?.flags?.field,
-    results?.flags?.house,
+    results?.flags?.grain,
+    results?.flags?.village,
     results?.longest?.rail,
     results?.longest?.river,
   );
   const totalUnlocked = sum(
+    results?.unlocked?.redHeart,
     results?.unlocked?.circus,
     results?.unlocked?.signalman,
     results?.unlocked?.shephard,
     results?.unlocked?.hill,
-    results?.unlocked?.constructionSite,
+    results?.unlocked?.constructionArea,
     results?.unlocked?.balloonLaunchSide,
     results?.unlocked?.goldenHeart,
     results?.unlocked?.forestHut,
