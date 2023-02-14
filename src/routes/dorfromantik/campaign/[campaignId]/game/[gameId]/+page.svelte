@@ -92,7 +92,11 @@
             <hr class="my-2">
             <div>
                 <div>Freigespielt</div>
-                <UnlockedResults results={game.results} totalUnlocked={total.totalUnlocked}
+                <UnlockedResults results={game.results}
+                                 totalUnlocked={total.totalUnlocked}
+                                 currentGame={(nbr ? $nbr : 0) + 1}
+                                 boxAchievements={campaign?.boxAchievements ?? {}}
+                                 campaignPathAchievements={campaign?.campaignPathAchievements ?? {}}
                                  on:input={update}
                 />
             </div>

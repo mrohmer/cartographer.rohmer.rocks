@@ -11,7 +11,7 @@
     <label for={id} class="block text-xs font-extralight"><slot /></label>
     <input {id}
            type="number"
-           class="block w-full border-b border-stone-800"
+           class="block w-full border-b border-stone-800 text-center"
            {max}
            {min}
            {step}
