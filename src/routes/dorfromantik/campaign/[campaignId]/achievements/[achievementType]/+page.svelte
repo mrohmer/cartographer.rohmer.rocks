@@ -5,7 +5,6 @@
   import {browser} from '$app/environment';
   import {liveQuery} from 'dexie';
   import {dorfromantikDB} from '$lib/db';
-  import deepmerge from 'deepmerge';
   import BoxAchievements from './_/components/BoxAchievements.svelte';
 
   export let data: Record<'campaign', DorfromantikCampaign>;

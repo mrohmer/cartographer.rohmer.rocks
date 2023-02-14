@@ -76,6 +76,11 @@
         <a href="/dorfromantik/campaign/{+$page.params.campaignId}/achievements/boxes" class="block">Schachteln</a>
     </div>
     <div>
+        <a href="/dorfromantik/campaign/{+$page.params.campaignId}/results" class="block">
+            Ergebnisse
+        </a>
+    </div>
+    <div>
         <h2>Spiele</h2>
         <div>
             <button on:click={startGame} class="block mb-2">Neues Spiel starten</button>

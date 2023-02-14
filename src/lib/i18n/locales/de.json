@@ -133,6 +133,39 @@
               "add": "weiterer Spieler"
             }
           }
+        },
+        "campaign_results": {
+          "steps": {
+            "0": "Vagabund",
+            "100": "Zeitungsjunge",
+            "110": "Fischerin",
+            "120": "Kutsch",
+            "130": "Nachtwächter",
+            "140": "Künstlerin",
+            "150": "Wirtin",
+            "160": "Förster",
+            "170": "Bäuerin",
+            "180": "Lokführerin",
+            "190": "Zirkusdirektorin",
+            "200": "Kapitän",
+            "210": "Hafenmeister",
+            "220": "Bahnhofsvorsteher",
+            "230": "Fotografin",
+            "240": "Kaufmann",
+            "250": "Archtiektin",
+            "260": "Erfinder",
+            "270": "Astronom",
+            "280": "Ärztin",
+            "290": "Diplomatin",
+            "300": "Ballonfahrer",
+            "310": "Fabrikantin",
+            "320": "Bürgermeister",
+            "330": "Ratsherrin",
+            "340": "Magnat",
+            "350": "Baronin",
+            "375": "Kronprinz",
+            "400": "Kaiserin"
+          }
         }
       }
     }
