@@ -11,6 +11,7 @@ export const load: Load = async ({params}) => {
   }
 
   if (!params.campaignId ||!/^\d+$/.test(params.campaignId)) {
+    console.log('nope', {...params})
     throw error(400);
   }
 

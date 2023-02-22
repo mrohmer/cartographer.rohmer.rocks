@@ -76,6 +76,11 @@
         <a href="/dorfromantik/campaign/{+$page.params.campaignId}/achievements/boxes" class="block">Schachteln</a>
     </div>
     <div>
+        <a href="/dorfromantik/campaign/{+$page.params.campaignId}/campaign-path" class="block">
+            Kampagnenblatt
+        </a>
+    </div>
+    <div>
         <a href="/dorfromantik/campaign/{+$page.params.campaignId}/results" class="block">
             Ergebnisse
         </a>
