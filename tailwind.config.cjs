@@ -11,6 +11,7 @@ module.exports = {
         'monster': '#611e7f',
         'mountain': '#A4918A',
         'wasteland': '#555',
+        'dorfromantik-blue': '#7eb8d0'
       },
       transitionProperty: {
         'border-width': 'border-width',
