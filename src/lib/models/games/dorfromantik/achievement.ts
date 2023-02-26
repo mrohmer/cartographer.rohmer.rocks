@@ -29,3 +29,8 @@ export enum DorfromantikCampaignPathAchievement {
   CASTLE = 'castle',
   FALLOW_DEER = 'fallowDeer',
 }
+export enum DorfromantikCampaignPathRedHeartAchievement {
+  HEART_LEFT = 1,
+  HEART_CENTER = 2,
+  HEART_RIGHT = 3,
+}

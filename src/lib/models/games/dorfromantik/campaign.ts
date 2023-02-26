@@ -1,4 +1,4 @@
-import type {DorfromantikBoxAchievement, DorfromantikCampaignPathAchievement} from './achievement';
+import type {DorfromantikBoxAchievement, DorfromantikCampaignPathAchievement, DorfromantikCampaignPathRedHeartAchievement} from './achievement';
 
 export interface DorfromantikCampaign {
   id?: number;
@@ -9,6 +9,7 @@ export interface DorfromantikCampaign {
 
   boxAchievements?: Achievements<DorfromantikBoxAchievement>;
   campaignPathAchievements?: Achievements<DorfromantikCampaignPathAchievement>;
+  campaignPathHeartAchievements?: Achievements<DorfromantikCampaignPathRedHeartAchievement>
 
   campaignPath?: [
     CampaignPathValues<2>,
@@ -23,7 +24,7 @@ export interface DorfromantikCampaign {
 
 
 type Achievements<
-  T extends DorfromantikBoxAchievement | DorfromantikCampaignPathAchievement
+  T extends DorfromantikBoxAchievement | DorfromantikCampaignPathAchievement | DorfromantikCampaignPathRedHeartAchievement
 >
   = Partial<Record<T, number>>
 

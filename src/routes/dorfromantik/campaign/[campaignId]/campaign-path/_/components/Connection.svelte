@@ -25,6 +25,13 @@
       }
       state = state.map((v, i) => index === i ? !v : v);
       dispatch('select', index);
+
+      if (state.every(i => i)) {
+        dispatch('complete', {index, isLast: index === state.length - 1, isFirst: index === 0})
+      }
+      if (state[index] && index === heartPosition) {
+        dispatch('completeHeart')
+      }
     }
 
     let klass: string;
