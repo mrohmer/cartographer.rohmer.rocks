@@ -7,4 +7,6 @@
     <meta name="description" content="{$_('games.dorfromantik.meta.description', {default: ''})}">
 </svelte:head>
 
-<slot/>
+<div class="p-3 max-w-4xl mx-auto">
+    <slot/>
+</div>

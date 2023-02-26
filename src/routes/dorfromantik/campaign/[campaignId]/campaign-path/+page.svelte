@@ -114,10 +114,6 @@
   $: currentGame = (gameCount ? $gameCount : undefined) ?? 1;
 </script>
 
-<a href="/dorfromantik/campaign/{$page.params.campaignId}" class="block mb-3">
-    &lt; Zurück zur Kampagne
-</a>
-
 <div>
     Freigeschaltete Schritte: {$unlockedSteps}
 </div>

@@ -39,11 +39,6 @@
 </script>
 
 <div class="flex flex-col gap-y-3">
-
-    <a href="/dorfromantik" class="block">
-        &lt; Zurück zur Übersicht
-    </a>
-
     <div>
         <TextInput id="name" bind:value={campaign.name} on:input={update}>
             Name

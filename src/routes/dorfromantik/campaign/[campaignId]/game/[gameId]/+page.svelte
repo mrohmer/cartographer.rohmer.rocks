@@ -10,11 +10,10 @@
   import TopResults from './_/components/TopResults.svelte';
   import UnlockedResults from './_/components/UnlockedResults.svelte';
   import ExpansionPanel from '$lib/components/ExpansionPanel.svelte';
-  import {sum} from '$lib/utils/games/dorfromantik/calc-game-results';
+  import {calcGameResults} from '$lib/utils/games/dorfromantik/calc-game-results';
   import {goto} from '$app/navigation';
   import {liveQuery} from 'dexie';
   import {browser} from '$app/environment';
-  import {calcGameResults} from '$lib/utils/games/dorfromantik/calc-game-results';
 
   export let data: Record<'campaign', DorfromantikCampaign> & Record<'game', DorfromantikGame>;
 
@@ -58,10 +57,6 @@
   $: resetGame(data.game);
   $: total = lastUpdate && calcGameResults(game?.results);
 </script>
-
-<a href="/dorfromantik/campaign/{$page.params.campaignId}" class="block mb-3">
-    &lt; Zurück zur Kampagne
-</a>
 
 <div class="mb-3">
     <ExpansionPanel>

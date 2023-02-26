@@ -9,8 +9,9 @@
 
   export let data: Record<'campaign', DorfromantikCampaign>;
 
-  let results: Pick<DorfromantikCampaign, 'campaignPathAchievements'|'boxAchievements'> = {};
-  const resetAchievements = (d: DorfromantikCampaign|undefined) => results = ({
+  let results: Pick<DorfromantikCampaign, 'campaignPathAchievements' | 'boxAchievements'> = {};
+
+  const resetAchievements = (d: DorfromantikCampaign | undefined) => results = ({
     campaignPathAchievements: d?.campaignPathAchievements ?? {},
     boxAchievements: d?.boxAchievements ?? {},
   });
@@ -24,14 +25,19 @@
   $: currentGame = (gameCount ? $gameCount : undefined) ?? 1;
 </script>
 
-<a href="/dorfromantik/campaign/{$page.params.campaignId}" class="block mb-3">
-    &lt; Zurück zur Kampagne
-</a>
-
-<h1>{$page.params.achievementType === 'campaign-path' ? 'Kampagnenblatt' : 'Schachteln'}</h1>
-
-{#if $page.params.achievementType === 'campaign-path'}
-    <CampaignPathAchievements {currentGame} bind:state={results.campaignPathAchievements} on:change={update} />
-{:else }
-    <BoxAchievements {currentGame} bind:state={results.boxAchievements} on:change={update}/>
-{/if}
+<div class="flex flex-col gap-5">
+    <div>
+        <h2 class="text-xl pb-1 mb-2">
+            Kampagnenblatt
+            <div class="absolute bg-dorfromantik-blue -left-1.5 bottom-0 w-10 h-px"></div>
+        </h2>
+        <CampaignPathAchievements {currentGame} bind:state={results.campaignPathAchievements} on:change={update}/>
+    </div>
+    <div>
+        <h2 class="text-xl pb-1 mb-2">
+            Schachteln
+            <div class="absolute bg-dorfromantik-blue -left-1.5 bottom-0 w-10 h-px"></div>
+        </h2>
+        <BoxAchievements {currentGame} bind:state={results.boxAchievements} on:change={update}/>
+    </div>
+</div>
