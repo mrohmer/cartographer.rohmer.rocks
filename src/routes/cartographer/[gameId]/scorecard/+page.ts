@@ -1,7 +1,7 @@
-import type {LoadEvent} from '@sveltejs/kit';
+import type {PageLoad} from './$types';
 
 export const prerender = true;
-export function load({ params }: LoadEvent) {
+export const load: PageLoad = ({ params }) => {
   if (!params.gameId || !/^\d+$/.test(params.gameId)) {
     return {
       status: 404,
