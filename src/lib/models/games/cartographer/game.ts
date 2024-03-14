@@ -1,4 +1,3 @@
-import type {GameMap} from './game-map';
 import type {TerrainAndEraser} from './terrain';
 import type {GameRoundResult} from './game-round-result';
 

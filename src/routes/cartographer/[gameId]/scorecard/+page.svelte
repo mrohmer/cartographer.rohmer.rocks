@@ -1,7 +1,7 @@
 <script lang="ts">
   import GameField from "../../_/components/GameField.svelte";
   import TerrainSelection from "./_/components/TerrainSelection.svelte";
-  import type {Terrain} from '$lib/models/games/cartographer/Terrain';
+  import {type Terrain, buildableTerrains} from '$lib/models/games/cartographer/terrain';
   import {onMount} from 'svelte';
   import Loading from "../../_/components/Loading.svelte";
   import {page} from '$app/stores';
@@ -28,7 +28,6 @@
   import Input from "$lib/components/Input.svelte";
   import {buildMap} from "$lib/utils/games/cartographer/build-map";
   import {createGameMap} from "$lib/utils/games/cartographer/create-game-map";
-  import {buildableTerrains} from '$lib/models/games/cartographer/terrain';
   import Error from "../../_/components/Error.svelte";
 
   const SEASON_MAP = ['spring', 'summer', 'autumn', 'winter'];

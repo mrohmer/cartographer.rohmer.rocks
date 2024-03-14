@@ -10,7 +10,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		prerender: {
-			entries: ['*', '/cartographer/0/scorecard']
+			entries: ['*', '/cartographer/0/scorecard', '/beer-and-bread/0/scorecard']
 		}
 	}
 };

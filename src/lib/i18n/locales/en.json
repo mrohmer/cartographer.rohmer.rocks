@@ -97,7 +97,7 @@
     "description": "Collection of multiple digital contents in connection to board games."
   },
   "footer": {
-    "rights_disclaimer": "The Cartographer is a brand of <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>This is an online alternative to the scorecard included in the game for personal usage.",
+    "rights_disclaimer": "The Cartographer & Beer and Bread are brands of <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>This is an online alternative to the scorecard included in the game for personal usage.",
     "images_used": "Used images"
   }
 }
