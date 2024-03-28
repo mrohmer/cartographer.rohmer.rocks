@@ -51,7 +51,7 @@
         Beer and Bread
       </div>
       <div class="text-[10px] leading-3 text-neutral-500">
-        {$_('games.cartographer.pages.index.previous_games.last_played')}: {$date($game.updated ?? $game.created, {format: 'short'})}
+        {$_('games.beer_and_bread.pages.scorecard.last_played')}: {$date($game.updated ?? $game.created, {format: 'short'})}
       </div>
     </div>
 
@@ -61,7 +61,7 @@
           <Icon icon={trashIcon}/>
         </div>
         <div class="flex-1">
-          {$_('games.cartographer.pages.scorecard.btn.delete_game')}
+          {$_('games.beer_and_bread.pages.scorecard.btn.delete_game')}
         </div>
       </button>
     </div>

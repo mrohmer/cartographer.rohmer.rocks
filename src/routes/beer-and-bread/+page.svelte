@@ -49,7 +49,8 @@
         Beer and Bread
 
         <button slot="action" class="border border-black rounded w-fit px-5 py-1.5" on:click={handleNewGame}>
-            Neues Spiel <span class="hidden sm:inline">starten</span>
+            <span class="hidden sm:inline">{$_('games.beer_and_bread.pages.index.new_game.long')}</span>
+            <span class="inline sm:hidden">{$_('games.beer_and_bread.pages.index.new_game.short')}</span>
         </button>
     </Header>
     <div class="max-w-[500px] mx-auto flex flex-col gap-10 py-5">
@@ -69,7 +70,7 @@
                                 {/each}
                             </div>
                             <div class="text-xs font-extralight w-full text-ellipsis overflow-hidden">
-                                {$_('games.cartographer.pages.index.previous_games.last_played')}
+                                {$_('games.beer_and_bread.pages.index.last_played')}
                                 : {$date(game.updated ?? game.created, {format: 'short'})}
                             </div>
                         </div>

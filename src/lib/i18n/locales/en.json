@@ -8,7 +8,7 @@
       },
       "meta": {
         "title": "Cartographer Scorecard",
-        "description": "Simple Online-Scorecard fot The Cartographer"
+        "description": "Simple Online-Scorecard for The Cartographer"
       },
       "pages": {
         "index": {
@@ -88,6 +88,27 @@
         "chars": {
           "mountain": "M",
           "default": "C"
+        }
+      }
+    },
+    "beer_and_bread": {
+      "meta": {
+        "title": "Beer and Bread Scorecard",
+        "description": "Simple Online-Scorecard for Beer and Bread"
+      },
+      "pages": {
+        "index": {
+          "last_played": "last played",
+          "new_game": {
+            "long": "Start a new game",
+            "short": "New game"
+          }
+        },
+        "scorecard": {
+          "last_played": "last played",
+          "btn": {
+            "delete_game": "delete game"
+          }
         }
       }
     }

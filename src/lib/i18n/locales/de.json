@@ -91,10 +91,25 @@
         }
       }
     },
-    "beerAndBread": {
+    "beer_and_bread": {
       "meta": {
         "title": "Beer and Bread Scorekarte",
-        "description": "Einfache Online-Scorekarte für der Beer and Bread"
+        "description": "Einfache Online-Scorekarte für Beer and Bread"
+      },
+      "pages": {
+        "index": {
+          "last_played": "zuletzt gespielt",
+          "new_game": {
+            "long": "Neues Spiel starten",
+            "short": "Neues Spiel"
+          }
+        },
+        "scorecard": {
+          "last_played": "zuletzt gespielt",
+          "btn": {
+            "delete_game": "Spiel löschen"
+          }
+        }
       }
     }
   },
