@@ -6,4 +6,10 @@
 
 </script>
 
-<input class="text-center w-full" type="number" {id} name={name ?? id} bind:value {placeholder} on:change on:input />
+<style lang="postcss">
+    ::placeholder {
+        @apply text-gray-600 opacity-100;
+    }
+</style>
+
+<input class="text-center w-full p-1 text-xl" type="number" {id} name={name ?? id} bind:value {placeholder} on:change on:input />
