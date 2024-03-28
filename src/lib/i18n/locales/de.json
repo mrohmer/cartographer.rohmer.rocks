@@ -90,14 +90,41 @@
           "default": "C"
         }
       }
+    },
+    "beer_and_bread": {
+      "meta": {
+        "title": "Beer and Bread Scorekarte",
+        "description": "Einfache Online-Scorekarte für Beer and Bread"
+      },
+      "pages": {
+        "index": {
+          "last_played": "zuletzt gespielt",
+          "new_game": {
+            "long": "Neues Spiel starten",
+            "short": "Neues Spiel"
+          }
+        },
+        "scorecard": {
+          "last_played": "zuletzt gespielt",
+          "btn": {
+            "delete_game": "Spiel löschen"
+          }
+        }
+      }
     }
   },
   "meta": {
     "title": "Brettspielewelt von Matthias Rohmer",
     "description": "Sammlung verschiedener digitaler Inhalte in Verbindung mit Brettspielen."
   },
+  "pages": {
+    "index": {
+      "title": "Brettspielewelt",
+      "subtitle": "von Matthias Rohmer"
+    }
+  },
   "footer": {
-    "rights_disclaimer": "Der Kartopgraph ist eine Marke von <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>Dies ist eine Online Alternative zur im Spiel enthaltenen Scorekarte zum reinen Privatgebrauch.",
+    "rights_disclaimer": "Der Kartopgraph & Beer and Bread sind Marken von <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>Dies ist eine Online Alternative zur im Spiel enthaltenen Scorekarte zum reinen Privatgebrauch.",
     "images_used": "Genutzte Bilder"
   }
 }

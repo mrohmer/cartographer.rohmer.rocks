@@ -11,6 +11,10 @@ module.exports = {
         'monster': '#611e7f',
         'mountain': '#A4918A',
         'wasteland': '#555',
+        'wood': '#854d0e',
+        'beer': '#60a9da',
+        'bread': '#eab308',
+        'total': '#c7a476',
       },
       transitionProperty: {
         'border-width': 'border-width',

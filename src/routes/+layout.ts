@@ -1,7 +1,8 @@
 import {waitLocale} from 'svelte-i18n'
 import {init} from '$lib/i18n';
+import type {LayoutLoad} from './$types';
 
-export async function load() {
+export const load: LayoutLoad = async () => {
   init();
   await waitLocale();
 

@@ -8,7 +8,7 @@
       },
       "meta": {
         "title": "Cartographer Scorecard",
-        "description": "Simple Online-Scorecard fot The Cartographer"
+        "description": "Simple Online-Scorecard for The Cartographer"
       },
       "pages": {
         "index": {
@@ -90,14 +90,41 @@
           "default": "C"
         }
       }
+    },
+    "beer_and_bread": {
+      "meta": {
+        "title": "Beer and Bread Scorecard",
+        "description": "Simple Online-Scorecard for Beer and Bread"
+      },
+      "pages": {
+        "index": {
+          "last_played": "last played",
+          "new_game": {
+            "long": "Start a new game",
+            "short": "New game"
+          }
+        },
+        "scorecard": {
+          "last_played": "last played",
+          "btn": {
+            "delete_game": "delete game"
+          }
+        }
+      }
     }
   },
   "meta": {
     "title": "Board Game World by Matthias Rohmer",
     "description": "Collection of multiple digital contents in connection to board games."
   },
+  "pages": {
+    "index": {
+      "title": "Board Game World",
+      "subtitle": "by Matthias Rohmer"
+    }
+  },
   "footer": {
-    "rights_disclaimer": "The Cartographer is a brand of <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>This is an online alternative to the scorecard included in the game for personal usage.",
+    "rights_disclaimer": "The Cartographer & Beer and Bread are brands of <a href=\"https://pegasus.de/der-kartograph\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"text-decoration: underline\">Pegasus Spiele GmbH</a>.<br>This is an online alternative to the scorecard included in the game for personal usage.",
     "images_used": "Used images"
   }
 }

@@ -33,6 +33,15 @@
             <a href="https://thenounproject.com/icon/ancient-ruins-2087414/" rel="noreferrer noopener" class="block">
                 Ancient Ruins by Maxicons from NounProject.com
             </a>
+            <a href="https://thenounproject.com/icon/beer-1101795/" rel="noreferrer noopener" class="block">
+                Beer by Valeriy from NounProject.com
+            </a>
+            <a href="https://thenounproject.com/icon/bread-1003376/" rel="noreferrer noopener" class="block">
+                Bread by Danil Polshin from NounProject.com
+            </a>
+            <a href="https://thenounproject.com/icon/coin-1078692/" rel="noreferrer noopener" class="block">
+                Coin by Orin zuu from NounProject.com
+            </a>
         </ExpansionPanel>
     </div>
 </div>
