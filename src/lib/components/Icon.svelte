@@ -2,7 +2,7 @@
   import type {IconDefinition} from '@fortawesome/free-solid-svg-icons';
 
   export let icon: IconDefinition;
-  let klass: string;
+  let klass: string = '';
   let pathClass: string;
 
   export { klass as class };

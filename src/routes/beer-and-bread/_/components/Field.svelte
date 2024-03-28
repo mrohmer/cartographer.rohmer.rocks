@@ -16,7 +16,7 @@
   const handleChange = () => dispatch('change', state);
 </script>
 
-<table class="w-full table-fixed max-w-[300px] mx-auto text-xl text-center bg-black border-separate border-spacing-px my-4">
+<table class="w-full table-fixed max-w-[300px] mx-auto text-xl text-center bg-black border-separate border-spacing-px">
     <thead>
     <tr>
         <th class="bg-wood"></th>

@@ -7,6 +7,7 @@
   import {_, date, isLoading as i18nLoading} from 'svelte-i18n';
   import MiniField from './_/components/MiniField.svelte';
   import {add} from './_/utils/add';
+  import Header from './_/components/Header.svelte';
 
   let newGameLoading = false;
   let games: Observable<Game[]>
@@ -44,11 +45,14 @@
 {#if $i18nLoading || loading}
     <div>Loading...</div>
 {:else}
-    <div class="max-w-[500px] mx-auto flex flex-col gap-5">
-        <button on:click={handleNewGame}>
-            neues spiel
-        </button>
+    <Header backHref="/">
+        Beer and Bread
 
+        <button slot="action" class="border border-black rounded w-fit px-5 py-1.5" on:click={handleNewGame}>
+            Neues Spiel <span class="hidden sm:inline">starten</span>
+        </button>
+    </Header>
+    <div class="max-w-[500px] mx-auto flex flex-col gap-10 py-5">
         {#if $games?.length}
             <div class="flex flex-col gap-2">
                 {#each $games as game (game.id)}
